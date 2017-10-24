@@ -3,8 +3,8 @@
 
 - Frontend:
 ```
-  AngularJS v_X.x
-  Bootstrap v_X.x
+  Bootstrap v_4.0
+  Thymeleaf
 ```
 - Backend:
 ```
