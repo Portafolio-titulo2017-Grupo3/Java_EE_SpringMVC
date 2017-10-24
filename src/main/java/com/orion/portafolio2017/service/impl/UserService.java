@@ -38,8 +38,8 @@ public class UserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
-		SimpleGrantedAuthority authorities = buildAuthorities(usuario.getPerfil());
-		return (UserDetails) buildUser(usuario, authorities);
+		List<GrantedAuthority> authorities = buildAuthorities(usuario.getPerfil());
+		return buildUser(usuario, authorities);
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public class UserService implements UserDetailsService{
 	 * @param authorities the authorities
 	 * @return the user
 	 */
-	private Usuario buildUser(com.orion.portafolio2017.entity.Usuario usuario, SimpleGrantedAuthority authorities) {
-		return new Usuario(usuario.getUsername(), usuario.getPassword(),authorities);
+	private User buildUser(com.orion.portafolio2017.entity.Usuario usuario, List<GrantedAuthority> authorities) {
+		return new User(usuario.getUsername(), usuario.getPassword(), true, true, true, true, authorities);
 	}
 	
 	/**
@@ -59,9 +59,11 @@ public class UserService implements UserDetailsService{
 	 * @param perfils the user roles
 	 * @return the list
 	 */
-	private SimpleGrantedAuthority buildAuthorities(Perfil perfils){
+	private List<GrantedAuthority> buildAuthorities(Perfil perfils){
 		
-		return new SimpleGrantedAuthority(perfils.getRole());
+		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
+		auths.add(new SimpleGrantedAuthority(perfils.getRole()));
+		return new ArrayList<GrantedAuthority>(auths);
 	}
 	
 	

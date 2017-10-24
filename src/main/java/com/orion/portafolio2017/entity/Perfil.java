@@ -20,17 +20,17 @@ public class Perfil {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id_perfil", unique = true, nullable = false)
+	@Column(name = "id_perfil", unique = true, nullable = false, length = 8)
 	private int userRoleId;
 
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "perfil")
 	private Set<Usuario> usuario = new HashSet<Usuario>();
 
-	@Column(name = "nombre_perfil", nullable = false, length = 45)
+	@Column(name = "nombre_perfil", nullable = false, length = 30)
 	private String role;
 
-	@Column(name = "descripcion_perfil", nullable = false, length = 45)
+	@Column(name = "descripcion_perfil", nullable = false, length = 255)
 	private String descripcion;
 
 	public Perfil() {
