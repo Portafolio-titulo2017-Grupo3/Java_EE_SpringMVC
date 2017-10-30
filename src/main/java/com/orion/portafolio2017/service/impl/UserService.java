@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-
 import com.orion.portafolio2017.entity.Perfil;
 import com.orion.portafolio2017.entity.Usuario;
 import com.orion.portafolio2017.repository.UserRepository;
@@ -62,7 +61,7 @@ public class UserService implements UserDetailsService{
 	private List<GrantedAuthority> buildAuthorities(Perfil perfils){
 		
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
-		auths.add(new SimpleGrantedAuthority(perfils.getRole()));
+		auths.add(new SimpleGrantedAuthority(perfils.getNombrePerfil()));
 		return new ArrayList<GrantedAuthority>(auths);
 	}
 	

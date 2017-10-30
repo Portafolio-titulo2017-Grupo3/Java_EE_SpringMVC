@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.orion</groupId>
-	<artifactId>portafolio2017</artifactId>
+	<artifactId>portafolio2017_2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>portafolio2017</name>
+	<name>portafolio2017_2</name>
 	<description>Aplicación web del proyecto ficticio municipalidad vista hermosa para el portafolio de título Duoc Viña 2017</description>
 
 	<parent>
