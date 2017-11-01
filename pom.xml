@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.orion</groupId>
-	<artifactId>portafolio2017_2</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>portafolio2017</artifactId>
+	<version>v1.0</version>
 	<packaging>war</packaging>
 
-	<name>portafolio2017_2</name>
+	<name>portafolio2017</name>
 	<description>Aplicación web del proyecto ficticio municipalidad vista hermosa para el portafolio de título Duoc Viña 2017</description>
 
 	<parent>
@@ -19,6 +19,7 @@
 	</parent>
 
 	<properties>
+		<tomcat.version>8.0.45</tomcat.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -67,6 +68,12 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>3.3.7</version>
+        </dependency>
+                <!-- hot swapping, disable cache for template, enable live reload -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 	</dependencies>
 
