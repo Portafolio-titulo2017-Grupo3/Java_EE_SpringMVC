@@ -4,11 +4,14 @@
 - Frontend:
 ```
   Bootstrap v_4.0
-  Thymeleaf
+  Thymeleaf (Motor de plantillas)
 ```
 - Backend:
 ```
     Spring MVC v_4.3
+    Spring Boots
+    Spring Security
+    Hibernate 5
 ```
 - Nombre proyecto
 - Descripcion del proyecto
