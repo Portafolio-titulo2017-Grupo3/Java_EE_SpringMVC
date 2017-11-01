@@ -14,6 +14,7 @@ public class Portafolio2017Application extends SpringBootServletInitializer{
     }
 	
 	public static void main(String[] args) {
+		//SpringApplication.run(Portafolio2017Application.class, args).close();
 		SpringApplication.run(Portafolio2017Application.class, args);
 	}
 }
