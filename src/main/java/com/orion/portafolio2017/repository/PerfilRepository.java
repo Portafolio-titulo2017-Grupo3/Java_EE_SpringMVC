@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.orion.portafolio2017.entity.Perfil;
-import com.orion.portafolio2017.entity.Usuario;
 
-@Repository("userRepository")
-public interface UserRepository extends JpaRepository<Usuario, Serializable> {
 
-	public abstract Usuario findByUsername(String username);
-	
-	
+@Repository("perfilRepository")
+public interface PerfilRepository extends JpaRepository<Perfil, Serializable>  {
+
+//	public abstract Perfil findByIdPerfil(int idPerfil);
+//	public abstract Perfil findByPerfilName(String name);
 }

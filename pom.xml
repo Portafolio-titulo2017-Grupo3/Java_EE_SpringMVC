@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<name>portafolio2017</name>
-	<description>Aplicación web del proyecto ficticio municipalidad vista hermosa para el portafolio de título Duoc Viña 2017</description>
+	<description>Aplicación web del proyecto ficticio municipalidad Vista Hermosa para el portafolio de título Duoc Viña 2017</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -38,7 +38,12 @@ public class UserService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		List<GrantedAuthority> authorities = buildAuthorities(usuario.getPerfil());
-		return buildUser(usuario, authorities);
+		return buildUser(usuario, authorities);	
+	}
+	
+	public String obtenerPerfilByUsuario(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		return usuario.getPerfil().getNombrePerfil().toString();
 	}
 	
 	/**

@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Qualifier("userService")
 	private UserDetailsService userService;
 	
+	
 	/**
 	 * Configure global.
 	 *
