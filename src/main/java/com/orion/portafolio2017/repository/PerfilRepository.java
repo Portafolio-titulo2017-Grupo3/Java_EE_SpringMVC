@@ -11,6 +11,4 @@ import com.orion.portafolio2017.entity.Perfil;
 @Repository("perfilRepository")
 public interface PerfilRepository extends JpaRepository<Perfil, Serializable>  {
 
-//	public abstract Perfil findByIdPerfil(int idPerfil);
-//	public abstract Perfil findByPerfilName(String name);
 }

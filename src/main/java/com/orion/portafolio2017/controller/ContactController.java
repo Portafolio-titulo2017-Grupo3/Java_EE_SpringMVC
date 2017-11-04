@@ -46,8 +46,9 @@ public class ContactController {
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
 			
-			mav.addObject("perfil", perfil);
+			//Devuelve el Nombre del Usuario y el Tipo de Perfil
 			mav.addObject("username", user.getUsername());
+			mav.addObject("perfil", perfil);
 			return mav;	
 	}
 
