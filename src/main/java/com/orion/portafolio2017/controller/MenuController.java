@@ -41,10 +41,30 @@ public class MenuController {
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/micuenta")
 	public ModelAndView showContacts() {
-			ModelAndView mav = new ModelAndView(ViewConstant.MENU);	
+			ModelAndView mav;
+			String constante=null;
 			
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
+			
+			switch (perfil) {
+            case "SUPER_ADMIN":  constante = ViewConstant.MENUSA;
+                     break;
+            case "ALCALDE":  constante = ViewConstant.MENUA;
+                     break;
+            case "JEFE INTERNO":  constante = ViewConstant.MENUJI;
+                     break;
+            case "JEFE SUPERIOR":  constante = ViewConstant.MENUJS;
+                     break;
+            case "FUNCIONARIO":  constante = ViewConstant.MENUF;
+                     break;
+            default: perfil = "PERFIL INVALIDO";
+                     break;
+			}
+			
+			//retorna la vista
+			mav = new ModelAndView(constante);
+			
 			
 			//Devuelve el Nombre del Usuario y el Tipo de Perfil
 			mav.addObject("username", user.getUsername());
