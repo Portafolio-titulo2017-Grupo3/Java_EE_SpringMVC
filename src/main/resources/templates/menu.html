@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8"/>
+
+    <title>Sistema de Gestión de Permisos - Orion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- Custom styles for this template -->
+    <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
+    
+ 	<link href="#" th:href="@{/css/contacts.css}" rel="stylesheet" />
+ 	
+  </head>
+
+  <body>
+	
+	<div class="container">
+	
+		<h1>Hola, <span th:text="${username}"></span> - Perfil: <span th:text="${perfil}"></span></h1>
+		<br/>
+		
+		<a href="#" th:href="@{/menu/menuform?id=0}">
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact</button>
+		</a>
+		
+		
+		<form th:action="@{/logout}" method="POST">
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</button>
+		</form>
+		
+		<a href="#" th:href="@{/rest/checkrest?id=0}"> Rest Request</a>
+	
+	</div>
+
+
+</body>
+</html>

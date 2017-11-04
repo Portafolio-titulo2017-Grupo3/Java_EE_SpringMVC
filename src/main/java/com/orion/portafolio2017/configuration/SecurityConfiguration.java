@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 		.formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
 		.usernameParameter("username").passwordParameter("password")
-		.defaultSuccessUrl("/contacts/showcontacts").permitAll()
+		.defaultSuccessUrl("/menu/micuenta").permitAll()
 		.and()
 		.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 		.permitAll();

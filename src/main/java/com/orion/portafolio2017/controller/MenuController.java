@@ -17,10 +17,10 @@ import com.orion.portafolio2017.service.impl.UserService;
 
 @Controller
 //@PreAuthorize("permitAll()")
-@RequestMapping("/contacts")
-public class ContactController {
+@RequestMapping("/menu")
+public class MenuController {
 	
-	private static final Log LOG = LogFactory.getLog(ContactController.class);
+	private static final Log LOG = LogFactory.getLog(MenuController.class);
 	
 	@Autowired
 	@Qualifier("userService")
@@ -29,7 +29,7 @@ public class ContactController {
 	
 	@GetMapping("/cancel")
 	public String cancel() {
-		return "redirect:/contacts/showcontacts";
+		return "redirect:/menu/micuenta";
 	}
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -39,9 +39,9 @@ public class ContactController {
 	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	//@PreAuthorize("hasAuthority('ALCALDE')")
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
-	@GetMapping("/showcontacts")
+	@GetMapping("/micuenta")
 	public ModelAndView showContacts() {
-			ModelAndView mav = new ModelAndView(ViewConstant.CONTACTS);	
+			ModelAndView mav = new ModelAndView(ViewConstant.MENU);	
 			
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
