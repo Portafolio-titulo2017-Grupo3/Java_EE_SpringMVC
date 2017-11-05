@@ -45,16 +45,20 @@ public class UserService implements UserDetailsService{
 		return buildUser(usuario, authorities);	
 	}
 	
+	//Obtiene el nombre de Perfil según Nombre de Usuario
 	public String obtenerPerfilByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getPerfil().getNombrePerfil().toString();
 	}
 	
+	//Obtiene el rut del Funcionario según Nombre de Usuario
 	public String obtenerRutFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getFuncionario().getRutFuncionario().toString();
 	}
 	
+	
+	//Obtiene los datos del Funcionario según Nombre de Usuario
 	public Funcionario obtenerFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		
