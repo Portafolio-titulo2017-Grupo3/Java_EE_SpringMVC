@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
 
-    <title>Sistema de Gestión de Permisos - Orion</title>
+    <title>Sistema de Gestión de Permisos - Orion - MENU JEFE SUPERIOR</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -19,8 +19,25 @@
 	
 	<div class="container">
 	
-		<h1>Hola MENU JEFE SUPERIOR, <span th:text="${username}"></span> - Perfil: <span th:text="${perfil}"></span></h1>
+		<h1>Bienvenido Usuario: <span th:text="${username}"></span> - Perfil: <span th:text="${perfil}"></span></h1>
+		<h1>
+			Nombres:  <span th:text="${nombres}"></span>
+		</h1>
+		<h1>
+			Apellidos:  <span th:text="${apellidos}"></span>
+		</h1>
+		<h1>
+			Rut:  <span th:text="${rut}"></span>
+		</h1>
 		<br/>
+		
+		<table style="height: 100px;">
+			<tbody>
+				<tr>
+<!--			<td class="align-baseline"><img src="#" th:src="@{/imgs/banner.jpg}" class="img-fluid" alt="Responsive image"/></td>    -->
+				</tr>
+			</tbody>
+		</table>
 		
 		<a href="#" th:href="@{/menu/menuform?id=0}">
 			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact</button>

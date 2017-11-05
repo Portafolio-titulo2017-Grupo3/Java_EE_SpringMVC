@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title>Sistema de Gestión de Permisos - Orion</title>
+<title>Sistema de Gestión de Permisos - Orion - MENU ALCALDE</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -21,15 +21,24 @@
 	<div class="container">
 
 		<h1>
-			Hola MENU ALCALDE, <span th:text="${username}"></span> - Perfil: <span
+			Bienvenido Usuario: <span th:text="${username}"></span> - Perfil: <span
 				th:text="${perfil}"></span>
+		</h1>
+		<h1>
+			Nombres:  <span th:text="${nombres}"></span>
+		</h1>
+		<h1>
+			Apellidos:  <span th:text="${apellidos}"></span>
+		</h1>
+		<h1>
+			Rut:  <span th:text="${rut}"></span>
 		</h1>
 		<br />
 
 		<table style="height: 100px;">
 			<tbody>
 				<tr>
-					<td class="align-baseline"><img src="#" th:src="@{/imgs/banner.jpg}" class="img-fluid" alt="Responsive image"/></td>
+<!--			<td class="align-baseline"><img src="#" th:src="@{/imgs/banner.jpg}" class="img-fluid" alt="Responsive image"/></td>    -->
 				</tr>
 			</tbody>
 		</table>

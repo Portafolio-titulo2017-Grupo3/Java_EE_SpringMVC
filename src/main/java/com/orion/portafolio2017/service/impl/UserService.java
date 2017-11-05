@@ -15,7 +15,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import com.orion.portafolio2017.entity.Cargo;
+import com.orion.portafolio2017.entity.Departamento;
+import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.entity.Perfil;
+import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.entity.Usuario;
 import com.orion.portafolio2017.repository.UserRepository;
 
@@ -44,6 +48,31 @@ public class UserService implements UserDetailsService{
 	public String obtenerPerfilByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getPerfil().getNombrePerfil().toString();
+	}
+	
+	public String obtenerRutFuncionarioByUsuario(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		return usuario.getFuncionario().getRutFuncionario().toString();
+	}
+	
+	public Funcionario obtenerFuncionarioByUsuario(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		
+		String rut = usuario.getFuncionario().getRutFuncionario();
+		Departamento departamento = usuario.getFuncionario().getDepartamento();
+		Cargo cargo = usuario.getFuncionario().getCargo();
+		String primerNombre = usuario.getFuncionario().getPrimerNombre();
+		String segundoNombre = usuario.getFuncionario().getSegundoNombre();
+		String primerApellido = usuario.getFuncionario().getPrimerApellido();
+		String segundoApellido = usuario.getFuncionario().getSegundoApellido();
+		long telefonoFunionario =usuario.getFuncionario().getTelefonoFunionario();
+		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
+		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
+		Set<Permiso> permisos = usuario.getFuncionario().getPermisos();
+		Set<Usuario> usuarios = usuario.getFuncionario().getUsuarios();
+		
+		Funcionario funcionary= new Funcionario(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,sexoFunionario,correoFuncionario,permisos,usuarios);
+		return funcionary;
 	}
 	
 	/**

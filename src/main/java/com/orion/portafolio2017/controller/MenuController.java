@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.service.impl.UserService;
 
 @Controller
@@ -46,6 +47,7 @@ public class MenuController {
 			
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
+			Funcionario funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
 			
 			switch (perfil) {
             case "SUPER_ADMIN":  constante = ViewConstant.MENUSA;
@@ -69,6 +71,9 @@ public class MenuController {
 			//Devuelve el Nombre del Usuario y el Tipo de Perfil
 			mav.addObject("username", user.getUsername());
 			mav.addObject("perfil", perfil);
+			mav.addObject("rut", funcionario.getRutFuncionario());
+			mav.addObject("nombres", funcionario.getPrimerNombre()+" "+funcionario.getSegundoNombre());
+			mav.addObject("apellidos", funcionario.getPrimerApellido()+" "+funcionario.getSegundoApellido());
 			return mav;	
 	}
 
