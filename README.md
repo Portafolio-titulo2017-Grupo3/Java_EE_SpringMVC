@@ -4,7 +4,7 @@
 - Frontend:
 ```
   Bootstrap v_3.3.7
-  Thymeleaf (Motor de plantillas)
+  Thymeleaf (Motor de plantillas de Spring)
 ```
 - Backend:
 ```
