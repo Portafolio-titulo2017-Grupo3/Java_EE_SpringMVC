@@ -74,6 +74,9 @@ public class MenuController {
 			mav.addObject("rut", funcionario.getRutFuncionario());
 			mav.addObject("nombres", funcionario.getPrimerNombre()+" "+funcionario.getSegundoNombre());
 			mav.addObject("apellidos", funcionario.getPrimerApellido()+" "+funcionario.getSegundoApellido());
+			mav.addObject("departamento", funcionario.getDepartamento().getNombreDepto());
+			mav.addObject("email", funcionario.getCorreoFuncionario());
+			mav.addObject("telefono", funcionario.getTelefonoFunionario());
 			return mav;	
 	}
 

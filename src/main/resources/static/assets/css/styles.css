@@ -9,6 +9,16 @@ body {
   display:inline-block;
 }
 
+@media (min-width: 991px) {
+  #promo {
+    text-align:center;
+    padding:40px;
+    background:url(../../assets/img/background.jpg) no-repeat;
+    background-size:cover;
+    margin-top:65px;
+  }
+}
+
 #promo {
   text-align:center;
   padding:40px;
@@ -90,9 +100,26 @@ legend {
   border-bottom:1px solid #e5e5e5;
 }
 
-#muni {
-  text-align:center;
-  background:url(../../assets/img/banner.jpg) no-repeat;
-  background-size:cover;
+a:hover, a:focus {
+  color:#134fb8;
+  text-decoration:underline;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-brand {
+    color:#4582ec;
+    font-size:11px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-default .navbar-brand {
+    color:#4582ec;
+    font-size:18px;
+  }
+}
+
+.navbar-default .navbar-brand {
+  color:#4582ec;
 }
 
