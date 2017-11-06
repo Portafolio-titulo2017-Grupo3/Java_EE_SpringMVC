@@ -9,14 +9,26 @@
 - Backend:
 ```
     Spring MVC v_4.3
-    Spring Boots
+    Spring Boots 1.5.8
     Spring Security
     Hibernate 5
+    Ojdbc7 (Driver de Oracle)
 ```
 - Nombre proyecto
-- Descripcion del proyecto
+- Descripcion del proyecto:
+```
+    Spring MVC v_4.3
+    Spring Boots 1.5.8
+    Spring Security
+    Hibernate 5
+    Ojdbc7 (Driver de Oracle)
+```
 - Instalación
 	- Requisitos
+	```
+		Java 8
+		Apache Tomcat 8 o motor de servidores web similares que manejen poryectos JavaEE (proyecto.war)
+	```
 	- Versión
 	- Encargados del proyecto
 - Uso
