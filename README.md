@@ -26,11 +26,16 @@
 - Instalación
 	- Requisitos
 	```
-		Java 8
-		Apache Tomcat 8 o motor de servidores web similares que manejen poryectos JavaEE (proyecto.war)
+	   - Java 8
+	   - Apache Tomcat 8 o motor de servidores web similares que manejen poryectos JavaEE (proyecto.war)
 	```
 	- Versión
 	- Encargados del proyecto
+	```
+	   - Matías Sotomayor.
+	   - Rebeca Navia.
+	   - Daniela Flores.
+	```
 - Uso
 - Documentación
 - Roadmap
