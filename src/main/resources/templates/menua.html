@@ -28,19 +28,20 @@
     <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand"><img src="#" th:src="@{/assets/img/orion.jpg}" id="logo"/>Sistema de Gestion de Permisos Orion</a>
+            <a href="#" class="navbar-brand"><img src="#" th:src="@{/assets/img/orion.jpg}" id="logo"/>Gestión Permisos - Orion</a>
             <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav navbar-right">
-                <li role="presentation" class="active"><a href="#">Home </a></li>
-                <li role="presentation"><a href="#">Servicios </a></li>
-                <li role="presentation"><a href="#">Contacto </a></li>
+                <li role="presentation" class="active"><a href="#">Mi Cuenta </a></li>
+                <li role="presentation"><a href="#">Mis Permisos </a></li>
+                <li role="presentation"><a href="#">Generar Permisos </a></li>
+                <li role="presentation"><a href="#">Ver Permisos por Departamentos </a></li>
                 <li role="presentation">
 	                <form th:action="@{/logout}" method="POST">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">
 							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-								Logout
+								Salir
 						</button>
 					</form>
 				</li>
