@@ -2,21 +2,16 @@ package com.orion.portafolio2017.model;
 
 import java.util.Date;
 
-
 public class Log {
-	
 
 	private int id;
-	
 	private Date date;
-	
 	private String details;
-	
 	private String username;
-	
 	private String url;
 
-	public Log() {}
+	public Log() {
+	}
 
 	public Log(Date date, String details, String username, String url) {
 		super();
@@ -65,7 +60,5 @@ public class Log {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
 
 }

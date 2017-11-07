@@ -68,7 +68,7 @@ public class MenuController {
 			mav = new ModelAndView(constante);
 			
 			
-			//Devuelve el Nombre del Usuario y el Tipo de Perfil
+			//Devuelve el Nombre del UsuarioModel y el TipoModel de PerfilModel
 			mav.addObject("username", user.getUsername());
 			mav.addObject("perfil", perfil);
 			mav.addObject("rut", funcionario.getRutFuncionario());

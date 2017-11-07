@@ -1,15 +1,14 @@
 package com.orion.portafolio2017.model;
 
-public class UserCredential {
+public class UserCredentialModel {
 
-	
 	private String username;
 	private String password;
 
-	public UserCredential() {
+	public UserCredentialModel() {
 	}
 
-	public UserCredential(String username, String password) {
+	public UserCredentialModel(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -30,11 +29,10 @@ public class UserCredential {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserCredential [username=" + username + ", password=" + password + "]";
+		return "UserCredentialModel [username=" + username + ", password=" + password + "]";
 	}
-
 
 }

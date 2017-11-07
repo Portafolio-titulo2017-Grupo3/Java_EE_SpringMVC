@@ -1,6 +1,7 @@
 package com.orion.portafolio2017.constant;
 
 // TODO: Auto-generated Javadoc
+// Por convención los nombres de las variables Java deberian ser en minúscula
 /**
  * The Class ViewConstant.
  */
@@ -25,6 +26,11 @@ public class ViewConstant {
 	
 	/** The Constant MENU SUPER_ADMIN. */
 	public static final String MENUSA = "menusa";
+	
+	
+	
+	/** The Constant MIS PERMISOS. */
+	public static final String MIS_PERMISOS = "mispermisos";
 	
 	
 	

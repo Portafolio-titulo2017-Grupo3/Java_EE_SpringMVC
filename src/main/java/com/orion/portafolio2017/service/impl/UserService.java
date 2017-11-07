@@ -15,13 +15,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import com.orion.portafolio2017.entity.Cargo;
-import com.orion.portafolio2017.entity.Departamento;
-import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.converter.CargoConverter;
+import com.orion.portafolio2017.converter.DepartamentoConverter;
+import com.orion.portafolio2017.converter.PermisoConverter;
 import com.orion.portafolio2017.entity.Perfil;
-import com.orion.portafolio2017.entity.Permiso;
-import com.orion.portafolio2017.entity.Usuario;
+import com.orion.portafolio2017.model.CargoModel;
+import com.orion.portafolio2017.model.DepartamentoModel;
+import com.orion.portafolio2017.model.FuncionarioModel;
+import com.orion.portafolio2017.model.PermisoModel;
+import com.orion.portafolio2017.model.UsuarioModel;
 import com.orion.portafolio2017.repository.UserRepository;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,6 +39,21 @@ public class UserService implements UserDetailsService{
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	
+	/** Converters */
+	
+	@Autowired
+	@Qualifier("departamentoConverter")
+	private DepartamentoConverter departamentoConverter;
+	
+	@Autowired
+	@Qualifier("cargoConverter")
+	private CargoConverter cargoConverter;
+	
+	@Autowired
+	@Qualifier("permisoConverter")
+	private PermisoConverter permisoConverter;
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
 	 */
@@ -45,26 +64,25 @@ public class UserService implements UserDetailsService{
 		return buildUser(usuario, authorities);	
 	}
 	
-	//Obtiene el nombre de Perfil según Nombre de Usuario
+	//Obtiene el nombre de PerfilModel según Nombre de UsuarioModel
 	public String obtenerPerfilByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getPerfil().getNombrePerfil().toString();
 	}
 	
-	//Obtiene el rut del Funcionario según Nombre de Usuario
+	//Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
 	public String obtenerRutFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getFuncionario().getRutFuncionario().toString();
 	}
 	
 	
-	//Obtiene los datos del Funcionario según Nombre de Usuario
-	public Funcionario obtenerFuncionarioByUsuario(String username) {
+	//Obtiene los datos del FuncionarioModel según Nombre de Usuario
+	public FuncionarioModel obtenerFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
-		
 		String rut = usuario.getFuncionario().getRutFuncionario();
-		Departamento departamento = usuario.getFuncionario().getDepartamento();
-		Cargo cargo = usuario.getFuncionario().getCargo();
+		DepartamentoModel departamento = departamentoConverter.convertDepartamento2DepartamentoModel(usuario.getFuncionario().getDepartamento());
+		CargoModel cargo = cargoConverter.convertCargo2CargoModel(usuario.getFuncionario().getCargo());
 		String primerNombre = usuario.getFuncionario().getPrimerNombre();
 		String segundoNombre = usuario.getFuncionario().getSegundoNombre();
 		String primerApellido = usuario.getFuncionario().getPrimerApellido();
@@ -72,10 +90,10 @@ public class UserService implements UserDetailsService{
 		long telefonoFunionario =usuario.getFuncionario().getTelefonoFunionario();
 		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
 		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
-		Set<Permiso> permisos = usuario.getFuncionario().getPermisos();
-		Set<Usuario> usuarios = usuario.getFuncionario().getUsuarios();
+		Set<PermisoModel> permisos = new HashSet<PermisoModel>();//permisoConverter.convertPermiso2PermisoModel(usuario.getFuncionario().getPermisos());
+		Set<UsuarioModel> usuarios = new HashSet<UsuarioModel>();//usuario.getFuncionario().getUsuarios();
 		
-		Funcionario funcionary= new Funcionario(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,sexoFunionario,correoFuncionario,permisos,usuarios);
+		FuncionarioModel funcionary= new FuncionarioModel(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,sexoFunionario,correoFuncionario,permisos,usuarios);
 		return funcionary;
 	}
 	
