@@ -43,11 +43,11 @@ public class CargoConverter {
 	public CargoModel convertCargo2CargoModel(Cargo cargo) {
 		
 		CargoModel cargoModel = new CargoModel();
-		cargoModel.setIdCargo(cargo.getIdCargo());
-		cargoModel.setNombreCargo(cargo.getNombreCargo());
-		cargoModel.setSalario(cargo.getSalario());
-		cargoModel.setHistorialCargos((Set<HistorialCargoModel>) historialcargoConverter.convertHistorialCargo2HistorialCargoModel((HistorialCargo) cargo.getHistorialCargos()));
-		cargoModel.setFuncionarios((Set<FuncionarioModel>) funcionarioConverter.convertFuncionario2FuncionarioModel((Funcionario) cargo.getFuncionarios()));
+			cargoModel.setIdCargo(cargo.getIdCargo());
+			cargoModel.setNombreCargo(cargo.getNombreCargo());
+			cargoModel.setSalario(cargo.getSalario());
+			cargoModel.setHistorialCargos((Set<HistorialCargoModel>) historialcargoConverter.convertHistorialCargo2HistorialCargoModel((HistorialCargo) cargo.getHistorialCargos()));
+			cargoModel.setFuncionarios((Set<FuncionarioModel>) funcionarioConverter.convertFuncionario2FuncionarioModel((Funcionario) cargo.getFuncionarios()));
 		return cargoModel;
 		
 	}

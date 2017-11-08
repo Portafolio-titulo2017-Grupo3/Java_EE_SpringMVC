@@ -18,7 +18,10 @@ import org.springframework.stereotype.Service;
 import com.orion.portafolio2017.converter.CargoConverter;
 import com.orion.portafolio2017.converter.DepartamentoConverter;
 import com.orion.portafolio2017.converter.PermisoConverter;
+import com.orion.portafolio2017.converter.UsuarioConverter;
 import com.orion.portafolio2017.entity.Perfil;
+import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.entity.Usuario;
 import com.orion.portafolio2017.model.CargoModel;
 import com.orion.portafolio2017.model.DepartamentoModel;
 import com.orion.portafolio2017.model.FuncionarioModel;
@@ -54,6 +57,10 @@ public class UserService implements UserDetailsService{
 	@Qualifier("permisoConverter")
 	private PermisoConverter permisoConverter;
 	
+	@Autowired
+	@Qualifier("usuarioConverter")
+	private UsuarioConverter usuarioConverter;
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
 	 */
@@ -80,6 +87,8 @@ public class UserService implements UserDetailsService{
 	//Obtiene los datos del FuncionarioModel según Nombre de Usuario
 	public FuncionarioModel obtenerFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		UsuarioModel usuarios = usuarioConverter.convertUsuario2UsuarioModel((Usuario) usuario);
+	/*	
 		String rut = usuario.getFuncionario().getRutFuncionario();
 		DepartamentoModel departamento = departamentoConverter.convertDepartamento2DepartamentoModel(usuario.getFuncionario().getDepartamento());
 		CargoModel cargo = cargoConverter.convertCargo2CargoModel(usuario.getFuncionario().getCargo());
@@ -90,10 +99,24 @@ public class UserService implements UserDetailsService{
 		long telefonoFunionario =usuario.getFuncionario().getTelefonoFunionario();
 		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
 		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
-		Set<PermisoModel> permisos = new HashSet<PermisoModel>();//permisoConverter.convertPermiso2PermisoModel(usuario.getFuncionario().getPermisos());
-		Set<UsuarioModel> usuarios = new HashSet<UsuarioModel>();//usuario.getFuncionario().getUsuarios();
+		Set<PermisoModel> permisos = (Set<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) usuario.getFuncionario().getPermisos());
+		Set<UsuarioModel> usuarios = (Set<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) usuario.getFuncionario().getUsuarios());
+	*/
+		String rut = usuarios.getFuncionario().getRutFuncionario();
+		DepartamentoModel departamento = usuarios.getFuncionario().getDepartamento();
+		CargoModel cargo = usuarios.getFuncionario().getCargo();
+		String primerNombre = usuarios.getFuncionario().getPrimerNombre();
+		String segundoNombre = usuarios.getFuncionario().getSegundoNombre();
+		String primerApellido = usuarios.getFuncionario().getPrimerApellido();
+		String segundoApellido = usuarios.getFuncionario().getSegundoApellido();
+		long telefonoFunionario =usuarios.getFuncionario().getTelefonoFunionario();
+		String sexoFunionario = usuarios.getFuncionario().getSexoFunionario();
+		String correoFuncionario = usuarios.getFuncionario().getCorreoFuncionario();
+		Set<PermisoModel> permisos = usuarios.getFuncionario().getPermisos();
+		Set<UsuarioModel> usuarioss = usuarios.getFuncionario().getUsuarios();
 		
-		FuncionarioModel funcionary= new FuncionarioModel(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,sexoFunionario,correoFuncionario,permisos,usuarios);
+		FuncionarioModel funcionary= new FuncionarioModel(rut,departamento,cargo,primerNombre,segundoNombre,
+				primerApellido,segundoApellido,telefonoFunionario,sexoFunionario,correoFuncionario,permisos,usuarioss);
 		return funcionary;
 	}
 	

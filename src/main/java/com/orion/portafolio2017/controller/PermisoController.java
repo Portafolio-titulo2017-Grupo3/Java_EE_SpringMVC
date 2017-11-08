@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
 import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.model.FuncionarioModel;
 import com.orion.portafolio2017.service.impl.UserService;
-import com.udemy.backendninja.model.ContactModel;
 
 
 @Controller
@@ -36,27 +36,15 @@ public class PermisoController {
 		ModelAndView mav = new ModelAndView(ViewConstant.MIS_PERMISOS);
 		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Funcionario funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
+		FuncionarioModel funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
 		
 		mav.addObject("username", user.getUsername());
 		mav.addObject("mispermisos", funcionario.getPermisos());
 		return mav;
 		
 	}
+
 	
-	@PostMapping("/crearpermiso")
-	public String agregarPermiso(@ModelAttribute(name="contactModel") ContactModel contactModel,
-			Model model) {
-		LOG.info("METHOD: addContact() -- PARAMS: " + contactModel.toString());
-		
-		if(null != contactService.addContact(contactModel)) {
-			model.addAttribute("result", 1);
-		}else {
-			model.addAttribute("result", 0);
-		}
-		
-		return "redirect:/permisos/mispermisos";
-		
-	}
+	//@PostMapping("/crearpermiso")
 
 }
