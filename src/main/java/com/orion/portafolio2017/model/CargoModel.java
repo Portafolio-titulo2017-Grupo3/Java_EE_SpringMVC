@@ -1,15 +1,15 @@
 package com.orion.portafolio2017.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CargoModel {
 
 	private int idCargo;
 	private String nombreCargo;
 	private long salario;
-	private Set<FuncionarioModel> funcionarioModels = new HashSet<FuncionarioModel>();
-	private Set<HistorialCargoModel> historialCargoModels = new HashSet<HistorialCargoModel>();
+	private List<FuncionarioModel> funcionarioModels = new ArrayList<FuncionarioModel>();
+	private List<HistorialCargoModel> historialCargoModels = new ArrayList<HistorialCargoModel>();
 
 	public CargoModel() {
 	}
@@ -20,8 +20,8 @@ public class CargoModel {
 		this.salario = salario;
 	}
 
-	public CargoModel(int idCargo, String nombreCargo, long salario, Set<FuncionarioModel> funcionarioModels,
-			Set<HistorialCargoModel> historialCargoModels) {
+	public CargoModel(int idCargo, String nombreCargo, long salario, List<FuncionarioModel> funcionarioModels,
+			List<HistorialCargoModel> historialCargoModels) {
 		super();
 		this.idCargo = idCargo;
 		this.nombreCargo = nombreCargo;
@@ -54,19 +54,19 @@ public class CargoModel {
 		this.salario = salario;
 	}
 
-	public Set<FuncionarioModel> getFuncionarios() {
+	public List<FuncionarioModel> getFuncionarios() {
 		return funcionarioModels;
 	}
 
-	public void setFuncionarios(Set<FuncionarioModel> funcionarioModels) {
+	public void setFuncionarios(List<FuncionarioModel> funcionarioModels) {
 		this.funcionarioModels = funcionarioModels;
 	}
 
-	public Set<HistorialCargoModel> getHistorialCargos() {
+	public List<HistorialCargoModel> getHistorialCargos() {
 		return historialCargoModels;
 	}
 
-	public void setHistorialCargos(Set<HistorialCargoModel> historialCargoModels) {
+	public void setHistorialCargos(List<HistorialCargoModel> historialCargoModels) {
 		this.historialCargoModels = historialCargoModels;
 	}
 

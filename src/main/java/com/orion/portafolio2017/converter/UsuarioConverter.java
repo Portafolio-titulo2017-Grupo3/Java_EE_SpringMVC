@@ -41,11 +41,11 @@ public class UsuarioConverter {
 	public UsuarioModel convertUsuario2UsuarioModel(Usuario usuario) {
 		
 		UsuarioModel usuarioModel = new UsuarioModel();
-			usuarioModel.setIdUsuario(usuario.getIdUsuario());
-			usuarioModel.setUsername(usuario.getUsername());
-			usuarioModel.setPassword(usuario.getPassword());
-			usuarioModel.setPerfil(perfilConverter.convertPerfil2PerfilModel(usuario.getPerfil()));
-			usuarioModel.setFuncionario(funcionarioConverter.convertFuncionario2FuncionarioModel(usuario.getFuncionario()));
+		usuarioModel.setIdUsuario(usuario.getIdUsuario());
+		usuarioModel.setUsername(usuario.getUsername());
+		usuarioModel.setPassword(usuario.getPassword());
+		usuarioModel.setPerfil(perfilConverter.convertPerfil2PerfilModel(usuario.getPerfil()));
+		usuarioModel.setFuncionario(funcionarioConverter.convertFuncionario2FuncionarioModel(usuario.getFuncionario()));
 		return usuarioModel;
 		
 	}

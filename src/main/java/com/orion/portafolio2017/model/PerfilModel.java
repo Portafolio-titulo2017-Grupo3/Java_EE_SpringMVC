@@ -1,14 +1,14 @@
 package com.orion.portafolio2017.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerfilModel {
 
 	private int idPerfil;
 	private String nombrePerfil;
 	private String descripcionPerfil;
-	private Set<UsuarioModel> usuarioModels = new HashSet<UsuarioModel>();
+	private List<UsuarioModel> usuarioModels = new ArrayList<UsuarioModel>();
 
 	public PerfilModel() {
 	}
@@ -19,7 +19,7 @@ public class PerfilModel {
 		this.descripcionPerfil = descripcionPerfil;
 	}
 
-	public PerfilModel(int idPerfil, String nombrePerfil, String descripcionPerfil, Set<UsuarioModel> usuarioModels) {
+	public PerfilModel(int idPerfil, String nombrePerfil, String descripcionPerfil, List<UsuarioModel> usuarioModels) {
 		super();
 		this.idPerfil = idPerfil;
 		this.nombrePerfil = nombrePerfil;
@@ -51,11 +51,11 @@ public class PerfilModel {
 		this.descripcionPerfil = descripcionPerfil;
 	}
 
-	public Set<UsuarioModel> getUsuarios() {
+	public List<UsuarioModel> getUsuarios() {
 		return usuarioModels;
 	}
 
-	public void setUsuarios(Set<UsuarioModel> usuarioModels) {
+	public void setUsuarios(List<UsuarioModel> usuarioModels) {
 		this.usuarioModels = usuarioModels;
 	}
 

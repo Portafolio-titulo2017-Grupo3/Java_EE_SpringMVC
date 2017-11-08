@@ -1,7 +1,7 @@
 package com.orion.portafolio2017.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioModel {
 
@@ -15,8 +15,8 @@ public class FuncionarioModel {
 	private long telefonoFunionario;
 	private String sexoFunionario;
 	private String correoFuncionario;
-	private Set<PermisoModel> permisoModels = new HashSet<PermisoModel>();
-	private Set<UsuarioModel> usuarioModels = new HashSet<UsuarioModel>();
+	private List<PermisoModel> permisoModels = new ArrayList<PermisoModel>();
+	private List<UsuarioModel> usuarioModels = new ArrayList<UsuarioModel>();
 
 	public FuncionarioModel() {
 	}
@@ -38,8 +38,8 @@ public class FuncionarioModel {
 
 	public FuncionarioModel(String rutFuncionario, DepartamentoModel departamentoModel, CargoModel cargoModel,
 			String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
-			long telefonoFunionario, String sexoFunionario, String correoFuncionario, Set<PermisoModel> permisoModels,
-			Set<UsuarioModel> usuarioModels) {
+			long telefonoFunionario, String sexoFunionario, String correoFuncionario, List<PermisoModel> permisoModels,
+			List<UsuarioModel> usuarioModels) {
 		super();
 		this.rutFuncionario = rutFuncionario;
 		this.departamentoModel = departamentoModel;
@@ -135,19 +135,19 @@ public class FuncionarioModel {
 		this.correoFuncionario = correoFuncionario;
 	}
 
-	public Set<PermisoModel> getPermisos() {
+	public List<PermisoModel> getPermisos() {
 		return permisoModels;
 	}
 
-	public void setPermisos(Set<PermisoModel> permisoModels) {
+	public void setPermisos(List<PermisoModel> permisoModels) {
 		this.permisoModels = permisoModels;
 	}
 
-	public Set<UsuarioModel> getUsuarios() {
+	public List<UsuarioModel> getUsuarios() {
 		return usuarioModels;
 	}
 
-	public void setUsuarios(Set<UsuarioModel> usuarioModels) {
+	public void setUsuarios(List<UsuarioModel> usuarioModels) {
 		this.usuarioModels = usuarioModels;
 	}
 

@@ -1,13 +1,13 @@
 package com.orion.portafolio2017.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DepartamentoModel {
 
 	private int idDepto;
 	private String nombreDepto;
-	private Set<FuncionarioModel> funcionarioModels = new HashSet<FuncionarioModel>();
+	private List<FuncionarioModel> funcionarioModels = new ArrayList<FuncionarioModel>();
 
 	public DepartamentoModel() {
 	}
@@ -17,7 +17,7 @@ public class DepartamentoModel {
 		this.nombreDepto = nombreDepto;
 	}
 
-	public DepartamentoModel(int idDepto, String nombreDepto, Set<FuncionarioModel> funcionarioModels) {
+	public DepartamentoModel(int idDepto, String nombreDepto, List<FuncionarioModel> funcionarioModels) {
 		super();
 		this.idDepto = idDepto;
 		this.nombreDepto = nombreDepto;
@@ -40,11 +40,11 @@ public class DepartamentoModel {
 		this.nombreDepto = nombreDepto;
 	}
 
-	public Set<FuncionarioModel> getFuncionarios() {
+	public List<FuncionarioModel> getFuncionarios() {
 		return funcionarioModels;
 	}
 
-	public void setFuncionarios(Set<FuncionarioModel> funcionarioModels) {
+	public void setFuncionarios(List<FuncionarioModel> funcionarioModels) {
 		this.funcionarioModels = funcionarioModels;
 	}
 

@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.converter;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class MotivoConverter {
 		MotivoModel motivoModel = new MotivoModel();
 		motivoModel.setIdMotivo(motivo.getIdMotivo());
 		motivoModel.setDescripcionMotivo(motivo.getDescripcionMotivo());
-		motivoModel.setPermisos((Set<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) motivo.getPermisos()));
+		motivoModel.setPermisos((List<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) motivo.getPermisos()));
 		return motivoModel;
 		
 	}

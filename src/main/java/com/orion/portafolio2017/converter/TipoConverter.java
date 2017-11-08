@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.converter;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class TipoConverter {
 		tipoModel.setIdTipo(tipo.getIdTipo());
 		tipoModel.setNombreTipo(tipo.getNombreTipo());
 		tipoModel.setDescripcionTipo(tipo.getDescripcionTipo());
-		tipoModel.setPermisos((Set<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) tipoModel.getPermisos()));
+		tipoModel.setPermisos((List<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) tipoModel.getPermisos()));
 		return tipoModel;
 		
 	}

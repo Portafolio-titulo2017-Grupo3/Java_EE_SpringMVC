@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.converter;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,18 +59,18 @@ public class FuncionarioConverter {
 	public FuncionarioModel convertFuncionario2FuncionarioModel(Funcionario funcionario) {
 		
 		FuncionarioModel funcionarioModel = new FuncionarioModel();
-			funcionarioModel.setRutFuncionario(funcionario.getRutFuncionario());
-			funcionarioModel.setCorreoFuncionario(funcionario.getCorreoFuncionario());
-			funcionarioModel.setPrimerNombre(funcionario.getPrimerNombre());
-			funcionarioModel.setPrimerApellido(funcionario.getPrimerApellido());
-			funcionarioModel.setSegundoNombre(funcionario.getSegundoNombre());
-			funcionarioModel.setSegundoApellido(funcionario.getSegundoApellido());
-			funcionarioModel.setTelefonoFunionario(funcionario.getTelefonoFunionario());
-			funcionarioModel.setSexoFunionario(funcionario.getSexoFunionario());
-			funcionarioModel.setCargo(cargoConverter.convertCargo2CargoModel(funcionario.getCargo()));
-			funcionarioModel.setDepartamento(departamentoConverter.convertDepartamento2DepartamentoModel(funcionario.getDepartamento()));
-			funcionarioModel.setPermisos((Set<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) funcionarioModel.getPermisos()));
-			funcionarioModel.setUsuarios((Set<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) funcionarioModel.getUsuarios()));
+		funcionarioModel.setRutFuncionario(funcionario.getRutFuncionario());
+		funcionarioModel.setCorreoFuncionario(funcionario.getCorreoFuncionario());
+		funcionarioModel.setPrimerNombre(funcionario.getPrimerNombre());
+		funcionarioModel.setPrimerApellido(funcionario.getPrimerApellido());
+		funcionarioModel.setSegundoNombre(funcionario.getSegundoNombre());
+		funcionarioModel.setSegundoApellido(funcionario.getSegundoApellido());
+		funcionarioModel.setTelefonoFunionario(funcionario.getTelefonoFunionario());
+		funcionarioModel.setSexoFunionario(funcionario.getSexoFunionario());
+		funcionarioModel.setCargo(cargoConverter.convertCargo2CargoModel(funcionario.getCargo()));
+		funcionarioModel.setDepartamento(departamentoConverter.convertDepartamento2DepartamentoModel(funcionario.getDepartamento()));
+		funcionarioModel.setPermisos((List<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) funcionarioModel.getPermisos()));
+		funcionarioModel.setUsuarios((List<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) funcionarioModel.getUsuarios()));
 		return funcionarioModel;
 		
 	}

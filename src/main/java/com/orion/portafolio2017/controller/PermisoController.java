@@ -36,7 +36,7 @@ public class PermisoController {
 		ModelAndView mav = new ModelAndView(ViewConstant.MIS_PERMISOS);
 		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		FuncionarioModel funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
+		Funcionario funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
 		
 		mav.addObject("username", user.getUsername());
 		mav.addObject("mispermisos", funcionario.getPermisos());

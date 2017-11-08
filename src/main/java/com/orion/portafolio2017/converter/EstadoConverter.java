@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.converter;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class EstadoConverter {
 		EstadoModel estadoModel = new EstadoModel();
 		estadoModel.setIdEstado(estado.getIdEstado());
 		estadoModel.setNombreEstado(estado.getNombreEstado());
-		estadoModel.setPermisos((Set<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) estado.getPermisos()));
+		estadoModel.setPermisos((List<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) estado.getPermisos()));
 		return estadoModel;
 		
 	}

@@ -1,13 +1,13 @@
 package com.orion.portafolio2017.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MotivoModel {
 
 	private int idMotivo;
 	private String descripcionMotivo;
-	private Set<PermisoModel> permisoModels = new HashSet<PermisoModel>();
+	private List<PermisoModel> permisoModels = new ArrayList<PermisoModel>();
 
 	public MotivoModel() {
 	}
@@ -17,7 +17,7 @@ public class MotivoModel {
 		this.descripcionMotivo = descripcionMotivo;
 	}
 
-	public MotivoModel(int idMotivo, String descripcionMotivo, Set<PermisoModel> permisoModels) {
+	public MotivoModel(int idMotivo, String descripcionMotivo, List<PermisoModel> permisoModels) {
 		super();
 		this.idMotivo = idMotivo;
 		this.descripcionMotivo = descripcionMotivo;
@@ -40,11 +40,11 @@ public class MotivoModel {
 		this.descripcionMotivo = descripcionMotivo;
 	}
 
-	public Set<PermisoModel> getPermisos() {
+	public List<PermisoModel> getPermisos() {
 		return permisoModels;
 	}
 
-	public void setPermisos(Set<PermisoModel> permisoModels) {
+	public void setPermisos(List<PermisoModel> permisoModels) {
 		this.permisoModels = permisoModels;
 	}
 

@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.converter;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class DepartamentoConverter {
 		DepartamentoModel departamentoModel = new DepartamentoModel();
 		departamentoModel.setIdDepto(departamento.getIdDepto());
 		departamentoModel.setNombreDepto(departamento.getNombreDepto());
-		departamentoModel.setFuncionarios((Set<FuncionarioModel>) funcionarioConverter.convertFuncionario2FuncionarioModel((Funcionario) departamentoModel.getFuncionarios()));
+		departamentoModel.setFuncionarios((List<FuncionarioModel>) funcionarioConverter.convertFuncionario2FuncionarioModel((Funcionario) departamentoModel.getFuncionarios()));
 		return departamentoModel;
 		
 	}

@@ -2,6 +2,7 @@ package com.orion.portafolio2017.converter;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,10 @@ public class PerfilConverter {
 
 	public PerfilModel convertPerfil2PerfilModel(Perfil perfil) {
 		PerfilModel perfilModel = new PerfilModel();
-			perfilModel.setIdPerfil(perfil.getIdPerfil());
-			perfilModel.setDescripcionPerfil(perfil.getDescripcionPerfil());
-			perfilModel.setNombrePerfil(perfil.getNombrePerfil());
-			perfilModel.setUsuarios((Set<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) perfilModel.getUsuarios()));
+		perfilModel.setIdPerfil(perfil.getIdPerfil());
+		perfilModel.setDescripcionPerfil(perfil.getDescripcionPerfil());
+		perfilModel.setNombrePerfil(perfil.getNombrePerfil());
+		perfilModel.setUsuarios((List<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) perfilModel.getUsuarios()));
 		return perfilModel;
 		
 	}
