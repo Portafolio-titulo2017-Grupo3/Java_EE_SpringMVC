@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 
 import com.orion.portafolio2017.entity.Cargo;
 import com.orion.portafolio2017.entity.Departamento;
+import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.entity.HistorialCargo;
 import com.orion.portafolio2017.model.CargoModel;
 import com.orion.portafolio2017.model.DepartamentoModel;
+import com.orion.portafolio2017.model.FuncionarioModel;
 import com.orion.portafolio2017.model.HistorialCargoModel;
 
 
@@ -20,6 +22,10 @@ public class CargoConverter {
 	@Autowired
 	@Qualifier("historialcargoConverter")
 	private HistorialCargoConverter historialcargoConverter;
+	
+	@Autowired
+	@Qualifier("funcionarioConverter")
+	private FuncionarioConverter funcionarioConverter;
 
 	public Cargo convertCargoModel2Cargo(CargoModel cargoModel) {
 
@@ -28,6 +34,7 @@ public class CargoConverter {
 		cargo.setNombreCargo(cargoModel.getNombreCargo());
 		cargo.setSalario(cargoModel.getSalario());
 		cargo.setHistorialCargos((Set<HistorialCargo>) historialcargoConverter.convertHistorialCargoModel2HistorialCargo((HistorialCargoModel) cargoModel.getHistorialCargos()));
+		cargo.setFuncionarios((Set<Funcionario>) funcionarioConverter.convertFuncionarioModel2Funcionario((FuncionarioModel) cargoModel.getFuncionarios()));
 		return cargo;
 		
 	}
@@ -40,6 +47,7 @@ public class CargoConverter {
 		cargoModel.setNombreCargo(cargo.getNombreCargo());
 		cargoModel.setSalario(cargo.getSalario());
 		cargoModel.setHistorialCargos((Set<HistorialCargoModel>) historialcargoConverter.convertHistorialCargo2HistorialCargoModel((HistorialCargo) cargo.getHistorialCargos()));
+		cargoModel.setFuncionarios((Set<FuncionarioModel>) funcionarioConverter.convertFuncionario2FuncionarioModel((Funcionario) cargo.getFuncionarios()));
 		return cargoModel;
 		
 	}
