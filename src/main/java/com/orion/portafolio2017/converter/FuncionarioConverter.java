@@ -1,42 +1,17 @@
 package com.orion.portafolio2017.converter;
 
-import java.util.List;
-import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.orion.portafolio2017.entity.Departamento;
 import com.orion.portafolio2017.entity.Funcionario;
-import com.orion.portafolio2017.entity.Permiso;
-import com.orion.portafolio2017.entity.Usuario;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.FuncionarioModel;
-import com.orion.portafolio2017.model.PermisoModel;
-import com.orion.portafolio2017.model.UsuarioModel;
+import com.orion.portafolio2017.model.FuncionarioInfoModel;
 
 
 @Component("funcionarioConverter")
 public class FuncionarioConverter {
 	
-	@Autowired
-	@Qualifier("cargoConverter")
-	private CargoConverter cargoConverter;
-	
-	@Autowired
-	@Qualifier("departamentoConverter")
-	private DepartamentoConverter departamentoConverter;
-	
-	@Autowired
-	@Qualifier("permisoConverter")
-	private PermisoConverter permisoConverter;
-	
-	@Autowired
-	@Qualifier("usuarioConverter")
-	private UsuarioConverter usuarioConverter;
 
-	public Funcionario convertFuncionarioModel2Funcionario(FuncionarioModel funcionarioModel) {
+	public Funcionario convertFuncionarioModel2Funcionario(FuncionarioInfoModel funcionarioModel) {
 
 		Funcionario funcionario = new Funcionario();
 		funcionario.setRutFuncionario(funcionarioModel.getRutFuncionario());
@@ -47,18 +22,15 @@ public class FuncionarioConverter {
 		funcionario.setSegundoApellido(funcionarioModel.getSegundoApellido());
 		funcionario.setTelefonoFunionario(funcionarioModel.getTelefonoFunionario());
 		funcionario.setSexoFunionario(funcionarioModel.getSexoFunionario());
-		funcionario.setCargo(cargoConverter.convertCargoModel2Cargo(funcionarioModel.getCargo()));
-		funcionario.setDepartamento(departamentoConverter.convertDepartamentoModel2Departamento(funcionarioModel.getDepartamento()));
-		funcionario.setPermisos((Set<Permiso>) permisoConverter.convertPermisoModel2Permiso((PermisoModel) funcionarioModel.getPermisos()));
-		funcionario.setUsuarios((Set<Usuario>) usuarioConverter.convertUsuarioModel2Usuario((UsuarioModel) funcionarioModel.getUsuarios()));
+
 		return funcionario;
 		
 	}
 	
 
-	public FuncionarioModel convertFuncionario2FuncionarioModel(Funcionario funcionario) {
+	public FuncionarioInfoModel convertFuncionario2FuncionarioModel(Funcionario funcionario) {
 		
-		FuncionarioModel funcionarioModel = new FuncionarioModel();
+		FuncionarioInfoModel funcionarioModel = new FuncionarioInfoModel();
 		funcionarioModel.setRutFuncionario(funcionario.getRutFuncionario());
 		funcionarioModel.setCorreoFuncionario(funcionario.getCorreoFuncionario());
 		funcionarioModel.setPrimerNombre(funcionario.getPrimerNombre());
@@ -67,10 +39,14 @@ public class FuncionarioConverter {
 		funcionarioModel.setSegundoApellido(funcionario.getSegundoApellido());
 		funcionarioModel.setTelefonoFunionario(funcionario.getTelefonoFunionario());
 		funcionarioModel.setSexoFunionario(funcionario.getSexoFunionario());
-		funcionarioModel.setCargo(cargoConverter.convertCargo2CargoModel(funcionario.getCargo()));
-		funcionarioModel.setDepartamento(departamentoConverter.convertDepartamento2DepartamentoModel(funcionario.getDepartamento()));
-		funcionarioModel.setPermisos((List<PermisoModel>) permisoConverter.convertPermiso2PermisoModel((Permiso) funcionarioModel.getPermisos()));
-		funcionarioModel.setUsuarios((List<UsuarioModel>) usuarioConverter.convertUsuario2UsuarioModel((Usuario) funcionarioModel.getUsuarios()));
+		
+		funcionarioModel.setIdCargo(funcionario.getCargo().getIdCargo());
+		funcionarioModel.setNombreCargo(funcionario.getCargo().getNombreCargo());
+		funcionarioModel.setSalario(funcionario.getCargo().getSalario());
+		
+		funcionarioModel.setIdDepto(funcionario.getDepartamento().getIdDepto());
+		funcionarioModel.setNombreDepto(funcionario.getDepartamento().getNombreDepto());
+
 		return funcionarioModel;
 		
 	}

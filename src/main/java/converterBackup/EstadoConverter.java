@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package converterBackup;
 
 import java.util.List;
 import java.util.Set;
@@ -14,13 +14,14 @@ import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Perfil;
 import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.entity.Usuario;
-import com.orion.portafolio2017.model.CargoModel;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.EstadoModel;
-import com.orion.portafolio2017.model.MotivoModel;
-import com.orion.portafolio2017.model.PerfilModel;
-import com.orion.portafolio2017.model.PermisoModel;
-import com.orion.portafolio2017.model.UsuarioModel;
+
+import modelBackup.CargoModel;
+import modelBackup.DepartamentoModel;
+import modelBackup.EstadoModel;
+import modelBackup.MotivoModel;
+import modelBackup.PerfilModel;
+import modelBackup.PermisoModel;
+import modelBackup.UsuarioModel;
 
 
 @Component("estadoConverter")

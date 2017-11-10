@@ -1,7 +1,9 @@
-package com.orion.portafolio2017.model;
+package modelBackup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.orion.portafolio2017.entity.Cargo;
 
 public class FuncionarioModel {
 
@@ -53,6 +55,12 @@ public class FuncionarioModel {
 		this.correoFuncionario = correoFuncionario;
 		this.permisoModels = permisoModels;
 		this.usuarioModels = usuarioModels;
+	}
+
+	public FuncionarioModel(String rut, String departamento, Cargo cargo, String primerNombre2, String segundoNombre2,
+			String primerApellido2, String segundoApellido2, long telefonoFunionario2, String sexoFunionario2,
+			String correoFuncionario2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getRutFuncionario() {

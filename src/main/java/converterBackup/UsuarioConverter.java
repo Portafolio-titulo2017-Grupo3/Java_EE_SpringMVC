@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package converterBackup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,10 +8,11 @@ import com.orion.portafolio2017.entity.Cargo;
 import com.orion.portafolio2017.entity.Departamento;
 import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.entity.Usuario;
-import com.orion.portafolio2017.model.CargoModel;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.PermisoModel;
-import com.orion.portafolio2017.model.UsuarioModel;
+
+import modelBackup.CargoModel;
+import modelBackup.DepartamentoModel;
+import modelBackup.PermisoModel;
+import modelBackup.UsuarioModel;
 
 
 @Component("usuarioConverter")

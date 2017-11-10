@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package converterBackup;
 
 import java.util.List;
 import java.util.Set;
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.orion.portafolio2017.entity.Departamento;
 import com.orion.portafolio2017.entity.Funcionario;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.FuncionarioModel;
+
+import modelBackup.DepartamentoModel;
+import modelBackup.FuncionarioModel;
 
 
 @Component("departamentoConverter")

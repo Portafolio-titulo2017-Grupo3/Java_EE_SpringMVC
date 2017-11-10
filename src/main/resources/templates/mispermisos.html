@@ -29,10 +29,10 @@
 				<tbody>
 					<tr th:each="mispermisos : ${mispermisos}">
 						<td th:text="${mispermisos.idPermiso}"></td>
-						<td th:text="${mispermisos.funcionario.rutFuncionario}"></td>
-						<td th:text="${mispermisos.estado.nombreEstado}"></td>
-						<td th:text="${mispermisos.motivo.descripcionMotivo}"></td>
-						<td th:text="${mispermisos.tipo.nombreTipo}"></td>
+						<td th:text="${mispermisos.rutFuncionario}"></td>
+						<td th:text="${mispermisos.nombreEstado}"></td>
+						<td th:text="${mispermisos.descripcionMotivo}"></td>
+						<td th:text="${mispermisos.nombreTipo}"></td>
 						<td th:text="${mispermisos.resolucionPermiso}"></td>
 						<td th:text="${mispermisos.fechaSolicitud}"></td>
 						<td th:text="${mispermisos.fechaInicio}"></td>

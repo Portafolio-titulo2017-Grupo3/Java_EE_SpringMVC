@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
-import com.orion.portafolio2017.entity.Funcionario;
-import com.orion.portafolio2017.model.FuncionarioModel;
+import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.service.impl.UserService;
+
+
 
 @Controller
 //@PreAuthorize("permitAll()")
@@ -48,7 +49,7 @@ public class MenuController {
 			
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
-			Funcionario funcionario = userService.obtenerFuncionarioByUsuario(user.getUsername());
+			FuncionarioInfoModel funcionarioModel = userService.obtenerFuncionarioByUsuario(user.getUsername());
 			
 			switch (perfil) {
             case "SUPER_ADMIN":  constante = ViewConstant.MENUSA;
@@ -72,12 +73,12 @@ public class MenuController {
 			//Devuelve el Nombre del UsuarioModel y el TipoModel de PerfilModel
 			mav.addObject("username", user.getUsername());
 			mav.addObject("perfil", perfil);
-			mav.addObject("rut", funcionario.getRutFuncionario());
-			mav.addObject("nombres", funcionario.getPrimerNombre()+" "+funcionario.getSegundoNombre());
-			mav.addObject("apellidos", funcionario.getPrimerApellido()+" "+funcionario.getSegundoApellido());
-			mav.addObject("departamento", funcionario.getDepartamento().getNombreDepto());
-			mav.addObject("email", funcionario.getCorreoFuncionario());
-			mav.addObject("telefono", funcionario.getTelefonoFunionario());
+			mav.addObject("rut", funcionarioModel.getRutFuncionario());
+			mav.addObject("nombres", funcionarioModel.getPrimerNombre()+" "+funcionarioModel.getSegundoNombre());
+			mav.addObject("apellidos", funcionarioModel.getPrimerApellido()+" "+funcionarioModel.getSegundoApellido());
+			mav.addObject("departamento", funcionarioModel.getNombreDepto());
+			mav.addObject("email", funcionarioModel.getCorreoFuncionario());
+			mav.addObject("telefono", funcionarioModel.getTelefonoFunionario());
 			return mav;	
 	}
 

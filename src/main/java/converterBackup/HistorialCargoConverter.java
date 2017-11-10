@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package converterBackup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 import com.orion.portafolio2017.entity.Cargo;
 import com.orion.portafolio2017.entity.Departamento;
 import com.orion.portafolio2017.entity.HistorialCargo;
-import com.orion.portafolio2017.model.CargoModel;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.HistorialCargoModel;
+
+import modelBackup.CargoModel;
+import modelBackup.DepartamentoModel;
+import modelBackup.HistorialCargoModel;
 
 
 @Component("historialcargoConverter")

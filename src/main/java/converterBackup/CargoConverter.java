@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package converterBackup;
 
 import java.util.List;
 import java.util.Set;
@@ -11,10 +11,11 @@ import com.orion.portafolio2017.entity.Cargo;
 import com.orion.portafolio2017.entity.Departamento;
 import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.entity.HistorialCargo;
-import com.orion.portafolio2017.model.CargoModel;
-import com.orion.portafolio2017.model.DepartamentoModel;
-import com.orion.portafolio2017.model.FuncionarioModel;
-import com.orion.portafolio2017.model.HistorialCargoModel;
+
+import modelBackup.CargoModel;
+import modelBackup.DepartamentoModel;
+import modelBackup.FuncionarioModel;
+import modelBackup.HistorialCargoModel;
 
 
 @Component("cargoConverter")
