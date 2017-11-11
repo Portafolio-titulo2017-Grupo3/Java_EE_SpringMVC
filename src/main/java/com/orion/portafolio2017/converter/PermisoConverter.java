@@ -2,7 +2,11 @@ package com.orion.portafolio2017.converter;
 
 import org.springframework.stereotype.Component;
 
+import com.orion.portafolio2017.entity.Estado;
+import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.PermisoModel;
 
 
@@ -19,6 +23,10 @@ public class PermisoConverter {
 		permiso.setFechaSolicitud(permisoModel.getFechaSolicitud());
 		permiso.setFechaTermino(permisoModel.getFechaTermino());
 		permiso.setResolucionPermiso(permisoModel.getResolucionPermiso());
+		permiso.setFuncionario(new Funcionario(permisoModel.getRutFuncionario()));
+		permiso.setEstado(new Estado(permisoModel.getIdEstado()));
+		permiso.setMotivo(new Motivo(permisoModel.getIdMotivo()));
+		permiso.setTipo(new Tipo(permisoModel.getIdTipo()));
 		return permiso;
 		
 	}

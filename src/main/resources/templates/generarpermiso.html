@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Orion - Add/modify Contact</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Contact Form</h1>
+			<br/>
+			<form action="#" th:action="@{/permisos/addpermiso}" th:object="${permisoModel}" method="post">
+				<input type="hidden" th:field="*{idPermiso}"></input>
+				Rut: <input type="text" th:field="*{rutFuncionario}" th:value="*{rutFuncionario}"></input>
+				<br/>
+				Fecha Solicitud: <input type="date" th:field="*{fechaSolicitud}" th:value="*{fechaSolicitud}"></input>
+				<br/>
+				Fecha Inicio: <input type="date" th:field="*{fechaInicio}" th:value="*{fechaInicio}"></input>
+				<br/>
+				Fecha Termino: <input type="date" th:field="*{fechaTermino}" th:value="*{fechaTermino}"></input>
+				<br/>
+				Fecha Resolucion: <input type="text" th:field="*{resolucionPermiso}" th:value="*{resolucionPermiso}"></input>
+				<br/>
+				ID Estado: <input type="text" th:field="*{idEstado}" th:value="*{idEstado}"></input>
+				<input type="hidden" th:field="*{nombreEstado}" th:value="*{3}"></input>
+				<br/>
+				
+				ID Motivo: <input type="text" th:field="*{idMotivo}" th:value="*{idMotivo}"></input>
+				<input type="hidden" th:field="*{descripcionMotivo}" th:value="*{40}"></input>
+				<br/>
+				
+				ID Tipo: <input type="text" th:field="*{idTipo}" th:value="*{idTipo}"></input>
+				<input type="hidden" th:field="*{nombreTipo}" th:value="*{4}"></input>
+				<input type="hidden" th:field="*{descripcionTipo}" th:value="*{4}"></input>
+
+				<br/>
+				<br/>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept
+				</button>
+			</form>
+			<a href="#" th:href="@{/permisos/cancel}">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+				</button>
+			</a>
+			
+		</div>
+	</div>
+
+</body>
+</html>

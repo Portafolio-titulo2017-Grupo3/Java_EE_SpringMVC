@@ -60,6 +60,10 @@ public class Funcionario implements java.io.Serializable {
 
 	public Funcionario() {
 	}
+	
+	public Funcionario(String rutFuncionario2) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Funcionario(String rutFuncionario, Departamento departamento, Cargo cargo, String primerNombre,
 			String segundoNombre, String primerApellido, String segundoApellido, long telefonoFunionario,
@@ -97,9 +101,11 @@ public class Funcionario implements java.io.Serializable {
 		this.usuarios = usuarios;
 	}
 
+
 	public String getRutFuncionario() {
 		return this.rutFuncionario;
 	}
+	
 
 	public void setRutFuncionario(String rutFuncionario) {
 		this.rutFuncionario = rutFuncionario;

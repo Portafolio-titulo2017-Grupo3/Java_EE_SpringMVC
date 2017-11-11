@@ -46,6 +46,8 @@ public class ViewConstant {
 	
 	
 	
+	/** The Constant CREAR PERMISO FUNCIONARIO. */
+	public static final String CREAR_PERMISO_F = "generarpermiso";
 
 	
 }

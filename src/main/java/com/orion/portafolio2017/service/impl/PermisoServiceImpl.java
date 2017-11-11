@@ -27,8 +27,8 @@ public class PermisoServiceImpl implements PermisoService {
 
 	@Override
 	public PermisoModel addPermiso(PermisoModel permisoModel) {
-		// TODO Auto-generated method stub
-		return null;
+		Permiso permiso = permisoRepository.save(permisoConverter.convertPermisoModel2Permiso(permisoModel));
+		return permisoConverter.convertPermiso2PermisoModel(permiso);
 	}
 
 	@Override
@@ -62,6 +62,19 @@ public class PermisoServiceImpl implements PermisoService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public PermisoModel findPermisoModelById(int id) {
+		PermisoModel permisoModel = permisoConverter.convertPermiso2PermisoModel(findPermisoById(id));
+		return permisoModel;
+	}
+
+	@Override
+	public Permiso findPermisoById(int id) {
+		return permisoRepository.findByIdPermiso(id);
+	}
+
+
 
 
 	

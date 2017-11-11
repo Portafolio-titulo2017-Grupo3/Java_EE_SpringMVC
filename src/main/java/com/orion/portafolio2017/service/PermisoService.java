@@ -16,6 +16,10 @@ public interface PermisoService {
 	
 	public abstract PermisoModel findPermisoModelByRut(String rut);
 	
+	public abstract PermisoModel findPermisoModelById(int id);
+	
+	public abstract Permiso findPermisoById(int id);
+	
 	public abstract void removePermiso(int rut);
 
 }

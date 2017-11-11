@@ -1,20 +1,30 @@
 package com.orion.portafolio2017.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
 import com.orion.portafolio2017.model.PermisoModel;
-import com.orion.portafolio2017.service.impl.PermisoServiceImpl;
+import com.orion.portafolio2017.service.PermisoService;
 import com.orion.portafolio2017.service.impl.UserService;
 
 
@@ -32,7 +42,25 @@ public class PermisoController {
 	
 	@Autowired
 	@Qualifier("permisoServiceImpl")
-	private PermisoServiceImpl permisoServiceImpl;
+	private PermisoService permisoService;
+	
+	@GetMapping("/cancel")
+	public String cancel() {
+		return "redirect:/permisos/mispermisos";
+	}
+	
+	@GetMapping("/permisoform")
+	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
+			Model model) {
+		PermisoModel permisoModel = new PermisoModel();
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permisoModel.toString());
+		if(idPermiso != 0) {
+			permisoModel = permisoService.findPermisoModelById(idPermiso);
+		}
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permisoModel.toString());
+		model.addAttribute("permisoModel", permisoModel);
+		return ViewConstant.CREAR_PERMISO_F;
+	}
 	
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/mispermisos")
@@ -63,8 +91,33 @@ public class PermisoController {
 		mav = new ModelAndView(constante);
 		
 		mav.addObject("username", user.getUsername());
-		mav.addObject("mispermisos", permisoServiceImpl.findAllPermisoByRut(rutFuncionario));
+		mav.addObject("mispermisos", permisoService.findAllPermisoByRut(rutFuncionario));
 		return mav;
+		
+	}
+
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+	    sdf.setLenient(true);
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
+	
+	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
+	@PostMapping("/addpermiso")
+	public String addPermiso(@ModelAttribute(name="permisoModel") PermisoModel permisoModel,
+			Model model) {
+		LOG.info("METHOD: addPermiso() -- PARAMS: " + permisoModel.toString());
+		
+		
+		if(null != permisoService.addPermiso(permisoModel)) {
+			model.addAttribute("result", 1);
+		}else {
+			model.addAttribute("result", 0);
+		}
+		
+		return "redirect:/permisos/mispermisos";
 		
 	}
 

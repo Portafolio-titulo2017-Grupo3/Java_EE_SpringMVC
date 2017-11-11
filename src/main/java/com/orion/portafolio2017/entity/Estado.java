@@ -43,6 +43,10 @@ public class Estado implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
+	public Estado(int idEstado2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdEstado() {
 		return this.idEstado;
 	}

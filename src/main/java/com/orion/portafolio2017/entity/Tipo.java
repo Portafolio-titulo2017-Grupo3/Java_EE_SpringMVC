@@ -49,6 +49,10 @@ public class Tipo implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
+	public Tipo(int idTipo2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdTipo() {
 		return this.idTipo;
 	}

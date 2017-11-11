@@ -44,6 +44,10 @@ public class Motivo implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
+	public Motivo(int idMotivo2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdMotivo() {
 		return this.idMotivo;
 	}
