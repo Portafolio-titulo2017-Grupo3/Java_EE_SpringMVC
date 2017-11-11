@@ -30,6 +30,12 @@ public class PermisoServiceImpl implements PermisoService {
 		Permiso permiso = permisoRepository.save(permisoConverter.convertPermisoModel2Permiso(permisoModel));
 		return permisoConverter.convertPermiso2PermisoModel(permiso);
 	}
+	
+	//No deberia ir este metodo, se implemento para trabajar sin Model (NO DEBERIA IR)
+	public Permiso addPermiso2(Permiso permiso) {
+		Permiso permiso2 = permisoRepository.save(permiso);
+		return permiso2;
+	}
 
 	@Override
 	public List<PermisoModel> findAllPermisoByRut(String rut) {

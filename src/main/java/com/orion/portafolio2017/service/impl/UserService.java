@@ -77,6 +77,28 @@ public class UserService implements UserDetailsService{
 		return funcionarioModel;
 	}
 	
+	//Este metodo no deberia ir , pero se implemento para poder trabajar sin el model
+	public Funcionario obtenerFuncionario(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		
+		String rut = usuario.getFuncionario().getRutFuncionario();
+ 		Departamento departamento = usuario.getFuncionario().getDepartamento();
+ 		Cargo cargo = usuario.getFuncionario().getCargo();
+ 		String primerNombre = usuario.getFuncionario().getPrimerNombre();
+ 		String segundoNombre = usuario.getFuncionario().getSegundoNombre();
+ 		String primerApellido = usuario.getFuncionario().getPrimerApellido();
+ 		String segundoApellido = usuario.getFuncionario().getSegundoApellido();
+ 		long telefonoFunionario =usuario.getFuncionario().getTelefonoFunionario();
+ 		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
+ 		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
+ 		Set<Permiso> permisos = usuario.getFuncionario().getPermisos();
+ 		Set<Usuario> usuarios = usuario.getFuncionario().getUsuarios();
+		
+ 		Funcionario funcionary= new Funcionario(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,
+ 		sexoFunionario,correoFuncionario,permisos,usuarios);
+ 		return funcionary;
+	}
+	
 	/**
 	 * Builds the user.
 	 *

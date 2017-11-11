@@ -10,6 +10,9 @@ public interface PermisoService {
 	
 	public abstract PermisoModel addPermiso(PermisoModel permisoModel);
 	
+	//NO DEBERIA IR
+	public abstract Permiso addPermiso2(Permiso permiso);
+	
 	public abstract List<PermisoModel> findAllPermisoByRut(String rut);
 	
 	public abstract Permiso findPermisoByRut(String rut);

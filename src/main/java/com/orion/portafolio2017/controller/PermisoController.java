@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.PermisoService;
 import com.orion.portafolio2017.service.impl.UserService;
@@ -49,6 +52,7 @@ public class PermisoController {
 		return "redirect:/permisos/mispermisos";
 	}
 	
+/*	
 	@GetMapping("/permisoform")
 	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
 			Model model) {
@@ -59,6 +63,26 @@ public class PermisoController {
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permisoModel.toString());
 		model.addAttribute("permisoModel", permisoModel);
+		return ViewConstant.CREAR_PERMISO_F;
+	}
+*/
+	
+	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
+	@GetMapping("/permisoform")
+	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
+			Model model) {
+		Permiso permiso = new Permiso();
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
+		
+		if(idPermiso != 0) {
+			permiso = permisoService.findPermisoById(idPermiso);
+		}
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Funcionario funcionario = userService.obtenerFuncionario(user.getUsername());
+		
+		model.addAttribute("funcionario",funcionario);
+		model.addAttribute("permiso", permiso);
 		return ViewConstant.CREAR_PERMISO_F;
 	}
 	
@@ -103,7 +127,9 @@ public class PermisoController {
 	    sdf.setLenient(true);
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
+
 	
+	/*
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@PostMapping("/addpermiso")
 	public String addPermiso(@ModelAttribute(name="permisoModel") PermisoModel permisoModel,
@@ -120,8 +146,25 @@ public class PermisoController {
 		return "redirect:/permisos/mispermisos";
 		
 	}
+	*/
 
 	
-	//@PostMapping("/crearpermiso")
+	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
+	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
+	@PostMapping("/addpermiso")
+	public String addPermiso(@ModelAttribute(name="permiso") Permiso permiso,
+			Model model) {
+		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
+		
+		
+		if(null != permisoService.addPermiso2(permiso)) {
+			model.addAttribute("result", 1);
+		}else {
+			model.addAttribute("result", 0);
+		}
+		
+		return "redirect:/permisos/mispermisos";
+		
+	}
 
 }
