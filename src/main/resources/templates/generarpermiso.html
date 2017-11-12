@@ -30,7 +30,61 @@
 				<br/>
 				Fecha Resolucion: <input type="text" th:field="*{resolucionPermiso}" th:value="*{resolucionPermiso}"></input>
 				<br/>
+				<div class="form-group">
+ 					<label class="col-md-3 control-label">Estado: </label>
+					    <div class="col-md-5">
+						    <div th:if="${estado != null}">
+						         <select th:field="*{estado}">
+						         	<script type="text/javascript">
+										    function changeFunc(x) {
+										     var selectBox = document.getElementById(x);
+										     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+										     alert(x);
+										    }
+									</script>
+						             <option th:each="dropDownItem : ${estado}" th:onclick="'changeFunc(\'' + ${dropDownItem.idEstado} + '\');'"
+						                             th:value="${dropDownItem.idEstado}"
+						                             th:text="${dropDownItem.nombreEstado}" />
+						         </select>
+	    					</div>
+						    <div th:if="${estado == null}">
+						        <div>"Estado no encontrado, porfavor contactar as servicio técnico."</div>
+						    </div>
+						</div>
+				</div>
 				<br/>
+				<div class="form-group">
+ 					<label class="col-md-3 control-label">Motivo: </label>
+					    <div class="col-md-5">
+						    <div th:if="${motivo != null}">
+						         <select th:field="*{motivo}">
+						             <option th:each="dropDownItem : ${motivo}"
+						                             th:value="${dropDownItem.idMotivo}"
+						                             th:text="${dropDownItem.descripcionMotivo}" />
+						         </select>
+	    					</div>
+						    <div th:if="${motivo == null}">
+						        <div>"Motivo no encontrado, porfavor contactar as servicio técnico."</div>
+						    </div>
+						</div>
+				</div>
+				<br/>
+				<div class="form-group">
+ 					<label class="col-md-3 control-label">Tipo: </label>
+					    <div class="col-md-5">
+						    <div th:if="${tipo != null}">
+						         <select th:field="*{tipo}">
+						             <option th:each="dropDownItem : ${tipo}"
+						                             th:value="${dropDownItem.idTipo}"
+						                             th:text="${dropDownItem.nombreTipo}" />
+						         </select>
+	    					</div>
+						    <div th:if="${tipo == null}">
+						        <div>"Tipo no encontrado, porfavor contactar as servicio técnico."</div>
+						    </div>
+						</div>
+				</div>
+				<br/><br/>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept
 				</button>

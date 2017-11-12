@@ -1,17 +1,24 @@
 package com.orion.portafolio2017.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.orion.portafolio2017.converter.EstadoConverter;
 import com.orion.portafolio2017.entity.Estado;
+import com.orion.portafolio2017.model.EstadoModel;
 import com.orion.portafolio2017.repository.EstadoRepository;
 import com.orion.portafolio2017.service.EstadoService;
 
-@Service("estadoServiceImpl")
+@Service("estadoService")
 public class EstadoServiceImpl implements EstadoService {
+	
+	@Autowired
+	@Qualifier("estadoConverter")
+	private EstadoConverter estadoConverter;
 	
 	@Autowired
 	@Qualifier("estadoRepository")
@@ -24,12 +31,23 @@ public class EstadoServiceImpl implements EstadoService {
 	}
 
 	@Override
+	public List<EstadoModel> findAllEstado2() {
+		List<Estado> estados= estadoRepository.findAll();
+		List<EstadoModel> estadoModel = new ArrayList<EstadoModel>();
+		for(Estado estado : estados) {
+			estadoModel.add(estadoConverter.convertEstado2EstadoModel(estado));
+		}
+		return estadoModel;
+	}
+
+	@Override
 	public List<Estado> findAllEstado() {
 		List<Estado> estados= estadoRepository.findAll();
+		List<Estado> estadoModel = new ArrayList<Estado>();
 		for(Estado estado : estados) {
-			estados.add(estado);
+			estadoModel.add(estado);
 		}
-		return estados;
+		return estadoModel;
 	}
 
 }

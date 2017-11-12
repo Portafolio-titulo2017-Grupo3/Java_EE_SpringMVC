@@ -2,12 +2,14 @@ package com.orion.portafolio2017.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -23,11 +25,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.entity.Estado;
 import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
+import com.orion.portafolio2017.service.EstadoService;
+import com.orion.portafolio2017.service.MotivoService;
 import com.orion.portafolio2017.service.PermisoService;
+import com.orion.portafolio2017.service.TipoService;
 import com.orion.portafolio2017.service.impl.UserService;
 
 
@@ -44,7 +52,19 @@ public class PermisoController {
 	private UserService userService;
 	
 	@Autowired
-	@Qualifier("permisoServiceImpl")
+	@Qualifier("estadoService")
+	private EstadoService estadoService;
+	
+	@Autowired
+	@Qualifier("motivoService")
+	private MotivoService motivoService;
+	
+	@Autowired
+	@Qualifier("tipoService")
+	private TipoService tipoService;
+	
+	@Autowired
+	@Qualifier("permisoService")
 	private PermisoService permisoService;
 	
 	@GetMapping("/cancel")
@@ -83,6 +103,9 @@ public class PermisoController {
 		
 		model.addAttribute("funcionario",funcionario);
 		model.addAttribute("permiso", permiso);
+		model.addAttribute("estado", estadoService.findAllEstado());
+		model.addAttribute("motivo", motivoService.findAllMotivo());
+		model.addAttribute("tipo", tipoService.findAllTipo());
 		return ViewConstant.CREAR_PERMISO_F;
 	}
 	
@@ -126,6 +149,8 @@ public class PermisoController {
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
 	    sdf.setLenient(true);
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	    binder.registerCustomEditor(Integer.class,null,new CustomNumberEditor(Integer.class,null,true));
+	    binder.registerCustomEditor(Long.class,null,new CustomNumberEditor(Long.class,null,true));
 	}
 
 	

@@ -14,7 +14,7 @@ import com.orion.portafolio2017.repository.PermisoRepository;
 import com.orion.portafolio2017.service.PermisoService;
 
 
-@Service("permisoServiceImpl")
+@Service("permisoService")
 public class PermisoServiceImpl implements PermisoService {
 
 	@Autowired
