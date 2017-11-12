@@ -2,13 +2,17 @@ package com.orion.portafolio2017.service;
 
 import java.util.List;
 
+import com.orion.portafolio2017.entity.Estado;
+import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.PermisoModel;
 
 
 public interface PermisoService {
 	
-	public abstract PermisoModel addPermiso(PermisoModel permisoModel);
+	public abstract PermisoModel addPermiso(PermisoModel permisoModel, Funcionario funcionario, Estado estado, Motivo motivo, Tipo tipo);
 	
 	//NO DEBERIA IR
 	public abstract Permiso addPermiso2(Permiso permiso);

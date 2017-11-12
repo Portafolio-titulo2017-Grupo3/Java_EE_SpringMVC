@@ -22,7 +22,7 @@ public class MotivoServiceImpl implements MotivoService{
 	@Override
 	public Motivo findMotivoById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return motivoRepository.findByIdMotivo(id);
 	}
 
 	@Override

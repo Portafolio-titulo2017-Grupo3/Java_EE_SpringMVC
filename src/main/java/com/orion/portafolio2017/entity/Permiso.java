@@ -2,6 +2,8 @@ package com.orion.portafolio2017.entity;
 // Generated 29-10-2017 16:52:28 by Hibernate Tools 5.0.6.Final
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,19 +27,19 @@ public class Permiso implements java.io.Serializable {
 	@Column(name = "id_permiso", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idPermiso;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "estado_id_estado", nullable = false)
 	private Estado estado;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "funcionario_rut_funcionario", nullable = false)
 	private Funcionario funcionario;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "motivo_id_motivo", nullable = false)
 	private Motivo motivo;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tipo_id_tipo", nullable = false)
 	private Tipo tipo;
 

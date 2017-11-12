@@ -22,7 +22,7 @@ public class TipoServiceImpl implements TipoService {
 	@Override
 	public Tipo findTipoById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoRepository.findByIdTipo(id);
 	}
 
 	@Override

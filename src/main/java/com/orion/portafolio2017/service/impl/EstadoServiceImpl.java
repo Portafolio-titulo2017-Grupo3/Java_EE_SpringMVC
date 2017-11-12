@@ -27,17 +27,13 @@ public class EstadoServiceImpl implements EstadoService {
 	@Override
 	public Estado findEstadoById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return estadoRepository.findByIdEstado(id);
 	}
-
+	
 	@Override
-	public List<EstadoModel> findAllEstado2() {
-		List<Estado> estados= estadoRepository.findAll();
-		List<EstadoModel> estadoModel = new ArrayList<EstadoModel>();
-		for(Estado estado : estados) {
-			estadoModel.add(estadoConverter.convertEstado2EstadoModel(estado));
-		}
-		return estadoModel;
+	public EstadoModel findEstadoByIdModel(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -46,6 +42,17 @@ public class EstadoServiceImpl implements EstadoService {
 		List<Estado> estadoModel = new ArrayList<Estado>();
 		for(Estado estado : estados) {
 			estadoModel.add(estado);
+		}
+		return estadoModel;
+	}
+
+
+	@Override
+	public List<EstadoModel> findAllEstadoModel() {
+		List<Estado> estados= estadoRepository.findAll();
+		List<EstadoModel> estadoModel = new ArrayList<EstadoModel>();
+		for(Estado estado : estados) {
+			estadoModel.add(estadoConverter.convertEstado2EstadoModel(estado));
 		}
 		return estadoModel;
 	}

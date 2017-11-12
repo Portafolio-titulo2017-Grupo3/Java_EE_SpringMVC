@@ -15,7 +15,7 @@ import com.orion.portafolio2017.model.PermisoModel;
 public class PermisoConverter {
 	
 
-	public Permiso convertPermisoModel2Permiso(PermisoModel permisoModel) {
+	public Permiso convertPermisoModel2Permiso(PermisoModel permisoModel, Funcionario funcionario, Estado estado, Motivo motivo, Tipo tipo) {
 
 		Permiso permiso = new Permiso();
 		permiso.setIdPermiso(permisoModel.getIdPermiso());
@@ -23,10 +23,10 @@ public class PermisoConverter {
 		permiso.setFechaSolicitud(permisoModel.getFechaSolicitud());
 		permiso.setFechaTermino(permisoModel.getFechaTermino());
 		permiso.setResolucionPermiso(permisoModel.getResolucionPermiso());
-		permiso.setFuncionario(new Funcionario(permisoModel.getRutFuncionario()));
-		permiso.setEstado(new Estado(permisoModel.getIdEstado()));
-		permiso.setMotivo(new Motivo(permisoModel.getIdMotivo()));
-		permiso.setTipo(new Tipo(permisoModel.getIdTipo()));
+		permiso.setFuncionario(funcionario);
+		permiso.setEstado(estado);
+		permiso.setMotivo(motivo);
+		permiso.setTipo(tipo);
 		return permiso;
 		
 	}
@@ -43,13 +43,13 @@ public class PermisoConverter {
 		
 		permisoModel.setRutFuncionario(permiso.getFuncionario().getRutFuncionario());
 		
-		permisoModel.setIdEstado(permiso.getEstado().getIdEstado());
+		permisoModel.setEstado(permiso.getEstado().getIdEstado());
 		permisoModel.setNombreEstado(permiso.getEstado().getNombreEstado());
 		
-		permisoModel.setIdMotivo(permiso.getMotivo().getIdMotivo());
+		permisoModel.setMotivo(permiso.getMotivo().getIdMotivo());
 		permisoModel.setDescripcionMotivo(permiso.getMotivo().getDescripcionMotivo());
 		
-		permisoModel.setIdTipo(permiso.getTipo().getIdTipo());
+		permisoModel.setTipo(permiso.getTipo().getIdTipo());
 		permisoModel.setNombreTipo(permiso.getTipo().getNombreTipo());
 		permisoModel.setDescripcionTipo(permiso.getTipo().getDescripcionTipo());
 		return permisoModel;

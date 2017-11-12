@@ -1,7 +1,5 @@
 package com.orion.portafolio2017.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class TipoModel {
 

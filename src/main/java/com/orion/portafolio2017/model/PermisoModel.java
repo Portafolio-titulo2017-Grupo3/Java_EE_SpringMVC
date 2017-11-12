@@ -10,15 +10,15 @@ public class PermisoModel {
 	private Date fechaInicio;
 	private Date fechaTermino;
 	
-	private int idEstado;
+	private int estado;
 	private String nombreEstado;
 	
 	private String rutFuncionario;
 	
-	private int idMotivo;
+	private int motivo;
 	private String descripcionMotivo;
 
-	private int idTipo;
+	private int tipo;
 	private String nombreTipo;
 	private String descripcionTipo;
 
@@ -26,20 +26,20 @@ public class PermisoModel {
 	}
 
 	public PermisoModel(int idPermiso, String resolucionPermiso, Date fechaSolicitud, Date fechaInicio,
-			Date fechaTermino, int idEstado, String nombreEstado, String rutFuncionario, int idMotivo,
-			String descripcionMotivo, int idTipo, String nombreTipo, String descripcionTipo) {
+			Date fechaTermino, int estado, String nombreEstado, String rutFuncionario, int motivo,
+			String descripcionMotivo, int tipo, String nombreTipo, String descripcionTipo) {
 		super();
 		this.idPermiso = idPermiso;
 		this.resolucionPermiso = resolucionPermiso;
 		this.fechaSolicitud = fechaSolicitud;
 		this.fechaInicio = fechaInicio;
 		this.fechaTermino = fechaTermino;
-		this.idEstado = idEstado;
+		this.estado = estado;
 		this.nombreEstado = nombreEstado;
 		this.rutFuncionario = rutFuncionario;
-		this.idMotivo = idMotivo;
+		this.motivo = motivo;
 		this.descripcionMotivo = descripcionMotivo;
-		this.idTipo = idTipo;
+		this.tipo = tipo;
 		this.nombreTipo = nombreTipo;
 		this.descripcionTipo = descripcionTipo;
 	}
@@ -84,12 +84,12 @@ public class PermisoModel {
 		this.fechaTermino = fechaTermino;
 	}
 
-	public int getIdEstado() {
-		return idEstado;
+	public int getEstado() {
+		return estado;
 	}
 
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public String getNombreEstado() {
@@ -108,12 +108,12 @@ public class PermisoModel {
 		this.rutFuncionario = rutFuncionario;
 	}
 
-	public int getIdMotivo() {
-		return idMotivo;
+	public int getMotivo() {
+		return motivo;
 	}
 
-	public void setIdMotivo(int idMotivo) {
-		this.idMotivo = idMotivo;
+	public void setMotivo(int motivo) {
+		this.motivo = motivo;
 	}
 
 	public String getDescripcionMotivo() {
@@ -124,12 +124,12 @@ public class PermisoModel {
 		this.descripcionMotivo = descripcionMotivo;
 	}
 
-	public int getIdTipo() {
-		return idTipo;
+	public int getTipo() {
+		return tipo;
 	}
 
-	public void setIdTipo(int idTipo) {
-		this.idTipo = idTipo;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getNombreTipo() {
@@ -151,10 +151,18 @@ public class PermisoModel {
 	@Override
 	public String toString() {
 		return "PermisoModel [idPermiso=" + idPermiso + ", resolucionPermiso=" + resolucionPermiso + ", fechaSolicitud="
-				+ fechaSolicitud + ", fechaInicio=" + fechaInicio + ", fechaTermino=" + fechaTermino + ", idEstado="
-				+ idEstado + ", nombreEstado=" + nombreEstado + ", rutFuncionario=" + rutFuncionario + ", idMotivo="
-				+ idMotivo + ", descripcionMotivo=" + descripcionMotivo + ", idTipo=" + idTipo + ", nombreTipo="
-				+ nombreTipo + ", descripcionTipo=" + descripcionTipo + "]";
+				+ fechaSolicitud + ", fechaInicio=" + fechaInicio + ", fechaTermino=" + fechaTermino + ", estado="
+				+ estado + ", nombreEstado=" + nombreEstado + ", rutFuncionario=" + rutFuncionario + ", motivo="
+				+ motivo + ", descripcionMotivo=" + descripcionMotivo + ", tipo=" + tipo + ", nombreTipo=" + nombreTipo
+				+ ", descripcionTipo=" + descripcionTipo + "]";
 	}
+
+
+
+	
+
+	
+
+	
 
 }

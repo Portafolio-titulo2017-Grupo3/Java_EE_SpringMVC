@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.orion.portafolio2017.converter.PermisoConverter;
+import com.orion.portafolio2017.entity.Estado;
+import com.orion.portafolio2017.entity.Funcionario;
+import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Permiso;
+import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.repository.PermisoRepository;
 import com.orion.portafolio2017.service.PermisoService;
@@ -26,8 +30,8 @@ public class PermisoServiceImpl implements PermisoService {
 	private PermisoConverter permisoConverter;
 
 	@Override
-	public PermisoModel addPermiso(PermisoModel permisoModel) {
-		Permiso permiso = permisoRepository.save(permisoConverter.convertPermisoModel2Permiso(permisoModel));
+	public PermisoModel addPermiso(PermisoModel permisoModel, Funcionario funcionario, Estado estado, Motivo motivo, Tipo tipo) {
+		Permiso permiso = permisoRepository.save(permisoConverter.convertPermisoModel2Permiso(permisoModel,funcionario,estado,motivo,tipo));
 		return permisoConverter.convertPermiso2PermisoModel(permiso);
 	}
 	

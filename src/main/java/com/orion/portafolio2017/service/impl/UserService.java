@@ -77,6 +77,11 @@ public class UserService implements UserDetailsService{
 		return funcionarioModel;
 	}
 	
+	public Funcionario obtenerFuncionario2(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		return usuario.getFuncionario();
+	}
+	
 	//Este metodo no deberia ir , pero se implemento para poder trabajar sin el model
 	public Funcionario obtenerFuncionario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);

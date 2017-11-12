@@ -2,7 +2,6 @@ package com.orion.portafolio2017.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,9 +29,9 @@ import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.entity.Tipo;
-import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.EstadoService;
+import com.orion.portafolio2017.service.FuncionarioService;
 import com.orion.portafolio2017.service.MotivoService;
 import com.orion.portafolio2017.service.PermisoService;
 import com.orion.portafolio2017.service.TipoService;
@@ -67,6 +66,10 @@ public class PermisoController {
 	@Qualifier("permisoService")
 	private PermisoService permisoService;
 	
+	@Autowired
+	@Qualifier("funcionarioService")
+	private FuncionarioService funcionarioService;
+	
 	@GetMapping("/cancel")
 	public String cancel() {
 		return "redirect:/permisos/mispermisos";
@@ -91,11 +94,11 @@ public class PermisoController {
 	@GetMapping("/permisoform")
 	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
 			Model model) {
-		Permiso permiso = new Permiso();
+		PermisoModel permiso = new PermisoModel();
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
 		
 		if(idPermiso != 0) {
-			permiso = permisoService.findPermisoById(idPermiso);
+			//permiso = permisoService.findPermisoById(idPermiso);
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -177,16 +180,22 @@ public class PermisoController {
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@PostMapping("/addpermiso")
-	public String addPermiso(@ModelAttribute(name="permiso") Permiso permiso,
+	public String addPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
 			Model model) {
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
+	
+
+		Funcionario funcionarioo = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario());
+		Estado estadoo = estadoService.findEstadoById(permiso.getEstado());
+		Motivo motivoo = motivoService.findMotivoById(permiso.getMotivo());
+		Tipo tipoo = tipoService.findTipoById(permiso.getTipo());
 		
-		
-		if(null != permisoService.addPermiso2(permiso)) {
+		if(null != permisoService.addPermiso(permiso,funcionarioo,estadoo,motivoo,tipoo)) {
 			model.addAttribute("result", 1);
 		}else {
 			model.addAttribute("result", 0);
 		}
+		
 		
 		return "redirect:/permisos/mispermisos";
 		

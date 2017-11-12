@@ -9,7 +9,9 @@ public interface EstadoService {
 
 	public abstract Estado findEstadoById(int id);
 	
-	public abstract List<EstadoModel> findAllEstado2();
+	public abstract EstadoModel findEstadoByIdModel(int id);
+	
+	public abstract List<EstadoModel> findAllEstadoModel();
 	
 	public abstract List<Estado> findAllEstado();
 	
