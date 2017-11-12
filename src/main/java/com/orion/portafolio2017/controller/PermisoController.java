@@ -1,6 +1,8 @@
 package com.orion.portafolio2017.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -8,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -70,20 +71,6 @@ public class PermisoController {
 		return "redirect:/permisos/mispermisos";
 	}
 	
-/*	
-	@GetMapping("/permisoform")
-	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
-			Model model) {
-		PermisoModel permisoModel = new PermisoModel();
-		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permisoModel.toString());
-		if(idPermiso != 0) {
-			permisoModel = permisoService.findPermisoModelById(idPermiso);
-		}
-		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permisoModel.toString());
-		model.addAttribute("permisoModel", permisoModel);
-		return ViewConstant.CREAR_PERMISO_F;
-	}
-*/
 	
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
@@ -98,8 +85,6 @@ public class PermisoController {
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//Funcionario funcionario = userService.obtenerFuncionario(user.getUsername());
-		
 		model.addAttribute("funcionario",userService.obtenerFuncionario(user.getUsername()));
 		model.addAttribute("permiso", permiso);
 		model.addAttribute("estado", estadoService.findAllEstadoModel());
@@ -143,27 +128,6 @@ public class PermisoController {
 	}
 
 
-
-	
-	/*
-	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
-	@PostMapping("/addpermiso")
-	public String addPermiso(@ModelAttribute(name="permisoModel") PermisoModel permisoModel,
-			Model model) {
-		LOG.info("METHOD: addPermiso() -- PARAMS: " + permisoModel.toString());
-		
-		
-		if(null != permisoService.addPermiso(permisoModel)) {
-			model.addAttribute("result", 1);
-		}else {
-			model.addAttribute("result", 0);
-		}
-		
-		return "redirect:/permisos/mispermisos";
-		
-	}
-	*/
-
 	
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
@@ -172,13 +136,11 @@ public class PermisoController {
 			Model model) {
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
 	
-		if(permiso.getResolucionPermiso().length()==0 || permiso.getResolucionPermiso().isEmpty()) {
+		if(permiso.getResolucionPermiso().length() == 0 || permiso.getResolucionPermiso().isEmpty()) {
 			permiso.setResolucionPermiso("Pendiente Revisión");
 		}
-		//Funcionario funcionarioo = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario());
-		//Estado estadoo = estadoService.findEstadoById(permiso.getEstado());
-		//Motivo motivoo = motivoService.findMotivoById(permiso.getMotivo());
-		//Tipo tipoo = tipoService.findTipoById(permiso.getTipo());
+		LocalDate localDate = LocalDate.now();
+		permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		
 		if(null != permisoService.addPermiso(permiso,
 											 funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()),
