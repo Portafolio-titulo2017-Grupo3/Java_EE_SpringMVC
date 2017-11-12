@@ -1,8 +1,6 @@
 package com.orion.portafolio2017.converter;
 
-
 import org.springframework.stereotype.Component;
-
 import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 

@@ -1,16 +1,8 @@
 package com.orion.portafolio2017.converter;
 
-
 import org.springframework.stereotype.Component;
-
-
 import com.orion.portafolio2017.entity.Estado;
 import com.orion.portafolio2017.model.EstadoModel;
-
-
-
-
-
 
 @Component("estadoConverter")
 public class EstadoConverter {

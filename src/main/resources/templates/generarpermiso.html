@@ -22,29 +22,14 @@
 				<input type="hidden" th:field="*{idPermiso}"></input>
 				<input type="hidden" th:field="${funcionario.rutFuncionario}" th:value="${funcionario.rutFuncionario}" th:text="${funcionario.rutFuncionario}"></input>
 				<br/>
-				Fecha Solicitud: <input type="date" th:field="*{fechaSolicitud}" th:value="*{fechaSolicitud}"></input>
+				Fecha Solicitud: <input type="date" th:field="*{fechaSolicitud}"></input>
 				<br/>
-				Fecha Inicio: <input type="date" th:field="*{fechaInicio}" th:value="*{fechaInicio}"></input>
+				Fecha Inicio: <input type="date" th:field="*{fechaInicio}"></input>
 				<br/>
-				Fecha Termino: <input type="date" th:field="*{fechaTermino}" th:value="*{fechaTermino}"></input>
+				Fecha Termino: <input type="date" th:field="*{fechaTermino}"></input>
 				<br/>
-				Fecha Resolucion: <input type="text" th:field="*{resolucionPermiso}" th:value="*{resolucionPermiso}"></input>
+				<input type="hidden" th:field="*{resolucionPermiso}"></input>
 				<br/>
-				<div class="form-group">
- 					<label class="col-md-3 control-label">Estado: </label>
-					    <div class="col-md-5">
-						    <div th:if="${estado != null}">
-						         <select th:field="*{estado}">
-						             <option th:each="dropDownItem : ${estado}"
-						                             th:value="${dropDownItem.idEstado}"
-						                             th:text="${dropDownItem.nombreEstado}" />
-						         </select>
-	    					</div>
-						    <div th:if="${estado == null}">
-						        <div>"Estado no encontrado, porfavor contactar as servicio técnico."</div>
-						    </div>
-						</div>
-				</div>
 				<br/>
 				<div class="form-group">
  					<label class="col-md-3 control-label">Motivo: </label>

@@ -24,11 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
-import com.orion.portafolio2017.entity.Estado;
-import com.orion.portafolio2017.entity.Funcionario;
-import com.orion.portafolio2017.entity.Motivo;
-import com.orion.portafolio2017.entity.Permiso;
-import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.EstadoService;
 import com.orion.portafolio2017.service.FuncionarioService;
@@ -91,6 +86,7 @@ public class PermisoController {
 */
 	
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
+	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/permisoform")
 	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
 			Model model) {
@@ -98,17 +94,17 @@ public class PermisoController {
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
 		
 		if(idPermiso != 0) {
-			//permiso = permisoService.findPermisoById(idPermiso);
+			permiso = permisoService.findPermisoModelById(idPermiso);
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Funcionario funcionario = userService.obtenerFuncionario(user.getUsername());
+		//Funcionario funcionario = userService.obtenerFuncionario(user.getUsername());
 		
-		model.addAttribute("funcionario",funcionario);
+		model.addAttribute("funcionario",userService.obtenerFuncionario(user.getUsername()));
 		model.addAttribute("permiso", permiso);
-		model.addAttribute("estado", estadoService.findAllEstado());
-		model.addAttribute("motivo", motivoService.findAllMotivo());
-		model.addAttribute("tipo", tipoService.findAllTipo());
+		model.addAttribute("estado", estadoService.findAllEstadoModel());
+		model.addAttribute("motivo", motivoService.findAllMotivoModel());
+		model.addAttribute("tipo", tipoService.findAllTipoModel());
 		return ViewConstant.CREAR_PERMISO_F;
 	}
 	
@@ -146,15 +142,7 @@ public class PermisoController {
 		
 	}
 
-	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-	    sdf.setLenient(true);
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	    binder.registerCustomEditor(Integer.class,null,new CustomNumberEditor(Integer.class,null,true));
-	    binder.registerCustomEditor(Long.class,null,new CustomNumberEditor(Long.class,null,true));
-	}
+
 
 	
 	/*
@@ -184,13 +172,20 @@ public class PermisoController {
 			Model model) {
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
 	
-
-		Funcionario funcionarioo = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario());
-		Estado estadoo = estadoService.findEstadoById(permiso.getEstado());
-		Motivo motivoo = motivoService.findMotivoById(permiso.getMotivo());
-		Tipo tipoo = tipoService.findTipoById(permiso.getTipo());
+		if(permiso.getResolucionPermiso().length()==0 || permiso.getResolucionPermiso().isEmpty()) {
+			permiso.setResolucionPermiso("Pendiente Revisión");
+		}
+		//Funcionario funcionarioo = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario());
+		//Estado estadoo = estadoService.findEstadoById(permiso.getEstado());
+		//Motivo motivoo = motivoService.findMotivoById(permiso.getMotivo());
+		//Tipo tipoo = tipoService.findTipoById(permiso.getTipo());
 		
-		if(null != permisoService.addPermiso(permiso,funcionarioo,estadoo,motivoo,tipoo)) {
+		if(null != permisoService.addPermiso(permiso,
+											 funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()),
+											 estadoService.findEstadoById(3),
+											 motivoService.findMotivoById(permiso.getMotivo()),
+											 tipoService.findTipoById(permiso.getTipo()))) 
+		{
 			model.addAttribute("result", 1);
 		}else {
 			model.addAttribute("result", 0);
@@ -199,6 +194,17 @@ public class PermisoController {
 		
 		return "redirect:/permisos/mispermisos";
 		
+	}
+	
+	
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    sdf.setLenient(true);
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	   // binder.registerCustomEditor(Integer.class,null,new CustomNumberEditor(Integer.class,null,true));
+	   //binder.registerCustomEditor(Long.class,null,new CustomNumberEditor(Long.class,null,true));
 	}
 
 }

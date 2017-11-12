@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation" class="active"><a href="#">Mi Cuenta </a></li>
                 <li role="presentation"><a href="#" th:href="@{/permisos/mispermisos}">Mis Permisos </a></li>
-                <li role="presentation"><a href="#">Generar Permisos </a></li>
+                <li role="presentation"><a href="#" th:href="@{/permisos/permisoform?idPermiso=0}">Generar Permisos </a></li>
                 <li role="presentation">
 	                <form th:action="@{/logout}" method="POST">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">

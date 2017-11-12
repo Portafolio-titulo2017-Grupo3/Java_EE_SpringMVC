@@ -1,20 +1,13 @@
 package com.orion.portafolio2017.converter;
 
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.orion.portafolio2017.entity.Tipo;
-import modelBackup.TipoModel;
+import com.orion.portafolio2017.model.TipoModel;
 
 
 @Component("tipoConverter")
 public class TipoConverter {
 
-	@Autowired
-	@Qualifier("permisoConverter")
-	private PermisoConverter permisoConverter;
 	
 	public Tipo convertTipoModel2Tipo(TipoModel tipoModel) {
 
