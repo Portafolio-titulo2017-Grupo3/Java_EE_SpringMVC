@@ -46,7 +46,7 @@ body {
 }
 
 .dark-section {
-  background-color:#f4f6fb;
+  background-color:black;
 }
 
 .site-section {
@@ -121,5 +121,13 @@ a:hover, a:focus {
 
 .navbar-default .navbar-brand {
   color:#4582ec;
+}
+
+#video {
+  text-align:center;
+  margin-right:0;
+  margin-left:0;
+  padding:0;
+  width:auto;
 }
 
