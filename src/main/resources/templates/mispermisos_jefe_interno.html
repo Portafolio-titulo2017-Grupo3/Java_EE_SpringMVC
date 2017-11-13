@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sistema de Gestión de Permisos - Orion</title>
-        <!-- Bootstrap core CSS -->
+    <title>orion</title>
+            <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/bootstrap/css/bootstrap.min.css}"/>
@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/OcOrato---Contact-Information-bar-line-with-e-mail-link-1.css}"/>
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Footer.css}"/>
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/styles.css}"/>
+    <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Table.css}"/>
+    <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Table1.css}"/>
+
 </head>
 
 <body>
@@ -35,7 +38,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation"><a href="#" th:href="@{/menu/micuenta}">Mi Cuenta </a></li>
                 <li role="presentation" class="active"><a href="#">Mis Permisos </a></li>
-                <li role="presentation"><a href="#" th:href="@{/permisos/permisoform?idPermiso=0}">Generar Permisos </a></li>
+                <li role="presentation"><a href="#" th:href="@{/permisos/permisoform?idPermiso=0}">Generar Permiso </a></li>
+                <li role="presentation"><a href="#" th:href="@{/permisos/deptopermisos}">Autorizar Permisos </a></li>
                 <li role="presentation">
 	                <form th:action="@{/logout}" method="POST">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -47,14 +51,13 @@
             </ul>
         </div>
     </div>
-</nav>
+	</nav>
     <div id="promo">
         <div class="container full-height">
-			<div class="panel panel-default">
-				<div class="panel-heading"></div>
-				<table class="table">
-					<thead>
-						<tr>
+            <div class="datagrid">
+                <table class="table">
+                    <thead>
+                        <tr>
 							<th>ID DEL PERMISO</th>
 							<th>RUT SOLICITANTE</th>
 							<th>ESTADO</th>
@@ -65,10 +68,9 @@
 							<th>FECHA INICIO</th>
 							<th>FECHA TERMINO</th>
 							<th>Actions</th>
-							
-						</tr>
-					</thead>
-					<tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
 						<tr th:each="mispermisos : ${mispermisos}">
 							<td th:text="${mispermisos.idPermiso}"></td>
 							<td th:text="${mispermisos.rutFuncionario}"></td>
@@ -81,26 +83,65 @@
 							<td th:text="${mispermisos.fechaTermino}"></td>
 	
 							<td>
-							
 								<a href="#">
 									<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 								</a>
-								<a href="#">
-									<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-								</a>
-							
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="11">
+                                <div class="paging">
+                                    <ul>
+                                        <li>
+                                            <a href="#"> <span>Previous </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="active"> <span>1 </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>2 </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>3</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>Next </span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
-    <footer>
+    <div class="dark-section">
+        <div class="container site-section" id="why">
+            <h1><strong>¿</strong>Como usar el Sistema Orion<strong>?</strong></h1>
+            <div class="row">
+                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
+                    <h2>Paso 1</h2>
+                    <p>###################### </p>
+                </div>
+                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
+                    <h2>Paso 2</h2>
+                    <p>###################### </p>
+                </div>
+                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
+                    <h2>Paso 3</h2>
+                    <p>###################### </p>
+                </div>
+            </div>
+        </div>
+    </div>
+ <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-6 footer-navigation">
-                    <h3><a href="#">Sistema De GEstión de Permisos <span>Orion </span></a></h3>
+                    <h3><a href="#">Sistema De Gestión de Permisos <span>Orion </span></a></h3>
                     <p class="links"><a href="#">Gestión </a><strong> · </strong><a href="#">Automatización </a><strong> · </strong><a href="#">Seguridad </a><strong> · </strong><a href="#">Confidencialidad - Integridad.</a>
                         <a href="#"> </a><strong> </strong>
                         <a href="#"> </a>

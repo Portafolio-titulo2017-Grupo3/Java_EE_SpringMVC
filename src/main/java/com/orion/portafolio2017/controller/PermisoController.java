@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.model.DepartamentoModel;
 import com.orion.portafolio2017.model.PermisoModel;
+import com.orion.portafolio2017.service.DepartamentoService;
 import com.orion.portafolio2017.service.EstadoService;
 import com.orion.portafolio2017.service.FuncionarioService;
 import com.orion.portafolio2017.service.MotivoService;
@@ -66,9 +68,13 @@ public class PermisoController {
 	@Qualifier("funcionarioService")
 	private FuncionarioService funcionarioService;
 	
+	@Autowired
+	@Qualifier("departamentoService")
+	private DepartamentoService departamentoService;
+	
 	@GetMapping("/cancel")
 	public String cancel() {
-		return "redirect:/permisos/mispermisos";
+		return "redirect:/menu/micuenta";
 	}
 	
 	
@@ -113,13 +119,13 @@ public class PermisoController {
 		model.addAttribute("estado", estadoService.findAllEstadoModel());
 		model.addAttribute("motivo", motivoService.findAllMotivoModel());
 		model.addAttribute("tipo", tipoService.findAllTipoModel());
-		return ViewConstant.CREAR_PERMISO_2;
+		return ViewConstant.CREAR_PERMISO_F;
 	}
 	
-	
+	//VISUALIZAR PERMISOS DEL USUARIO
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/mispermisos")
-	public ModelAndView showContacts() {
+	public ModelAndView misPermisos() {
 		ModelAndView mav;
 		String constante=null;
 		
@@ -150,6 +156,30 @@ public class PermisoController {
 		return mav;
 		
 	}
+	
+	
+	
+	//VISUALIZAR PERMISOS DEL DEPARTAMENTO.
+	@PreAuthorize("hasAnyAuthority('ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR')")
+	@GetMapping("/deptopermisos")
+	public ModelAndView departamentoPermisos() {
+		
+		ModelAndView mav=new ModelAndView(ViewConstant.DEPTO_PERMISOS);
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		int departamentoId = userService.obtenerIdDepartamentoByUsuario(user.getUsername());
+		DepartamentoModel depto= departamentoService.findDepartamentoModelByIdDepto(departamentoId);
+		
+		
+		mav.addObject("username", user.getUsername());
+		mav.addObject("depto", depto);
+		mav.addObject("deptopermisos", permisoService.findAllPermisoByDepartamento(departamentoId));
+		return mav;
+		
+	}
+	
+	
+	
 
 
 	

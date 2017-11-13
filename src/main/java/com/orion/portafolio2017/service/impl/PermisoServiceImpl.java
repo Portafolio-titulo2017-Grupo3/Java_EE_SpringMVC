@@ -54,6 +54,23 @@ public class PermisoServiceImpl implements PermisoService {
 		}
 		return permisoModel;
 	}
+	
+	
+	@Override
+	public List<PermisoModel> findAllPermisoByDepartamento(int idDepartamento) {
+		List<Permiso> permisos = permisoRepository.findAll();
+		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
+		
+		for(Permiso permiso : permisos) {
+			if(permiso.getFuncionario().getDepartamento().getIdDepto() == idDepartamento)
+			{
+				permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+			}
+		}
+		return permisoModel;
+	}
+	
+	
 
 	@Override
 	public Permiso findPermisoByRut(String rut) {
@@ -83,6 +100,8 @@ public class PermisoServiceImpl implements PermisoService {
 	public Permiso findPermisoById(int id) {
 		return permisoRepository.findByIdPermiso(id);
 	}
+
+
 
 
 

@@ -69,6 +69,12 @@ public class UserService implements UserDetailsService{
 		return usuario.getFuncionario().getRutFuncionario().toString();
 	}
 	
+	//Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
+		public int obtenerIdDepartamentoByUsuario(String username) {
+			com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+			return  usuario.getFuncionario().getDepartamento().getIdDepto();
+		}
+	
 	
 	//Obtiene los datos del FuncionarioModel según Nombre de Usuario
 	public FuncionarioInfoModel obtenerFuncionarioByUsuario(String username) {

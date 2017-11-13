@@ -18,6 +18,7 @@ public interface PermisoService {
 	public abstract Permiso addPermiso2(Permiso permiso);
 	
 	public abstract List<PermisoModel> findAllPermisoByRut(String rut);
+	public abstract List<PermisoModel> findAllPermisoByDepartamento(int idDepartamento);
 	
 	public abstract Permiso findPermisoByRut(String rut);
 	

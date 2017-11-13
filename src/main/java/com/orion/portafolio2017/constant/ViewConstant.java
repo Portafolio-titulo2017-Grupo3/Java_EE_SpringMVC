@@ -7,11 +7,12 @@ package com.orion.portafolio2017.constant;
  */
 public class ViewConstant {
 
+	//AUTENTIFICACION DE LA APLICACION
 	/** The Constant LOGIN. */
 	public static final String LOGIN = "login";
 	
 	
-	
+	//MENU PRINCIPAL DE CADA PERFIL
 	/** The Constant MENU FUNCIONARIO. */
 	public static final String MENUF = "menuf";
 	
@@ -28,29 +29,36 @@ public class ViewConstant {
 	public static final String MENUSA = "menusa";
 	
 	
-	
+	//PERMISOS PERSONALES
 	/** The Constant MIS PERMISOS ALCALDE. */
-	public static final String MIS_PERMISOS_A = "mispermisos_a";
+	public static final String MIS_PERMISOS_A = "mispermisos_alcalde";
 	
 	/** The Constant MIS PERMISOS FUNCIONARIO. */
-	public static final String MIS_PERMISOS_F = "mispermisos_f";
+	public static final String MIS_PERMISOS_F = "mispermisos_funcionario";
 	
 	/** The Constant MIS PERMISOS JEFE SUPERIOR. */
-	public static final String MIS_PERMISOS_JS = "mispermisos_js";
+	public static final String MIS_PERMISOS_JS = "mispermisos_jefe_superior";
 	
 	/** The Constant MIS PERMISOS JEFE INTERNO. */
-	public static final String MIS_PERMISOS_JI = "mispermisos_ji";
+	public static final String MIS_PERMISOS_JI = "mispermisos_jefe_interno";
 	
 	/** The Constant MIS PERMISOS SUPER_ADMIN. */
-	public static final String MIS_PERMISOS_SU = "mispermisos_su";
+	public static final String MIS_PERMISOS_SU = "mispermisos_super_admin";
+	
+	
+	//CREAR FORMULARIO
+	/** The Constant CREAR PERMISO FUNCIONARIO. */
+	public static final String CREAR_PERMISO_F = "generarpermiso";
 	
 	
 	
 	/** The Constant CREAR PERMISO FUNCIONARIO. */
-	public static final String CREAR_PERMISO_F = "generarpermiso";
+	public static final String DEPTO_PERMISOS = "deptopermisos";
 	
-	/** The Constant CREAR PERMISO 2. */
-	public static final String CREAR_PERMISO_2 = "crearpermiso";
+	
+	
+	
+	
 
 	
 }

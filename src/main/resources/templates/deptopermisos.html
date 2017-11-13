@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/OcOrato---Contact-Information-bar-line-with-e-mail-link-1.css}"/>
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Footer.css}"/>
     <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/styles.css}"/>
+    <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Table.css}"/>
+    <link rel="stylesheet" href="#" type="text/css" th:href="@{/assets/css/Pretty-Table1.css}"/>
+    
 </head>
 
 <body>
@@ -33,10 +36,10 @@
         </div>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav navbar-right">
-                <li role="presentation" class="active"><a href="#">Mi Cuenta </a></li>
+                <li role="presentation"><a href="#" th:href="@{/menu/micuenta}">Mi Cuenta </a></li>
                 <li role="presentation"><a href="#" th:href="@{/permisos/mispermisos}">Mis Permisos </a></li>
                 <li role="presentation"><a href="#" th:href="@{/permisos/permisoform?idPermiso=0}">Generar Permiso </a></li>
-                <li role="presentation"><a href="#" th:href="@{/permisos/deptopermisos}">Autorizar Permisos </a></li>
+                <li role="presentation" class="active"><a href="#">Autorizar Permisos </a></li>
                 <li role="presentation">
 	                <form th:action="@{/logout}" method="POST">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -51,42 +54,71 @@
 </nav>
     <div id="promo">
         <div class="container full-height">
-            <div class="form-box">
-                <section>
-                    <div class="jumbotron" style="margin:0px;padding:0px;">
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>USUARIO: <span th:text="${username}"></span></strong></p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>PERFIL: <span th:text="${perfil}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>NOMBRES: <span th:text="${nombres}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>APELLIDOS: <span th:text="${apellidos}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>RUT: <span th:text="${rut}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>DEPARTAMENTO: <span th:text="${departamento}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>EMAIL: <span th:text="${email}"></span></strong> </p>
-                        <p class="text-left" style="margin:0px;font-size:14px;font-family:Quicksand, sans-serif;margin-left:7px;"><strong>TELEFONO: <span th:text="${telefono}"></span></strong> </p>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <div class="container site-section" id="welcome">
-        <h1>Bienvenidos a Sistema Orion de la Municipalidad Vista Hermosa.</h1>
-        <p>El sistema Orion permite gestionar las solicitudes de permisos laborales para organizaciones de forma eficiente y eficaz.</p>
-    </div>
-    <div class="dark-section">
-        <div class="container site-section" id="why">
-            <h1><strong>¿</strong>Como usar el Sistema Orion<strong>?</strong></h1>
-            <div class="row">
-                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
-                    <h2>Paso 1</h2>
-                    <p>###################### </p>
-                </div>
-                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
-                    <h2>Paso 2</h2>
-                    <p>###################### </p>
-                </div>
-                <div class="col-md-4 item"><i class="glyphicon glyphicon-ok"></i>
-                    <h2>Paso 3</h2>
-                    <p>###################### </p>
-                </div>
+            <div class="datagrid">
+                <table class="table">
+                    <thead>
+                        <tr>
+							<th>ID DEL PERMISO</th>
+							<th>RUT SOLICITANTE</th>
+							<th>ESTADO</th>
+							<th>MOTIVO</th>
+							<th>TIPO</th>
+							<th>RESOLUCION</th>
+							<th>FECHA DE SOLICITUD</th>
+							<th>FECHA INICIO</th>
+							<th>FECHA TERMINO</th>
+							<th>DEPTO</th>
+							<th>Actions</th>
+							<th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<tr th:each="deptopermisos : ${deptopermisos}">
+							<td th:text="${deptopermisos.idPermiso}"></td>
+							<td th:text="${deptopermisos.rutFuncionario}"></td>
+							<td th:text="${deptopermisos.nombreEstado}"></td>
+							<td th:text="${deptopermisos.descripcionMotivo}"></td>
+							<td th:text="${deptopermisos.nombreTipo}"></td>
+							<td th:text="${deptopermisos.resolucionPermiso}"></td>
+							<td th:text="${deptopermisos.fechaSolicitud}"></td>
+							<td th:text="${deptopermisos.fechaInicio}"></td>
+							<td th:text="${deptopermisos.fechaTermino}"></td>
+							<td th:text="${deptopermisos.fechaTermino}"></td>
+							<td th:text="${depto.nombreDepto}"></td>
+	
+							<td>
+								<a href="#">
+									<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+								</a>
+							</td>
+						</tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="12">
+                                <div class="paging">
+                                    <ul>
+                                        <li>
+                                            <a href="#"> <span>Previous </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="active"> <span>1 </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>2 </span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>3</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <span>Next </span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
@@ -94,7 +126,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-6 footer-navigation">
-                    <h3><a href="#">Sistema De Gestión de Permisos <span>Orion </span></a></h3>
+                    <h3><a href="#">Sistema De GEstión de Permisos <span>Orion </span></a></h3>
                     <p class="links"><a href="#">Gestión </a><strong> · </strong><a href="#">Automatización </a><strong> · </strong><a href="#">Seguridad </a><strong> · </strong><a href="#">Confidencialidad - Integridad.</a>
                         <a href="#"> </a><strong> </strong>
                         <a href="#"> </a>
