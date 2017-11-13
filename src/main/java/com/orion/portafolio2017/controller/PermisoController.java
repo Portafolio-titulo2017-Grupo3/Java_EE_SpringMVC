@@ -93,6 +93,30 @@ public class PermisoController {
 		return ViewConstant.CREAR_PERMISO_F;
 	}
 	
+	
+	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
+	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
+	@GetMapping("/permisoform2")
+	public String redirectPermisoForm2(@RequestParam(name="idPermiso", required=false) int idPermiso,
+			Model model) {
+		PermisoModel permiso = new PermisoModel();
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
+		
+		if(idPermiso != 0) {
+			permiso = permisoService.findPermisoModelById(idPermiso);
+		}
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("funcionario",userService.obtenerFuncionario(user.getUsername()));
+		model.addAttribute("permiso", permiso);
+		model.addAttribute("estado", estadoService.findAllEstadoModel());
+		model.addAttribute("motivo", motivoService.findAllMotivoModel());
+		model.addAttribute("tipo", tipoService.findAllTipoModel());
+		return ViewConstant.CREAR_PERMISO_2;
+	}
+	
+	
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/mispermisos")
 	public ModelAndView showContacts() {
