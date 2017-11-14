@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.model.DepartamentoModel;
+import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.DepartamentoService;
 import com.orion.portafolio2017.service.EstadoService;
@@ -100,28 +102,6 @@ public class PermisoController {
 	}
 	
 	
-	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
-	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
-	@GetMapping("/permisoform2")
-	public String redirectPermisoForm2(@RequestParam(name="idPermiso", required=false) int idPermiso,
-			Model model) {
-		PermisoModel permiso = new PermisoModel();
-		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
-		
-		if(idPermiso != 0) {
-			permiso = permisoService.findPermisoModelById(idPermiso);
-		}
-		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("username", user.getUsername());
-		model.addAttribute("funcionario",userService.obtenerFuncionario(user.getUsername()));
-		model.addAttribute("permiso", permiso);
-		model.addAttribute("estado", estadoService.findAllEstadoModel());
-		model.addAttribute("motivo", motivoService.findAllMotivoModel());
-		model.addAttribute("tipo", tipoService.findAllTipoModel());
-		return ViewConstant.CREAR_PERMISO_F;
-	}
-	
 	//VISUALIZAR PERMISOS DEL USUARIO
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/mispermisos")
@@ -158,7 +138,7 @@ public class PermisoController {
 	}
 	
 	
-	
+//**************************************************************************************************************************************************	
 	//VISUALIZAR PERMISOS DEL DEPARTAMENTO.
 	@PreAuthorize("hasAnyAuthority('ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR')")
 	@GetMapping("/deptopermisos")
@@ -178,9 +158,66 @@ public class PermisoController {
 		
 	}
 	
+	//VISUALIZAR PERMISOS DEL DEPARTAMENTO.
+	@PreAuthorize("hasAnyAuthority('JEFE INTERNO', 'JEFE SUPERIOR')")
+	@GetMapping("/detallepermiso")
+	public String redirectDetallePermiso(@RequestParam(name="idPermiso", required=false) int idPermiso,
+			Model model) {
+		PermisoModel permiso = new PermisoModel();
+		FuncionarioInfoModel funcionario = new FuncionarioInfoModel();
+		LOG.info("METHOD: redirectDetallePermiso() -- PARAMS IN: " + permiso.toString());
+		
+		if(idPermiso != 0) {
+			permiso = permisoService.findPermisoModelById(idPermiso);
+		}
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		funcionario = funcionarioService.findFuncionarioModelByRut(permiso.getRutFuncionario());
+		String nomfuncionario = funcionario.getPrimerNombre().trim()+" "+funcionario.getSegundoNombre().trim()+" "+funcionario.getPrimerApellido().trim()+" "+funcionario.getSegundoApellido().trim();
+		
+		model.addAttribute("permiso", permiso);
+		model.addAttribute("funcionario", funcionario);
+		model.addAttribute("nomfuncionario", nomfuncionario.trim());
+		return ViewConstant.PERMISO_DETALLE;
+	}
 	
 	
-
+	//AUTORIZAR O RECHAZAR PERMISO
+	@PreAuthorize("hasAnyAuthority('JEFE INTERNO', 'JEFE SUPERIOR')")
+	@PostMapping("/authpermiso")
+	public String authPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
+							  Model model) {
+		LOG.info("METHOD: authPermiso() -- PARAMS: " + permiso.toString());
+		LOG.info("METHOD: authPermiso() -- VALOR ESTADO: " + permiso.getEstado());
+	
+		//LocalDate localDate = LocalDate.now();
+		//permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		
+		PermisoModel permi = permisoService.findPermisoModelById(permiso.getIdPermiso());
+		permi.setEstado(permiso.getEstado());
+		permi.setResolucionPermiso(permiso.getResolucionPermiso());
+		
+		
+		if(null != permisoService.addPermiso(permi,
+											 funcionarioService.findFuncionarioByRut(permi.getRutFuncionario()),
+											 estadoService.findEstadoById(permi.getEstado()),
+											 motivoService.findMotivoById(permi.getMotivo()),
+											 tipoService.findTipoById(permi.getTipo()))) 
+		{
+			model.addAttribute("result", 1);
+		}else {
+			model.addAttribute("result", 0);
+		}
+		
+		return "redirect:/permisos/deptopermisos";
+		
+	}
+	
+	
+	
+//**************************************************************************************************************************************************	
 
 	
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
@@ -190,9 +227,7 @@ public class PermisoController {
 			Model model) {
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
 	
-		if(permiso.getResolucionPermiso().length() == 0 || permiso.getResolucionPermiso().isEmpty()) {
-			permiso.setResolucionPermiso("Pendiente Revisión");
-		}
+		permiso.setResolucionPermiso("PENDIENTE");
 		LocalDate localDate = LocalDate.now();
 		permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		

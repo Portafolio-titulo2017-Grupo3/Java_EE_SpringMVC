@@ -51,13 +51,14 @@ public class ViewConstant {
 	public static final String CREAR_PERMISO_F = "generarpermiso";
 	
 	
-	
+	//MUESTRA PERMISOS DEL DEPARTAMENTO
 	/** The Constant CREAR PERMISO FUNCIONARIO. */
 	public static final String DEPTO_PERMISOS = "deptopermisos";
 	
 	
 	
-	
+	//ABRE EL DETALLE DE UN PERMISO PARA AUTORIZACION
+	public static final String PERMISO_DETALLE= "detallepermiso";
 	
 
 	
