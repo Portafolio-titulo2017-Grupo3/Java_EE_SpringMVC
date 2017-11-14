@@ -45,7 +45,7 @@ public class PermisoController {
 	
 	private static final Log LOG = LogFactory.getLog(PermisoController.class);
 	
-	/** The user repository. */
+	
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -148,12 +148,21 @@ public class PermisoController {
 
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int departamentoId = userService.obtenerIdDepartamentoByUsuario(user.getUsername());
-		DepartamentoModel depto= departamentoService.findDepartamentoModelByIdDepto(departamentoId);
 		
-		
+		String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
+		switch (perfil) {
+        case "JEFE INTERNO":  
+        	LOG.info("METHOD: departamentoPermisos() -- ENTRA COMO : " + perfil.toString());
+        	mav.addObject("deptopermisos", permisoService.findAllPermisoByDepartamento(departamentoId));
+                 break;
+        case "JEFE SUPERIOR":
+        	LOG.info("METHOD: departamentoPermisos() -- ENTRA COMO: " + perfil.toString());
+        	mav.addObject("deptopermisos", permisoService.findAllPermiso());
+                 break;
+        default: perfil = "PERFIL INVALIDO";
+                 break;
+		}
 		mav.addObject("username", user.getUsername());
-		mav.addObject("depto", depto);
-		mav.addObject("deptopermisos", permisoService.findAllPermisoByDepartamento(departamentoId));
 		return mav;
 		
 	}

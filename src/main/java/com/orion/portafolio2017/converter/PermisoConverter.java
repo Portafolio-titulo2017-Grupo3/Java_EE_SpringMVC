@@ -51,6 +51,8 @@ public class PermisoConverter {
 		permisoModel.setTipo(permiso.getTipo().getIdTipo());
 		permisoModel.setNombreTipo(permiso.getTipo().getNombreTipo());
 		permisoModel.setDescripcionTipo(permiso.getTipo().getDescripcionTipo());
+		
+		permisoModel.setNombreDepartamento(permiso.getFuncionario().getDepartamento().getNombreDepto());
 		return permisoModel;
 		
 	}

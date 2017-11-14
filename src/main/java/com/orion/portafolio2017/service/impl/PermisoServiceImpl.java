@@ -70,6 +70,17 @@ public class PermisoServiceImpl implements PermisoService {
 		return permisoModel;
 	}
 	
+	@Override
+	public List<PermisoModel> findAllPermiso() {
+		List<Permiso> permisos = permisoRepository.findAll();
+		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
+		
+		for(Permiso permiso : permisos) {
+			permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+		}
+		return permisoModel;
+	}
+	
 	
 
 	@Override
@@ -100,6 +111,8 @@ public class PermisoServiceImpl implements PermisoService {
 	public Permiso findPermisoById(int id) {
 		return permisoRepository.findByIdPermiso(id);
 	}
+
+
 
 
 

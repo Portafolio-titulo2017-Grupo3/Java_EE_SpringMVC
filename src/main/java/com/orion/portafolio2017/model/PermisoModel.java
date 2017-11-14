@@ -21,13 +21,15 @@ public class PermisoModel {
 	private int tipo;
 	private String nombreTipo;
 	private String descripcionTipo;
+	
+	private String nombreDepartamento;
 
 	public PermisoModel() {
 	}
 
 	public PermisoModel(int idPermiso, String resolucionPermiso, Date fechaSolicitud, Date fechaInicio,
 			Date fechaTermino, int estado, String nombreEstado, String rutFuncionario, int motivo,
-			String descripcionMotivo, int tipo, String nombreTipo, String descripcionTipo) {
+			String descripcionMotivo, int tipo, String nombreTipo, String descripcionTipo, String nombreDepartamento) {
 		super();
 		this.idPermiso = idPermiso;
 		this.resolucionPermiso = resolucionPermiso;
@@ -42,6 +44,7 @@ public class PermisoModel {
 		this.tipo = tipo;
 		this.nombreTipo = nombreTipo;
 		this.descripcionTipo = descripcionTipo;
+		this.nombreDepartamento = nombreDepartamento;
 	}
 
 	public int getIdPermiso() {
@@ -148,15 +151,24 @@ public class PermisoModel {
 		this.descripcionTipo = descripcionTipo;
 	}
 
+	public String getNombreDepartamento() {
+		return nombreDepartamento;
+	}
+
+	public void setNombreDepartamento(String nombreDepartamento) {
+		this.nombreDepartamento = nombreDepartamento;
+	}
+
 	@Override
 	public String toString() {
 		return "PermisoModel [idPermiso=" + idPermiso + ", resolucionPermiso=" + resolucionPermiso + ", fechaSolicitud="
 				+ fechaSolicitud + ", fechaInicio=" + fechaInicio + ", fechaTermino=" + fechaTermino + ", estado="
 				+ estado + ", nombreEstado=" + nombreEstado + ", rutFuncionario=" + rutFuncionario + ", motivo="
 				+ motivo + ", descripcionMotivo=" + descripcionMotivo + ", tipo=" + tipo + ", nombreTipo=" + nombreTipo
-				+ ", descripcionTipo=" + descripcionTipo + "]";
+				+ ", descripcionTipo=" + descripcionTipo + ", nombreDepartamento=" + nombreDepartamento + "]";
 	}
 
+	
 
 
 	
