@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.converter.Fechas;
 import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.model.DepartamentoModel;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
@@ -79,6 +81,8 @@ public class PermisoController {
 		return "redirect:/menu/micuenta";
 	}
 	
+	Fechas fecha = new Fechas();
+	
 	
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
@@ -86,6 +90,8 @@ public class PermisoController {
 	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
 			Model model) {
 		PermisoModel permiso = new PermisoModel();
+		String constante=null;
+		
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
 		
 		if(idPermiso != 0) {
@@ -93,12 +99,44 @@ public class PermisoController {
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("funcionario",userService.obtenerFuncionario(user.getUsername()));
+		String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
+		FuncionarioInfoModel funcionarioModel = userService.obtenerFuncionarioByUsuario(user.getUsername());
+		
+		
+		switch (perfil) {
+        case "SUPER_ADMIN":  constante = ViewConstant.CREAR_PERMISO_SU;
+                 break;
+        case "ALCALDE":  constante = ViewConstant.CREAR_PERMISO_A;
+                 break;
+        case "JEFE INTERNO":  constante = ViewConstant.CREAR_PERMISO_JI;
+                 break;
+        case "JEFE SUPERIOR":  constante = ViewConstant.CREAR_PERMISO_JS;
+                 break;
+        case "FUNCIONARIO":  constante = ViewConstant.CREAR_PERMISO_F;
+                 break;
+        default: perfil = "PERFIL INVALIDO";
+                 break;
+		}
+		
+		
+		model.addAttribute("hora", fecha.horaActual());
+		model.addAttribute("fecha", fecha.fechaActual());
+		
+		model.addAttribute("perfil",perfil);
+		model.addAttribute("username",user.getUsername());
+		model.addAttribute("rutFuncionario", funcionarioModel.getRutFuncionario());
+		model.addAttribute("nombres", funcionarioModel.getPrimerNombre()+" "+funcionarioModel.getSegundoNombre());
+		model.addAttribute("apellidos", funcionarioModel.getPrimerApellido()+" "+funcionarioModel.getSegundoApellido());
+		model.addAttribute("departamento", funcionarioModel.getNombreDepto());
+		model.addAttribute("email", funcionarioModel.getCorreoFuncionario());
+		model.addAttribute("telefono", funcionarioModel.getTelefonoFunionario());
+		model.addAttribute("funcionario", userService.obtenerFuncionario(user.getUsername()));
+		
 		model.addAttribute("permiso", permiso);
 		model.addAttribute("estado", estadoService.findAllEstadoModel());
 		model.addAttribute("motivo", motivoService.findAllMotivoModel());
 		model.addAttribute("tipo", tipoService.findAllTipoModel());
-		return ViewConstant.CREAR_PERMISO_F;
+		return constante;
 	}
 	
 	
@@ -234,8 +272,26 @@ public class PermisoController {
 	@PostMapping("/addpermiso")
 	public String addPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
 			Model model) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaI = permiso.getAnioI()+"-"+permiso.getMesI()+"-"+permiso.getDiaI();
+		String fechaF = permiso.getAnioF()+"-"+permiso.getMesF()+"-"+permiso.getDiaF();
+		sdf.setLenient(true);
+		
+		
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
+		LOG.info("METHOD: addPermiso() -- FECHA INICIO: " + fechaI);
+		LOG.info("METHOD: addPermiso() -- FECHA FIN: " + fechaF);
 	
+		
+		try {
+			permiso.setFechaInicio(sdf.parse(fechaI));
+			permiso.setFechaTermino(sdf.parse(fechaF));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		permiso.setResolucionPermiso("PENDIENTE");
 		LocalDate localDate = LocalDate.now();
 		permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));

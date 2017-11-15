@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.converter.Fechas;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.service.impl.UserService;
 
@@ -47,6 +48,8 @@ public class MenuController {
 			ModelAndView mav;
 			String constante=null;
 			
+			Fechas fecha = new Fechas();
+			
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String perfil = userService.obtenerPerfilByUsuario(user.getUsername());
 			FuncionarioInfoModel funcionarioModel = userService.obtenerFuncionarioByUsuario(user.getUsername());
@@ -71,14 +74,19 @@ public class MenuController {
 			
 			
 			//Devuelve el Nombre del UsuarioModel y el TipoModel de PerfilModel
-			mav.addObject("username", user.getUsername());
-			mav.addObject("perfil", perfil);
-			mav.addObject("rut", funcionarioModel.getRutFuncionario());
+			
+			mav.addObject("hora", fecha.horaActual());
+			mav.addObject("fecha", fecha.fechaActual());
+			
+			mav.addObject("perfil",perfil);
+			mav.addObject("username",user.getUsername());
+			mav.addObject("rutFuncionario", funcionarioModel.getRutFuncionario());
 			mav.addObject("nombres", funcionarioModel.getPrimerNombre()+" "+funcionarioModel.getSegundoNombre());
 			mav.addObject("apellidos", funcionarioModel.getPrimerApellido()+" "+funcionarioModel.getSegundoApellido());
 			mav.addObject("departamento", funcionarioModel.getNombreDepto());
 			mav.addObject("email", funcionarioModel.getCorreoFuncionario());
 			mav.addObject("telefono", funcionarioModel.getTelefonoFunionario());
+
 			return mav;	
 	}
 

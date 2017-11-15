@@ -23,13 +23,16 @@ public class PermisoModel {
 	private String descripcionTipo;
 	
 	private String nombreDepartamento;
+	private String diaI,mesI,anioI;
+	private String diaF,mesF,anioF;
 
 	public PermisoModel() {
 	}
 
 	public PermisoModel(int idPermiso, String resolucionPermiso, Date fechaSolicitud, Date fechaInicio,
 			Date fechaTermino, int estado, String nombreEstado, String rutFuncionario, int motivo,
-			String descripcionMotivo, int tipo, String nombreTipo, String descripcionTipo, String nombreDepartamento) {
+			String descripcionMotivo, int tipo, String nombreTipo, String descripcionTipo, String nombreDepartamento,
+			String diaI, String mesI, String anioI, String diaF, String mesF, String anioF) {
 		super();
 		this.idPermiso = idPermiso;
 		this.resolucionPermiso = resolucionPermiso;
@@ -45,6 +48,12 @@ public class PermisoModel {
 		this.nombreTipo = nombreTipo;
 		this.descripcionTipo = descripcionTipo;
 		this.nombreDepartamento = nombreDepartamento;
+		this.diaI = diaI;
+		this.mesI = mesI;
+		this.anioI = anioI;
+		this.diaF = diaF;
+		this.mesF = mesF;
+		this.anioF = anioF;
 	}
 
 	public int getIdPermiso() {
@@ -159,14 +168,66 @@ public class PermisoModel {
 		this.nombreDepartamento = nombreDepartamento;
 	}
 
+	public String getDiaI() {
+		return diaI;
+	}
+
+	public void setDiaI(String diaI) {
+		this.diaI = diaI;
+	}
+
+	public String getMesI() {
+		return mesI;
+	}
+
+	public void setMesI(String mesI) {
+		this.mesI = mesI;
+	}
+
+	public String getAnioI() {
+		return anioI;
+	}
+
+	public void setAnioI(String anioI) {
+		this.anioI = anioI;
+	}
+
+	public String getDiaF() {
+		return diaF;
+	}
+
+	public void setDiaF(String diaF) {
+		this.diaF = diaF;
+	}
+
+	public String getMesF() {
+		return mesF;
+	}
+
+	public void setMesF(String mesF) {
+		this.mesF = mesF;
+	}
+
+	public String getAnioF() {
+		return anioF;
+	}
+
+	public void setAnioF(String anioF) {
+		this.anioF = anioF;
+	}
+
 	@Override
 	public String toString() {
 		return "PermisoModel [idPermiso=" + idPermiso + ", resolucionPermiso=" + resolucionPermiso + ", fechaSolicitud="
 				+ fechaSolicitud + ", fechaInicio=" + fechaInicio + ", fechaTermino=" + fechaTermino + ", estado="
 				+ estado + ", nombreEstado=" + nombreEstado + ", rutFuncionario=" + rutFuncionario + ", motivo="
 				+ motivo + ", descripcionMotivo=" + descripcionMotivo + ", tipo=" + tipo + ", nombreTipo=" + nombreTipo
-				+ ", descripcionTipo=" + descripcionTipo + ", nombreDepartamento=" + nombreDepartamento + "]";
+				+ ", descripcionTipo=" + descripcionTipo + ", nombreDepartamento=" + nombreDepartamento + ", diaI="
+				+ diaI + ", mesI=" + mesI + ", anioI=" + anioI + ", diaF=" + diaF + ", mesF=" + mesF + ", anioF="
+				+ anioF + "]";
 	}
+
+	
 
 	
 
