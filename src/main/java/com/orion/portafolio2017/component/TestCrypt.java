@@ -1,4 +1,4 @@
-package com.orion.portafolio2017.converter;
+package com.orion.portafolio2017.component;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

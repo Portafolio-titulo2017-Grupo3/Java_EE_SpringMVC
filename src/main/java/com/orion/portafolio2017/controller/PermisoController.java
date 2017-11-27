@@ -1,5 +1,6 @@
 package com.orion.portafolio2017.controller;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -25,10 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.orion.portafolio2017.component.Fechas;
+import com.orion.portafolio2017.component.HttpJsonRequestLibreria;
 import com.orion.portafolio2017.constant.ViewConstant;
-import com.orion.portafolio2017.converter.Fechas;
-import com.orion.portafolio2017.entity.Permiso;
-import com.orion.portafolio2017.model.DepartamentoModel;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.DepartamentoService;
@@ -271,12 +271,14 @@ public class PermisoController {
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@PostMapping("/addpermiso")
 	public String addPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
-			Model model) {
+			Model model) throws Exception {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaI = permiso.getAnioI()+"-"+permiso.getMesI()+"-"+permiso.getDiaI();
 		String fechaF = permiso.getAnioF()+"-"+permiso.getMesF()+"-"+permiso.getDiaF();
 		sdf.setLenient(true);
+		
+		
 		
 		
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
@@ -292,23 +294,43 @@ public class PermisoController {
 			e.printStackTrace();
 		}
 		
-		permiso.setResolucionPermiso("PENDIENTE");
-		LocalDate localDate = LocalDate.now();
-		permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		//OBTENER DIAS
+		int dias =(int) (permiso.getFechaTermino().getTime() - permiso.getFechaInicio().getTime())/86400000;
+		if(dias > 0) {
+			
+			//CONSULTA LOS DIAS DISPONIBLES A LA API REST DE RRHH DE LA MUNICIPALIDAD
+			//------------------------------------------------------------------------------------------------------------------
+			HttpJsonRequestLibreria test = new HttpJsonRequestLibreria();
+			String url="http://localhost:8082/api-rest/v1/funcionario/"+permiso.getRutFuncionario()+"&"+dias;
+			String diasDisponibles=test.obtieneJsonAPIRest(url);
+			//------------------------------------------------------------------------------------------------------------------
 		
-		if(null != permisoService.addPermiso(permiso,
+			LOG.info("METHOD: addPermiso() -- DIAS DE PERMISO SOLICITADOS: " + dias);
+			LOG.info("METHOD: addPermiso() -- DIAS DE PERMISO DISPONIBLES: " + diasDisponibles);
+			
+			
+			permiso.setResolucionPermiso("PENDIENTE");
+			LocalDate localDate = LocalDate.now();
+			permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+			if(Integer.parseInt(diasDisponibles) >= dias) {
+			if(null != permisoService.addPermiso(permiso,
 											 funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()),
 											 estadoService.findEstadoById(3),
 											 motivoService.findMotivoById(permiso.getMotivo()),
 											 tipoService.findTipoById(permiso.getTipo()))) 
-		{
-			model.addAttribute("result", 1);
-		}else {
-			model.addAttribute("result", 0);
+			{
+				model.addAttribute("result", 1);
+			}else {
+				model.addAttribute("result", 0);
+				}
+			return "redirect:/permisos/mispermisos";
+			}
+		
 		}
 		
+		return null;
 		
-		return "redirect:/permisos/mispermisos";
 		
 	}
 	
