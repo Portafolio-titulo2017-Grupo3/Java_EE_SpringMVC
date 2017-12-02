@@ -4,10 +4,8 @@ import org.springframework.stereotype.Component;
 import com.orion.portafolio2017.entity.Funcionario;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 
-
 @Component("funcionarioConverter")
 public class FuncionarioConverter {
-	
 
 	public Funcionario convertFuncionarioModel2Funcionario(FuncionarioInfoModel funcionarioModel) {
 
@@ -22,12 +20,11 @@ public class FuncionarioConverter {
 		funcionario.setSexoFunionario(funcionarioModel.getSexoFunionario());
 
 		return funcionario;
-		
+
 	}
-	
 
 	public FuncionarioInfoModel convertFuncionario2FuncionarioModel(Funcionario funcionario) {
-		
+
 		FuncionarioInfoModel funcionarioModel = new FuncionarioInfoModel();
 		funcionarioModel.setRutFuncionario(funcionario.getRutFuncionario());
 		funcionarioModel.setCorreoFuncionario(funcionario.getCorreoFuncionario());
@@ -37,15 +34,15 @@ public class FuncionarioConverter {
 		funcionarioModel.setSegundoApellido(funcionario.getSegundoApellido());
 		funcionarioModel.setTelefonoFunionario(funcionario.getTelefonoFunionario());
 		funcionarioModel.setSexoFunionario(funcionario.getSexoFunionario());
-		
+
 		funcionarioModel.setIdCargo(funcionario.getCargo().getIdCargo());
 		funcionarioModel.setNombreCargo(funcionario.getCargo().getNombreCargo());
 		funcionarioModel.setSalario(funcionario.getCargo().getSalario());
-		
+
 		funcionarioModel.setIdDepto(funcionario.getDepartamento().getIdDepto());
 		funcionarioModel.setNombreDepto(funcionario.getDepartamento().getNombreDepto());
 
 		return funcionarioModel;
-		
+
 	}
 }

@@ -11,21 +11,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class RequestTimeInterceptor.
- */
 @Component("requestTimeInterceptor")
 public class RequestTimeInterceptor extends HandlerInterceptorAdapter{
 	
 	
-	
-	/** The Constant LOG. */
 	private static final Log LOG = LogFactory.getLog(RequestTimeInterceptor.class);
 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
-	 */
+
 	//PRIMERO
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -34,9 +26,7 @@ public class RequestTimeInterceptor extends HandlerInterceptorAdapter{
 		return true;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#afterCompletion(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, java.lang.Exception)
-	 */
+
 	//SEGUNDO
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)

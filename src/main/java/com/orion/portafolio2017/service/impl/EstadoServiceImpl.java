@@ -15,11 +15,11 @@ import com.orion.portafolio2017.service.EstadoService;
 
 @Service("estadoService")
 public class EstadoServiceImpl implements EstadoService {
-	
+
 	@Autowired
 	@Qualifier("estadoConverter")
 	private EstadoConverter estadoConverter;
-	
+
 	@Autowired
 	@Qualifier("estadoRepository")
 	private EstadoRepository estadoRepository;
@@ -29,7 +29,7 @@ public class EstadoServiceImpl implements EstadoService {
 		// TODO Auto-generated method stub
 		return estadoRepository.findByIdEstado(id);
 	}
-	
+
 	@Override
 	public EstadoModel findEstadoByIdModel(int id) {
 		// TODO Auto-generated method stub
@@ -38,20 +38,19 @@ public class EstadoServiceImpl implements EstadoService {
 
 	@Override
 	public List<Estado> findAllEstado() {
-		List<Estado> estados= estadoRepository.findAll();
+		List<Estado> estados = estadoRepository.findAll();
 		List<Estado> estadoModel = new ArrayList<Estado>();
-		for(Estado estado : estados) {
+		for (Estado estado : estados) {
 			estadoModel.add(estado);
 		}
 		return estadoModel;
 	}
 
-
 	@Override
 	public List<EstadoModel> findAllEstadoModel() {
-		List<Estado> estados= estadoRepository.findAll();
+		List<Estado> estados = estadoRepository.findAll();
 		List<EstadoModel> estadoModel = new ArrayList<EstadoModel>();
-		for(Estado estado : estados) {
+		for (Estado estado : estados) {
 			estadoModel.add(estadoConverter.convertEstado2EstadoModel(estado));
 		}
 		return estadoModel;

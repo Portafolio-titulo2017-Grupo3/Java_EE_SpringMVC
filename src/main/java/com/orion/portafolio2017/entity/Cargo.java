@@ -21,16 +21,16 @@ public class Cargo implements java.io.Serializable {
 	@Id
 	@Column(name = "id_cargo", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idCargo;
-	
+
 	@Column(name = "nombre_cargo", nullable = false, length = 50)
 	private String nombreCargo;
-	
+
 	@Column(name = "salario", nullable = false, precision = 10, scale = 0)
 	private long salario;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cargo")
 	private Set<Funcionario> funcionarios = new HashSet<Funcionario>();
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cargo")
 	private Set<HistorialCargo> historialCargos = new HashSet<HistorialCargo>();
 
@@ -43,9 +43,6 @@ public class Cargo implements java.io.Serializable {
 		this.salario = salario;
 	}
 
-	
-
-	
 	public Cargo(int idCargo, String nombreCargo, long salario, Set<Funcionario> funcionarios,
 			Set<HistorialCargo> historialCargos) {
 		super();
@@ -64,7 +61,6 @@ public class Cargo implements java.io.Serializable {
 		this.idCargo = idCargo;
 	}
 
-	
 	public String getNombreCargo() {
 		return this.nombreCargo;
 	}
@@ -73,7 +69,6 @@ public class Cargo implements java.io.Serializable {
 		this.nombreCargo = nombreCargo;
 	}
 
-	
 	public long getSalario() {
 		return this.salario;
 	}
@@ -97,6 +92,5 @@ public class Cargo implements java.io.Serializable {
 	public void setHistorialCargos(Set<HistorialCargo> historialCargos) {
 		this.historialCargos = historialCargos;
 	}
-
 
 }

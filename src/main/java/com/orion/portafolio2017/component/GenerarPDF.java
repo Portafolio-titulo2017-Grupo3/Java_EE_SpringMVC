@@ -58,8 +58,14 @@ public class GenerarPDF {
 
 	public static void main(String[] a3d) throws FileNotFoundException, DocumentException {
 
-		String rut = "18.781.xxx-x";String estado = "aprobado";String fecha = "01/12/2017";int id_numero_resolucion = 123456;
-		String motivo = "asdasdadasd";String fInicio = "04/12/2017";String fTermino = "08/12/2017";String nombre_departamento = "Informatica";
+		String rut = "18.781.xxx-x";
+		String estado = "aprobado";
+		String fecha = "01/12/2017";
+		int id_numero_resolucion = 123456;
+		String motivo = "asdasdadasd";
+		String fInicio = "04/12/2017";
+		String fTermino = "08/12/2017";
+		String nombre_departamento = "Informatica";
 		String nombre_funcionario = "Daniela Sofía Flores Verdugo";
 		
 		GenerarPDF doc= new GenerarPDF();

@@ -22,45 +22,45 @@ public class Funcionario implements java.io.Serializable {
 	@Id
 	@Column(name = "rut_funcionario", unique = true, nullable = false, length = 10)
 	private String rutFuncionario;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "departamento_id_depto", nullable = false)
 	private Departamento departamento;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cargo_id_cargo", nullable = false)
 	private Cargo cargo;
-	
+
 	@Column(name = "primer_nombre", nullable = false, length = 20)
 	private String primerNombre;
-	
+
 	@Column(name = "segundo_nombre", nullable = false, length = 20)
 	private String segundoNombre;
-	
+
 	@Column(name = "primer_apellido", nullable = false, length = 20)
 	private String primerApellido;
-	
+
 	@Column(name = "segundo_apellido", nullable = false, length = 20)
 	private String segundoApellido;
-	
+
 	@Column(name = "telefono_funionario", nullable = false, precision = 10, scale = 0)
 	private long telefonoFunionario;
-	
+
 	@Column(name = "sexo_funionario", nullable = false, length = 9)
 	private String sexoFunionario;
-	
+
 	@Column(name = "correo_funcionario", nullable = false, length = 20)
 	private String correoFuncionario;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionario")
 	private Set<Permiso> permisos = new HashSet<Permiso>();
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionario")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
 
 	public Funcionario() {
 	}
-	
+
 	public Funcionario(String rutFuncionario2) {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,9 +80,6 @@ public class Funcionario implements java.io.Serializable {
 		this.correoFuncionario = correoFuncionario;
 	}
 
-
-
-	
 	public Funcionario(String rutFuncionario, Departamento departamento, Cargo cargo, String primerNombre,
 			String segundoNombre, String primerApellido, String segundoApellido, long telefonoFunionario,
 			String sexoFunionario, String correoFuncionario, Set<Permiso> permisos, Set<Usuario> usuarios) {
@@ -101,17 +98,14 @@ public class Funcionario implements java.io.Serializable {
 		this.usuarios = usuarios;
 	}
 
-
 	public String getRutFuncionario() {
 		return this.rutFuncionario;
 	}
-	
 
 	public void setRutFuncionario(String rutFuncionario) {
 		this.rutFuncionario = rutFuncionario;
 	}
 
-	
 	public Departamento getDepartamento() {
 		return this.departamento;
 	}
@@ -120,7 +114,6 @@ public class Funcionario implements java.io.Serializable {
 		this.departamento = departamento;
 	}
 
-	
 	public Cargo getCargo() {
 		return this.cargo;
 	}
@@ -129,7 +122,6 @@ public class Funcionario implements java.io.Serializable {
 		this.cargo = cargo;
 	}
 
-	
 	public String getPrimerNombre() {
 		return this.primerNombre;
 	}
@@ -138,7 +130,6 @@ public class Funcionario implements java.io.Serializable {
 		this.primerNombre = primerNombre;
 	}
 
-	
 	public String getSegundoNombre() {
 		return this.segundoNombre;
 	}
@@ -146,7 +137,6 @@ public class Funcionario implements java.io.Serializable {
 	public void setSegundoNombre(String segundoNombre) {
 		this.segundoNombre = segundoNombre;
 	}
-
 
 	public String getPrimerApellido() {
 		return this.primerApellido;
@@ -156,7 +146,6 @@ public class Funcionario implements java.io.Serializable {
 		this.primerApellido = primerApellido;
 	}
 
-	
 	public String getSegundoApellido() {
 		return this.segundoApellido;
 	}
@@ -165,7 +154,6 @@ public class Funcionario implements java.io.Serializable {
 		this.segundoApellido = segundoApellido;
 	}
 
-	
 	public long getTelefonoFunionario() {
 		return this.telefonoFunionario;
 	}
@@ -174,7 +162,6 @@ public class Funcionario implements java.io.Serializable {
 		this.telefonoFunionario = telefonoFunionario;
 	}
 
-	
 	public String getSexoFunionario() {
 		return this.sexoFunionario;
 	}
@@ -183,7 +170,6 @@ public class Funcionario implements java.io.Serializable {
 		this.sexoFunionario = sexoFunionario;
 	}
 
-	
 	public String getCorreoFuncionario() {
 		return this.correoFuncionario;
 	}
@@ -207,8 +193,5 @@ public class Funcionario implements java.io.Serializable {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
-	
-
 
 }

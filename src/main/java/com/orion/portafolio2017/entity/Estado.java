@@ -20,10 +20,10 @@ public class Estado implements java.io.Serializable {
 	@Id
 	@Column(name = "id_estado", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idEstado;
-	
+
 	@Column(name = "nombre_estado", nullable = false, length = 50)
 	private String nombreEstado;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "estado")
 	private Set<Permiso> permisos = new HashSet<Permiso>();
 
@@ -35,7 +35,6 @@ public class Estado implements java.io.Serializable {
 		this.nombreEstado = nombreEstado;
 	}
 
-	
 	public Estado(int idEstado, String nombreEstado, Set<Permiso> permisos) {
 		super();
 		this.idEstado = idEstado;
@@ -55,7 +54,6 @@ public class Estado implements java.io.Serializable {
 		this.idEstado = idEstado;
 	}
 
-	
 	public String getNombreEstado() {
 		return this.nombreEstado;
 	}
@@ -71,7 +69,5 @@ public class Estado implements java.io.Serializable {
 	public void setPermisos(Set<Permiso> permisos) {
 		this.permisos = permisos;
 	}
-
-	
 
 }

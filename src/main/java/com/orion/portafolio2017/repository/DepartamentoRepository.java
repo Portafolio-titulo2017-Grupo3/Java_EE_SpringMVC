@@ -9,7 +9,7 @@ import com.orion.portafolio2017.entity.Departamento;
 
 @Repository("departamentoRepository")
 public interface DepartamentoRepository extends JpaRepository<Departamento, Serializable> {
-	
+
 	public abstract Departamento findByIdDepto(int IdDepto);
 
 }

@@ -2,7 +2,6 @@ package com.orion.portafolio2017.model;
 
 public class FuncionarioInfoModel {
 
-
 	private String rutFuncionario;
 	private String primerNombre;
 	private String segundoNombre;
@@ -11,14 +10,14 @@ public class FuncionarioInfoModel {
 	private long telefonoFunionario;
 	private String sexoFunionario;
 	private String correoFuncionario;
-	
+
 	private int idCargo;
 	private String nombreCargo;
 	private long salario;
-	
+
 	private int idDepto;
 	private String nombreDepto;
-	
+
 	public FuncionarioInfoModel() {
 		super();
 	}
@@ -145,7 +144,7 @@ public class FuncionarioInfoModel {
 	public void setNombreDepto(String nombreDepto) {
 		this.nombreDepto = nombreDepto;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "FuncionarioInfoModel [rutFuncionario=" + rutFuncionario + ", primerNombre=" + primerNombre
@@ -154,5 +153,5 @@ public class FuncionarioInfoModel {
 				+ ", correoFuncionario=" + correoFuncionario + ", idCargo=" + idCargo + ", nombreCargo=" + nombreCargo
 				+ ", salario=" + salario + ", idDepto=" + idDepto + ", nombreDepto=" + nombreDepto + "]";
 	}
-	
+
 }

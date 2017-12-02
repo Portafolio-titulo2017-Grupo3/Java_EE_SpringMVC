@@ -39,8 +39,6 @@ public class Tipo implements java.io.Serializable {
 		this.descripcionTipo = descripcionTipo;
 	}
 
-
-
 	public Tipo(int idTipo, String nombreTipo, String descripcionTipo, Set<Permiso> permisos) {
 		super();
 		this.idTipo = idTipo;
@@ -84,7 +82,5 @@ public class Tipo implements java.io.Serializable {
 	public void setPermisos(Set<Permiso> permisos) {
 		this.permisos = permisos;
 	}
-
-
 
 }

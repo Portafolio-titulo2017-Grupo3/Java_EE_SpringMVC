@@ -9,22 +9,22 @@ public class PermisoModel {
 	private Date fechaSolicitud;
 	private Date fechaInicio;
 	private Date fechaTermino;
-	
+
 	private int estado;
 	private String nombreEstado;
-	
+
 	private String rutFuncionario;
-	
+
 	private int motivo;
 	private String descripcionMotivo;
 
 	private int tipo;
 	private String nombreTipo;
 	private String descripcionTipo;
-	
+
 	private String nombreDepartamento;
-	private String diaI,mesI,anioI;
-	private String diaF,mesF,anioF;
+	private String diaI, mesI, anioI;
+	private String diaF, mesF, anioF;
 
 	public PermisoModel() {
 	}
@@ -226,16 +226,5 @@ public class PermisoModel {
 				+ diaI + ", mesI=" + mesI + ", anioI=" + anioI + ", diaF=" + diaF + ", mesF=" + mesF + ", anioF="
 				+ anioF + "]";
 	}
-
-	
-
-	
-
-
-	
-
-	
-
-	
 
 }

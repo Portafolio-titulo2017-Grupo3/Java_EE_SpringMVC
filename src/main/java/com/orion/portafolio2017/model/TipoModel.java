@@ -1,6 +1,5 @@
 package com.orion.portafolio2017.model;
 
-
 public class TipoModel {
 
 	private int idTipo;
@@ -39,6 +38,5 @@ public class TipoModel {
 	public void setDescripcionTipo(String descripcionTipo) {
 		this.descripcionTipo = descripcionTipo;
 	}
-
 
 }

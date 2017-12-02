@@ -2,8 +2,6 @@ package com.orion.portafolio2017.component;
 
 import java.util.Calendar;
 
-import com.orion.portafolio2017.constant.ViewConstant;
-
 public class Fechas {
 
 	public String fechaActual() {

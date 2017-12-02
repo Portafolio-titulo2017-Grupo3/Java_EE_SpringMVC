@@ -1,10 +1,8 @@
 package com.orion.portafolio2017.constant;
 
-// TODO: Auto-generated Javadoc
-// Por convención los nombres de las variables Java deberian ser en minúscula
-/**
- * The Class ViewConstant.
- */
+
+// Por convención los nombres de las variables Java deberían ser en minúscula
+
 public class ViewConstant {
 
 	//AUTENTIFICACION DE LA APLICACION

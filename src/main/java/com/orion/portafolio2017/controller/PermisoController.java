@@ -335,14 +335,11 @@ public class PermisoController {
 	}
 	
 	
-	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    sdf.setLenient(true);
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	   // binder.registerCustomEditor(Integer.class,null,new CustomNumberEditor(Integer.class,null,true));
-	   //binder.registerCustomEditor(Long.class,null,new CustomNumberEditor(Long.class,null,true));
 	}
 
 }

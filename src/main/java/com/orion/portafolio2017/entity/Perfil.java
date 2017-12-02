@@ -22,13 +22,13 @@ public class Perfil implements java.io.Serializable {
 	@GeneratedValue
 	@Column(name = "id_perfil", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idPerfil;
-	
+
 	@Column(name = "nombre_perfil", nullable = false, length = 30)
 	private String nombrePerfil;
-	
+
 	@Column(name = "descripcion_perfil", nullable = false)
 	private String descripcionPerfil;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "perfil")
 	private Set<Usuario> usuarios = new HashSet<Usuario>();
 
@@ -40,8 +40,6 @@ public class Perfil implements java.io.Serializable {
 		this.nombrePerfil = nombrePerfil;
 		this.descripcionPerfil = descripcionPerfil;
 	}
-
-
 
 	public Perfil(int idPerfil, String nombrePerfil, String descripcionPerfil, Set<Usuario> usuarios) {
 		super();
@@ -59,7 +57,6 @@ public class Perfil implements java.io.Serializable {
 		this.idPerfil = idPerfil;
 	}
 
-	
 	public String getNombrePerfil() {
 		return this.nombrePerfil;
 	}
@@ -68,7 +65,6 @@ public class Perfil implements java.io.Serializable {
 		this.nombrePerfil = nombrePerfil;
 	}
 
-	
 	public String getDescripcionPerfil() {
 		return this.descripcionPerfil;
 	}
@@ -84,8 +80,5 @@ public class Perfil implements java.io.Serializable {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
-	
-	
 
 }

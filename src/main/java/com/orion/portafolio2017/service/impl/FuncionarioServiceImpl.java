@@ -16,11 +16,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Autowired
 	@Qualifier("funcionarioRepository")
 	private FuncionarioRepository funcionarioRepository;
-	
+
 	@Autowired
 	@Qualifier("funcionarioConverter")
 	private FuncionarioConverter funcionarioConverter;
-	
+
 	@Override
 	public Funcionario findFuncionarioByRut(String rut) {
 		// TODO Auto-generated method stub
@@ -30,7 +30,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	public FuncionarioInfoModel findFuncionarioModelByRut(String rut) {
 		// TODO Auto-generated method stub
-		return funcionarioConverter.convertFuncionario2FuncionarioModel(funcionarioRepository.findByRutFuncionario(rut));
+		return funcionarioConverter
+				.convertFuncionario2FuncionarioModel(funcionarioRepository.findByRutFuncionario(rut));
 	}
 
 }

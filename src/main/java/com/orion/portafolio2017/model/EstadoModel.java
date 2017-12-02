@@ -1,8 +1,5 @@
 package com.orion.portafolio2017.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EstadoModel {
 
 	private int idEstado;
@@ -15,7 +12,6 @@ public class EstadoModel {
 		this.idEstado = idEstado;
 		this.nombreEstado = nombreEstado;
 	}
-
 
 	public int getIdEstado() {
 		return this.idEstado;
@@ -32,6 +28,5 @@ public class EstadoModel {
 	public void setNombreEstado(String nombreEstado) {
 		this.nombreEstado = nombreEstado;
 	}
-
 
 }

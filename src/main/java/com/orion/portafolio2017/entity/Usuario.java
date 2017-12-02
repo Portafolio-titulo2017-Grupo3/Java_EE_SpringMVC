@@ -48,7 +48,7 @@ public class Usuario implements java.io.Serializable {
 		this.username = nombreUsuario;
 		this.password = claveUsuario;
 	}
-	
+
 	public Usuario(String username2, String password2, SimpleGrantedAuthority authorities) {
 		// TODO Auto-generated constructor stub
 	}

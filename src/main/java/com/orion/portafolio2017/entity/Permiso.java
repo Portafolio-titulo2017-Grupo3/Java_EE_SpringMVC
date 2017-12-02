@@ -27,19 +27,19 @@ public class Permiso implements java.io.Serializable {
 	@Column(name = "id_permiso", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idPermiso;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "estado_id_estado", nullable = false)
 	private Estado estado;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "funcionario_rut_funcionario", nullable = false)
 	private Funcionario funcionario;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "motivo_id_motivo", nullable = false)
 	private Motivo motivo;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tipo_id_tipo", nullable = false)
 	private Tipo tipo;
 

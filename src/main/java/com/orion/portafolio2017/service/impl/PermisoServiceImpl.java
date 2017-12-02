@@ -17,25 +17,27 @@ import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.repository.PermisoRepository;
 import com.orion.portafolio2017.service.PermisoService;
 
-
 @Service("permisoService")
 public class PermisoServiceImpl implements PermisoService {
 
 	@Autowired
 	@Qualifier("permisoRepository")
 	private PermisoRepository permisoRepository;
-	
+
 	@Autowired
 	@Qualifier("permisoConverter")
 	private PermisoConverter permisoConverter;
 
 	@Override
-	public PermisoModel addPermiso(PermisoModel permisoModel, Funcionario funcionario, Estado estado, Motivo motivo, Tipo tipo) {
-		Permiso permiso = permisoRepository.save(permisoConverter.convertPermisoModel2Permiso(permisoModel,funcionario,estado,motivo,tipo));
+	public PermisoModel addPermiso(PermisoModel permisoModel, Funcionario funcionario, Estado estado, Motivo motivo,
+			Tipo tipo) {
+		Permiso permiso = permisoRepository
+				.save(permisoConverter.convertPermisoModel2Permiso(permisoModel, funcionario, estado, motivo, tipo));
 		return permisoConverter.convertPermiso2PermisoModel(permiso);
 	}
-	
-	//No deberia ir este metodo, se implemento para trabajar sin Model (NO DEBERIA IR)
+
+	// No deberia ir este metodo, se implemento para trabajar sin Model (NO DEBERIA
+	// IR)
 	public Permiso addPermiso2(Permiso permiso) {
 		Permiso permiso2 = permisoRepository.save(permiso);
 		return permiso2;
@@ -45,43 +47,38 @@ public class PermisoServiceImpl implements PermisoService {
 	public List<PermisoModel> findAllPermisoByRut(String rut) {
 		List<Permiso> permisos = permisoRepository.findAll();
 		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
-		
-		for(Permiso permiso : permisos) {
-			if(permiso.getFuncionario().getRutFuncionario().equals(rut))
-			{
+
+		for (Permiso permiso : permisos) {
+			if (permiso.getFuncionario().getRutFuncionario().equals(rut)) {
 				permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
 			}
 		}
 		return permisoModel;
 	}
-	
-	
+
 	@Override
 	public List<PermisoModel> findAllPermisoByDepartamento(int idDepartamento) {
 		List<Permiso> permisos = permisoRepository.findAll();
 		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
-		
-		for(Permiso permiso : permisos) {
-			if(permiso.getFuncionario().getDepartamento().getIdDepto() == idDepartamento)
-			{
+
+		for (Permiso permiso : permisos) {
+			if (permiso.getFuncionario().getDepartamento().getIdDepto() == idDepartamento) {
 				permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
 			}
 		}
 		return permisoModel;
 	}
-	
+
 	@Override
 	public List<PermisoModel> findAllPermiso() {
 		List<Permiso> permisos = permisoRepository.findAll();
 		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
-		
-		for(Permiso permiso : permisos) {
+
+		for (Permiso permiso : permisos) {
 			permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
 		}
 		return permisoModel;
 	}
-	
-	
 
 	@Override
 	public Permiso findPermisoByRut(String rut) {
@@ -98,7 +95,7 @@ public class PermisoServiceImpl implements PermisoService {
 	@Override
 	public void removePermiso(int rut) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -111,15 +108,5 @@ public class PermisoServiceImpl implements PermisoService {
 	public Permiso findPermisoById(int id) {
 		return permisoRepository.findByIdPermiso(id);
 	}
-
-
-
-
-
-
-
-
-	
-
 
 }

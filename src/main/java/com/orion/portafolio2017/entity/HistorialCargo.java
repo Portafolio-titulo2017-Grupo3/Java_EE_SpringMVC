@@ -23,15 +23,15 @@ public class HistorialCargo implements java.io.Serializable {
 	@Id
 	@Column(name = "id_historial", unique = true, nullable = false)
 	private int id_historial;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicio", nullable = false, length = 7)
 	private Date fechaInicio;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cargo_id_cargo", nullable = false)
 	private Cargo cargo;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_termino", length = 7)
 	private Date fechaTermino;
@@ -39,15 +39,12 @@ public class HistorialCargo implements java.io.Serializable {
 	public HistorialCargo() {
 	}
 
-
 	public HistorialCargo(int id_historial, Cargo cargo) {
 		super();
 		this.id_historial = id_historial;
 		this.cargo = cargo;
 	}
 
-
-	
 	public HistorialCargo(int id_historial, Date fechaInicio, Cargo cargo, Date fechaTermino) {
 		super();
 		this.id_historial = id_historial;
@@ -56,17 +53,13 @@ public class HistorialCargo implements java.io.Serializable {
 		this.fechaTermino = fechaTermino;
 	}
 
-	
-
 	public int getId_historial() {
 		return id_historial;
 	}
 
-
 	public void setId_historial(int id_historial) {
 		this.id_historial = id_historial;
 	}
-
 
 	public Date getFechaInicio() {
 		return this.fechaInicio;
@@ -76,7 +69,6 @@ public class HistorialCargo implements java.io.Serializable {
 		this.fechaInicio = fechaInicio;
 	}
 
-
 	public Cargo getCargo() {
 		return this.cargo;
 	}
@@ -85,7 +77,6 @@ public class HistorialCargo implements java.io.Serializable {
 		this.cargo = cargo;
 	}
 
-	
 	public Date getFechaTermino() {
 		return this.fechaTermino;
 	}

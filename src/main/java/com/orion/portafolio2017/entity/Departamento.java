@@ -20,10 +20,10 @@ public class Departamento implements java.io.Serializable {
 	@Id
 	@Column(name = "id_depto", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idDepto;
-	
+
 	@Column(name = "nombre_depto", nullable = false)
 	private String nombreDepto;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "departamento")
 	private Set<Funcionario> funcionarios = new HashSet<Funcionario>();
 
@@ -35,8 +35,6 @@ public class Departamento implements java.io.Serializable {
 		this.nombreDepto = nombreDepto;
 	}
 
-
-	
 	public Departamento(int idDepto, String nombreDepto, Set<Funcionario> funcionarios) {
 		super();
 		this.idDepto = idDepto;
@@ -52,7 +50,6 @@ public class Departamento implements java.io.Serializable {
 		this.idDepto = idDepto;
 	}
 
-	
 	public String getNombreDepto() {
 		return this.nombreDepto;
 	}
@@ -68,8 +65,5 @@ public class Departamento implements java.io.Serializable {
 	public void setFuncionarios(Set<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-
-	
-
 
 }

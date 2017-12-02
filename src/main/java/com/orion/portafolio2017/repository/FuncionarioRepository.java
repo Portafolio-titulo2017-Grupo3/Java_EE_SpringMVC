@@ -10,6 +10,5 @@ import com.orion.portafolio2017.entity.Funcionario;
 @Repository("funcionarioRepository")
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Serializable> {
 
-	
 	public abstract Funcionario findByRutFuncionario(String rut);
 }

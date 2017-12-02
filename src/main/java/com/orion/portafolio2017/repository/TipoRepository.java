@@ -9,7 +9,7 @@ import com.orion.portafolio2017.entity.Tipo;
 
 @Repository("tipoRepository")
 public interface TipoRepository extends JpaRepository<Tipo, Serializable> {
-	
+
 	public abstract Tipo findByIdTipo(int id);
 
 }

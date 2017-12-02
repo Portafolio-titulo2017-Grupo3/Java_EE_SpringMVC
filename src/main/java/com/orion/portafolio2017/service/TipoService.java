@@ -8,7 +8,9 @@ import com.orion.portafolio2017.model.TipoModel;
 public interface TipoService {
 
 	public abstract Tipo findTipoById(int id);
+
 	public abstract List<Tipo> findAllTipo();
+
 	public abstract List<TipoModel> findAllTipoModel();
-	
+
 }

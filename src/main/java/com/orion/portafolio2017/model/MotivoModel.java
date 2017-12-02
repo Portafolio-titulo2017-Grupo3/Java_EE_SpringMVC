@@ -1,8 +1,5 @@
 package com.orion.portafolio2017.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MotivoModel {
 
 	private int idMotivo;
@@ -15,7 +12,6 @@ public class MotivoModel {
 		this.idMotivo = idMotivo;
 		this.descripcionMotivo = descripcionMotivo;
 	}
-
 
 	public int getIdMotivo() {
 		return this.idMotivo;
@@ -32,6 +28,5 @@ public class MotivoModel {
 	public void setDescripcionMotivo(String descripcionMotivo) {
 		this.descripcionMotivo = descripcionMotivo;
 	}
-
 
 }

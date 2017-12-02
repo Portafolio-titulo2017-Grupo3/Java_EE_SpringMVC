@@ -35,8 +35,6 @@ public class Motivo implements java.io.Serializable {
 		this.descripcionMotivo = descripcionMotivo;
 	}
 
-
-
 	public Motivo(int idMotivo, String descripcionMotivo, Set<Permiso> permisos) {
 		super();
 		this.idMotivo = idMotivo;
@@ -71,7 +69,5 @@ public class Motivo implements java.io.Serializable {
 	public void setPermisos(Set<Permiso> permisos) {
 		this.permisos = permisos;
 	}
-
-
 
 }

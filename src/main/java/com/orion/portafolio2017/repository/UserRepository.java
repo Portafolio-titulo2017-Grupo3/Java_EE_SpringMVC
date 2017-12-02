@@ -10,6 +10,5 @@ import com.orion.portafolio2017.entity.Usuario;
 public interface UserRepository extends JpaRepository<Usuario, Serializable> {
 
 	public abstract Usuario findByUsername(String username);
-	
-	
+
 }

@@ -25,115 +25,116 @@ import com.orion.portafolio2017.entity.Usuario;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.repository.UserRepository;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserService.
  */
 @Service("userService")
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
 	/** The user repository. */
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
-	
-	
+
 	/** Converters */
-	
-	
+
 	@Autowired
 	@Qualifier("funcionarioConverter")
 	private FuncionarioConverter funcionarioConverter;
-	
-	/* (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#
+	 * loadUserByUsername(java.lang.String)
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		List<GrantedAuthority> authorities = buildAuthorities(usuario.getPerfil());
-		return buildUser(usuario, authorities);	
+		return buildUser(usuario, authorities);
 	}
-	
-	//Obtiene el nombre de PerfilModel según Nombre de UsuarioModel
+
+	// Obtiene el nombre de PerfilModel según Nombre de UsuarioModel
 	public String obtenerPerfilByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getPerfil().getNombrePerfil().toString();
 	}
-	
-	//Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
+
+	// Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
 	public String obtenerRutFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getFuncionario().getRutFuncionario().toString();
 	}
-	
-	//Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
-		public int obtenerIdDepartamentoByUsuario(String username) {
-			com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
-			return  usuario.getFuncionario().getDepartamento().getIdDepto();
-		}
-	
-	
-	//Obtiene los datos del FuncionarioModel según Nombre de Usuario
+
+	// Obtiene el rut del FuncionarioModel según Nombre de UsuarioModel
+	public int obtenerIdDepartamentoByUsuario(String username) {
+		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
+		return usuario.getFuncionario().getDepartamento().getIdDepto();
+	}
+
+	// Obtiene los datos del FuncionarioModel según Nombre de Usuario
 	public FuncionarioInfoModel obtenerFuncionarioByUsuario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
-		FuncionarioInfoModel funcionarioModel = funcionarioConverter.convertFuncionario2FuncionarioModel(usuario.getFuncionario());
+		FuncionarioInfoModel funcionarioModel = funcionarioConverter
+				.convertFuncionario2FuncionarioModel(usuario.getFuncionario());
 		return funcionarioModel;
 	}
-	
+
 	public Funcionario obtenerFuncionario2(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
 		return usuario.getFuncionario();
 	}
-	
-	//Este metodo no deberia ir , pero se implemento para poder trabajar sin el model
+
+	// Este metodo no deberia ir , pero se implemento para poder trabajar sin el
+	// model
 	public Funcionario obtenerFuncionario(String username) {
 		com.orion.portafolio2017.entity.Usuario usuario = userRepository.findByUsername(username);
-		
+
 		String rut = usuario.getFuncionario().getRutFuncionario();
- 		Departamento departamento = usuario.getFuncionario().getDepartamento();
- 		Cargo cargo = usuario.getFuncionario().getCargo();
- 		String primerNombre = usuario.getFuncionario().getPrimerNombre();
- 		String segundoNombre = usuario.getFuncionario().getSegundoNombre();
- 		String primerApellido = usuario.getFuncionario().getPrimerApellido();
- 		String segundoApellido = usuario.getFuncionario().getSegundoApellido();
- 		long telefonoFunionario =usuario.getFuncionario().getTelefonoFunionario();
- 		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
- 		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
- 		Set<Permiso> permisos = usuario.getFuncionario().getPermisos();
- 		Set<Usuario> usuarios = usuario.getFuncionario().getUsuarios();
-		
- 		Funcionario funcionary= new Funcionario(rut,departamento,cargo,primerNombre,segundoNombre,primerApellido,segundoApellido,telefonoFunionario,
- 		sexoFunionario,correoFuncionario,permisos,usuarios);
- 		return funcionary;
+		Departamento departamento = usuario.getFuncionario().getDepartamento();
+		Cargo cargo = usuario.getFuncionario().getCargo();
+		String primerNombre = usuario.getFuncionario().getPrimerNombre();
+		String segundoNombre = usuario.getFuncionario().getSegundoNombre();
+		String primerApellido = usuario.getFuncionario().getPrimerApellido();
+		String segundoApellido = usuario.getFuncionario().getSegundoApellido();
+		long telefonoFunionario = usuario.getFuncionario().getTelefonoFunionario();
+		String sexoFunionario = usuario.getFuncionario().getSexoFunionario();
+		String correoFuncionario = usuario.getFuncionario().getCorreoFuncionario();
+		Set<Permiso> permisos = usuario.getFuncionario().getPermisos();
+		Set<Usuario> usuarios = usuario.getFuncionario().getUsuarios();
+
+		Funcionario funcionary = new Funcionario(rut, departamento, cargo, primerNombre, segundoNombre, primerApellido,
+				segundoApellido, telefonoFunionario, sexoFunionario, correoFuncionario, permisos, usuarios);
+		return funcionary;
 	}
-	
+
 	/**
 	 * Builds the user.
 	 *
-	 * @param usuario the user
-	 * @param authorities the authorities
+	 * @param usuario
+	 *            the user
+	 * @param authorities
+	 *            the authorities
 	 * @return the user
 	 */
 	private User buildUser(com.orion.portafolio2017.entity.Usuario usuario, List<GrantedAuthority> authorities) {
 		return new User(usuario.getUsername(), usuario.getPassword(), true, true, true, true, authorities);
 	}
-	
+
 	/**
 	 * Builds the authorities.
 	 *
-	 * @param perfils the user roles
+	 * @param perfils
+	 *            the user roles
 	 * @return the list
 	 */
-	private List<GrantedAuthority> buildAuthorities(Perfil perfils){
-		
+	private List<GrantedAuthority> buildAuthorities(Perfil perfils) {
+
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
 		auths.add(new SimpleGrantedAuthority(perfils.getNombrePerfil()));
 		return new ArrayList<GrantedAuthority>(auths);
 	}
-	
-	
 
 }

@@ -9,7 +9,7 @@ import com.orion.portafolio2017.entity.Estado;
 
 @Repository("estadoRepository")
 public interface EstadoRepository extends JpaRepository<Estado, Serializable> {
-	
+
 	public abstract Estado findByIdEstado(int id);
 
 }
