@@ -301,7 +301,7 @@ public class PermisoController {
 			//CONSULTA LOS DIAS DISPONIBLES A LA API REST DE RRHH DE LA MUNICIPALIDAD
 			//------------------------------------------------------------------------------------------------------------------
 			HttpJsonRequestLibreria test = new HttpJsonRequestLibreria();
-			String url="http://localhost:8082/api-rest/v1/funcionario/"+permiso.getRutFuncionario()+"&"+dias;
+			String url="http://localhost:8082/api-rest/v1/funcionario/"+permiso.getRutFuncionario();
 			String diasDisponibles=test.obtieneJsonAPIRest(url);
 			//------------------------------------------------------------------------------------------------------------------
 		

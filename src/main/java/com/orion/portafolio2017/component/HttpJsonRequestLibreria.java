@@ -103,7 +103,7 @@ public class HttpJsonRequestLibreria {
 	
 	public static void main(String[] args) {
 		HttpJsonRequestLibreria test = new HttpJsonRequestLibreria();
-		String url="http://localhost:8082/api-rest/v1/funcionario/22222222-2&15";
+		String url="http://localhost:8082/api-rest/v1/funcionario/22222222-2";
 		//test.obtieneJsonAPIRestTest(url);
 		System.out.println("salida como String : " +test.obtieneJsonAPIRest(url));
 		//test.obtieneJsonAPIRest(url);
