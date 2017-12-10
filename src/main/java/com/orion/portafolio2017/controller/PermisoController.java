@@ -1,6 +1,7 @@
 package com.orion.portafolio2017.controller;
 
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itextpdf.text.DocumentException;
 import com.orion.portafolio2017.component.Fechas;
+import com.orion.portafolio2017.component.GenerarPDF;
 import com.orion.portafolio2017.component.HttpJsonRequestLibreria;
 import com.orion.portafolio2017.constant.ViewConstant;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
@@ -234,12 +237,12 @@ public class PermisoController {
 	@PreAuthorize("hasAnyAuthority('JEFE INTERNO', 'JEFE SUPERIOR')")
 	@PostMapping("/authpermiso")
 	public String authPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
-							  Model model) {
+							  Model model) throws FileNotFoundException, DocumentException {
 		LOG.info("METHOD: authPermiso() -- PARAMS: " + permiso.toString());
 		LOG.info("METHOD: authPermiso() -- VALOR ESTADO: " + permiso.getEstado());
 	
-		//LocalDate localDate = LocalDate.now();
-		//permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		LocalDate localDate = LocalDate.now();
+		Date hora_actual=(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		
 		
 		PermisoModel permi = permisoService.findPermisoModelById(permiso.getIdPermiso());
@@ -251,8 +254,27 @@ public class PermisoController {
 											 funcionarioService.findFuncionarioByRut(permi.getRutFuncionario()),
 											 estadoService.findEstadoById(permi.getEstado()),
 											 motivoService.findMotivoById(permi.getMotivo()),
-											 tipoService.findTipoById(permi.getTipo()))) 
+											 tipoService.findTipoById(permi.getTipo())))
 		{
+			String P_nombre = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getPrimerNombre();
+			String S_nombre = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getSegundoNombre();
+			String P_apellido = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getPrimerApellido();
+			String S_apellido = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getSegundoApellido();
+			String nombre= P_nombre +" "+ S_nombre +" "+ P_apellido +" "+ S_apellido;
+			
+			String rut = permiso.getRutFuncionario();
+			String estado = estadoService.findEstadoById(permi.getEstado()).getNombreEstado();
+			String fecha = String.valueOf(hora_actual);
+			int id_numero_resolucion = permiso.getIdPermiso();
+			String motivo =  motivoService.findMotivoById(permi.getMotivo()).getDescripcionMotivo();
+			String fInicio = String.valueOf(permiso.getFechaInicio());
+			String fTermino = String.valueOf(permiso.getFechaTermino());
+			String nombre_departamento = permiso.getNombreDepartamento();
+			String nombre_funcionario = nombre;
+			
+			GenerarPDF resolucion= new GenerarPDF();
+			resolucion.generarPDFresolucion(rut, estado, fecha, id_numero_resolucion, motivo, fInicio, fTermino, nombre_departamento, nombre_funcionario);
+			
 			model.addAttribute("result", 1);
 		}else {
 			model.addAttribute("result", 0);
@@ -278,13 +300,9 @@ public class PermisoController {
 		String fechaF = permiso.getAnioF()+"-"+permiso.getMesF()+"-"+permiso.getDiaF();
 		sdf.setLenient(true);
 		
-		
-		
-		
 		LOG.info("METHOD: addPermiso() -- PARAMS: " + permiso.toString());
 		LOG.info("METHOD: addPermiso() -- FECHA INICIO: " + fechaI);
 		LOG.info("METHOD: addPermiso() -- FECHA FIN: " + fechaF);
-	
 		
 		try {
 			permiso.setFechaInicio(sdf.parse(fechaI));
@@ -304,7 +322,8 @@ public class PermisoController {
 			String url="http://localhost:8082/api-rest/v1/funcionario/"+permiso.getRutFuncionario();
 			String diasDisponibles=test.obtieneJsonAPIRest(url);
 			//------------------------------------------------------------------------------------------------------------------
-		
+			
+			
 			LOG.info("METHOD: addPermiso() -- DIAS DE PERMISO SOLICITADOS: " + dias);
 			LOG.info("METHOD: addPermiso() -- DIAS DE PERMISO DISPONIBLES: " + diasDisponibles);
 			
@@ -330,8 +349,7 @@ public class PermisoController {
 		}
 		
 		return null;
-		
-		
+
 	}
 	
 	

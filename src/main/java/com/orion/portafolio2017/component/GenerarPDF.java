@@ -2,6 +2,8 @@
 package com.orion.portafolio2017.component;
 
 import com.itextpdf.text.BaseColor;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -21,7 +23,7 @@ public class GenerarPDF {
 
 		String constante = "DOC";
 		long tiempo_milisegundos = System.currentTimeMillis();
-		String n_doc = constante + "_" + rut + tiempo_milisegundos;
+		String n_doc = constante + "_" + rut +"_"+ tiempo_milisegundos;
 
 		GenerarCodigo cod = new GenerarCodigo();
 		String codigo = cod.cod_verificar();
@@ -31,7 +33,7 @@ public class GenerarPDF {
 		Font fontTitulos = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, Font.NORMAL, BaseColor.BLACK);
 
 		// Ruta y nombre del documento
-		FileOutputStream archivo = new FileOutputStream("C:\\Users\\maty\\Desktop\\" + n_doc + ".pdf");
+		FileOutputStream archivo = new FileOutputStream(new File(".").getAbsolutePath()+"\\resoluciones\\" + n_doc + ".pdf");
 		// Creo el documento con el tipo de hoja y sus màrgenes
 		Document documento = new Document(PageSize.A4, 35, 30, 50, 50);
 		// Obtener la instancia del PdfWrite
