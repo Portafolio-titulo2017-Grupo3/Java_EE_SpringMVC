@@ -90,15 +90,17 @@ public class PermisoController {
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/permisoform")
-	public String redirectPermisoForm(@RequestParam(name="idPermiso", required=false) int idPermiso,
-			Model model) {
+	public String redirectPermisoForm(@RequestParam(name="dias", required=false) String dias,
+									  @RequestParam(name="error", required=false) String error,
+									  @RequestParam(name="idPermiso", required=false) String idPermiso,
+									  Model model) {
 		PermisoModel permiso = new PermisoModel();
 		String constante=null;
 		
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS IN: " + permiso.toString());
 		
-		if(idPermiso != 0) {
-			permiso = permisoService.findPermisoModelById(idPermiso);
+		if(Integer.parseInt(idPermiso) != 0) {
+			permiso = permisoService.findPermisoModelById(Integer.parseInt(idPermiso));
 		}
 		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -134,6 +136,9 @@ public class PermisoController {
 		model.addAttribute("email", funcionarioModel.getCorreoFuncionario());
 		model.addAttribute("telefono", funcionarioModel.getTelefonoFunionario());
 		model.addAttribute("funcionario", userService.obtenerFuncionario(user.getUsername()));
+		
+		model.addAttribute("error", error);
+		model.addAttribute("dias", dias);
 		
 		model.addAttribute("permiso", permiso);
 		model.addAttribute("estado", estadoService.findAllEstadoModel());
@@ -319,7 +324,8 @@ public class PermisoController {
 			//CONSULTA LOS DIAS DISPONIBLES A LA API REST DE RRHH DE LA MUNICIPALIDAD
 			//------------------------------------------------------------------------------------------------------------------
 			HttpJsonRequestLibreria test = new HttpJsonRequestLibreria();
-			String url="http://localhost:8082/api-rest/v1/funcionario/"+permiso.getRutFuncionario();
+
+			String url=ViewConstant.URL_WS+permiso.getRutFuncionario();
 			String diasDisponibles=test.obtieneJsonAPIRest(url);
 			//------------------------------------------------------------------------------------------------------------------
 			
@@ -347,18 +353,18 @@ public class PermisoController {
 			}else {
 				model.addAttribute("result", 0);
 				}
-			return "redirect:/permisos/mispermisos";
+			return "redirect:/permisos/permisoform";
 			}
 			
-			String mensajeError1="No puedes solicitar mas de "+dias+" Días de permiso.";
-			model.addAttribute("error1", mensajeError1);
-			return "redirect:/permisos/mispermisos";
+			//String mensajeError1="No puedes solicitar mas de "+dias+" Días de permiso.";
+			//model.addAttribute("mensajeError1", mensajeError1);
+			return "redirect:/permisos/permisoform?idPermiso=0&error=1&dias="+dias;
 
 		}
 		
-		String mensajeError2="No tienes mas Días disponibles.";
-		model.addAttribute("error2", mensajeError2);
-		return "redirect:/permisos/mispermisos";
+		//String mensajeError2="No tienes mas Días disponibles.";
+		//model.addAttribute("mensajeError1", mensajeError2);
+		return "redirect:/permisos/permisoform?idPermiso=0&error=2&dias="+null;
 
 	}
 	

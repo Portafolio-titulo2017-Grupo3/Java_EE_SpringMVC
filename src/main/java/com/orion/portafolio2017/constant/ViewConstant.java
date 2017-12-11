@@ -4,6 +4,10 @@ package com.orion.portafolio2017.constant;
 // Por convención los nombres de las variables Java deberían ser en minúscula
 
 public class ViewConstant {
+	
+	//DIRECCION URL WEBSERVICE
+	public static final String URL_WS="http://ec2-54-233-174-238.sa-east-1.compute.amazonaws.com:8081/api-rest/v1/funcionario/";
+	public static final String URL_WS_TEST="http://localhost:8082/api-rest/v1/funcionario/";
 
 	//AUTENTIFICACION DE LA APLICACION
 	/** The Constant LOGIN. */

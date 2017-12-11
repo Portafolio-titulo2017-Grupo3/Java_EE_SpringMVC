@@ -4,13 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.orion.portafolio2017.service.MotivoService;
+import com.orion.portafolio2017.constant.ViewConstant;
 
 
 
@@ -107,10 +103,9 @@ public class HttpJsonRequestLibreria {
 	
 	public static void main(String[] args) {
 		HttpJsonRequestLibreria test = new HttpJsonRequestLibreria();
-		String url="http://localhost:8082/api-rest/v1/funcionario/22222222-2";
-		//test.obtieneJsonAPIRestTest(url);
+		String rut= "22222222-2";
+		String url=ViewConstant.URL_WS+rut;
 		System.out.println("salida como String : " +test.obtieneJsonAPIRest(url));
-		//test.obtieneJsonAPIRest(url);
 	
 		
 	}
