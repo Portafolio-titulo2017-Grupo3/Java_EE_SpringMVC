@@ -3,6 +3,7 @@ package com.orion.portafolio2017.service;
 import java.util.List;
 
 import com.orion.portafolio2017.entity.Motivo;
+import com.orion.portafolio2017.entity.Permiso;
 import com.orion.portafolio2017.model.MotivoModel;
 
 public interface MotivoService {
@@ -12,5 +13,7 @@ public interface MotivoService {
 	public abstract List<Motivo> findAllMotivo();
 
 	public abstract List<MotivoModel> findAllMotivoModel();
+	
+	public abstract Motivo addMotivo(String motivo);
 
 }

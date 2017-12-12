@@ -293,7 +293,7 @@ public class PermisoController {
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@PostMapping("/addpermiso")
 	public String addPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
-			Model model) throws Exception {
+							 Model model) throws Exception {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaI = permiso.getAnioI()+"-"+permiso.getMesI()+"-"+permiso.getDiaI();
@@ -331,12 +331,16 @@ public class PermisoController {
 			permiso.setResolucionPermiso("PENDIENTE");
 			LocalDate localDate = LocalDate.now();
 			permiso.setFechaSolicitud(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-		
+			int idMotivo=motivoService.addMotivo(permiso.getDescripcionMotivo().trim()).getIdMotivo();
+			
+
+
 			if(Integer.parseInt(diasDisponibles) >= dias) {
+				LOG.info("METHOD: addPermiso() -- Este el el motivo: " + permiso.getDescripcionMotivo().trim());	
 			if(null != permisoService.addPermiso(permiso,
 											 funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()),
 											 estadoService.findEstadoById(3),
-											 motivoService.findMotivoById(permiso.getMotivo()),
+											 motivoService.findMotivoById(idMotivo),
 											 tipoService.findTipoById(permiso.getTipo()))) 
 			{
 				model.addAttribute("result", 1);
@@ -345,10 +349,16 @@ public class PermisoController {
 				}
 			return "redirect:/permisos/mispermisos";
 			}
-		
+			
+			String mensajeError1="No puedes solicitar mas de "+dias+" Días de permiso.";
+			model.addAttribute("error1", mensajeError1);
+			return "redirect:/permisos/mispermisos";
+
 		}
 		
-		return null;
+		String mensajeError2="No tienes mas Días disponibles.";
+		model.addAttribute("error2", mensajeError2);
+		return "redirect:/permisos/mispermisos";
 
 	}
 	
@@ -359,5 +369,8 @@ public class PermisoController {
 	    sdf.setLenient(true);
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
+	
+	
+	
 
 }

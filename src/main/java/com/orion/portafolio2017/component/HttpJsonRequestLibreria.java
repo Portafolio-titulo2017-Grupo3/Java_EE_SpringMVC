@@ -5,8 +5,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.orion.portafolio2017.service.MotivoService;
 
 
 
@@ -107,6 +111,8 @@ public class HttpJsonRequestLibreria {
 		//test.obtieneJsonAPIRestTest(url);
 		System.out.println("salida como String : " +test.obtieneJsonAPIRest(url));
 		//test.obtieneJsonAPIRest(url);
+	
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+
 import com.orion.portafolio2017.converter.MotivoConverter;
 import com.orion.portafolio2017.entity.Motivo;
 import com.orion.portafolio2017.model.MotivoModel;
@@ -50,4 +51,15 @@ public class MotivoServiceImpl implements MotivoService {
 		return motivoModel;
 	}
 
+	@Override
+	public Motivo addMotivo(String motivo) {
+		Motivo motivoO = new Motivo(0,motivo,null);
+		Motivo motivoO2 = motivoRepository.save(motivoO);
+		return motivoO2;
+	}
+	
+	
+
 }
+
+

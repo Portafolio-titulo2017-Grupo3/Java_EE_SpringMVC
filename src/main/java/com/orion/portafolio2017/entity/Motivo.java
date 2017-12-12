@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 public class Motivo implements java.io.Serializable {
 
 	@Id
+	@GeneratedValue
 	@Column(name = "id_motivo", unique = true, nullable = false, precision = 8, scale = 0)
 	private int idMotivo;
 
