@@ -257,8 +257,8 @@
                             </div>
                         </div>
                         
-                        <div th:if="${error == 1}" class="alert alert-danger" role="alert">No puedes solicitar mas de <span th:text="${dias}"></span> Días de permiso.</div>
-                        <div th:if="${error == 2}" class="alert alert-danger" role="alert">No tienes mas Días disponibles.</div>
+                        <div th:if="${error} == '1'" class="alert alert-danger" role="alert">No puedes solicitar mas de <span th:text="${dias}"></span> Días de permiso.</div>
+                        <div th:if="${error} == '2'" class="alert alert-danger" role="alert">No tienes mas Días disponibles.</div>
                         
  						<div class="checkbox">
                             <label><input type="checkbox"/>Estoy seguro de solicitar el permiso.</label>

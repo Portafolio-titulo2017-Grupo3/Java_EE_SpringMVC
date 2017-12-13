@@ -90,7 +90,7 @@ public class PermisoController {
 	//Se agrega este metodo que trabaja sin Model (NO DEBERIA IR)
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/permisoform")
-	public String redirectPermisoForm(@RequestParam(name="dias", required=false) String dias,
+	public String redirectPermisoForm(@RequestParam(name="diass", required=false) String diass,
 									  @RequestParam(name="error", required=false) String error,
 									  @RequestParam(name="idPermiso", required=false) String idPermiso,
 									  Model model) {
@@ -138,7 +138,7 @@ public class PermisoController {
 		model.addAttribute("funcionario", userService.obtenerFuncionario(user.getUsername()));
 		
 		model.addAttribute("error", error);
-		model.addAttribute("dias", dias);
+		model.addAttribute("dias", diass);
 		
 		model.addAttribute("permiso", permiso);
 		model.addAttribute("estado", estadoService.findAllEstadoModel());
@@ -353,18 +353,18 @@ public class PermisoController {
 			}else {
 				model.addAttribute("result", 0);
 				}
-			return "redirect:/permisos/permisoform";
+			return "redirect:/permisos/mispermisos";
 			}
 			
 			//String mensajeError1="No puedes solicitar mas de "+dias+" Días de permiso.";
 			//model.addAttribute("mensajeError1", mensajeError1);
-			return "redirect:/permisos/permisoform?idPermiso=0&error=1&dias="+dias;
+			return "redirect:/permisos/permisoform?idPermiso=0&error=1&diass="+dias;
 
 		}
 		
 		//String mensajeError2="No tienes mas Días disponibles.";
 		//model.addAttribute("mensajeError1", mensajeError2);
-		return "redirect:/permisos/permisoform?idPermiso=0&error=2&dias="+null;
+		return "redirect:/permisos/permisoform?idPermiso=0&error=2&diass="+0;
 
 	}
 	
