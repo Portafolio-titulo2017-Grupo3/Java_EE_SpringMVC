@@ -92,6 +92,12 @@
 			<version>5.5.10</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
 
 
 		<dependency>
@@ -99,7 +105,12 @@
 			<artifactId>Saxon-HE</artifactId>
 			<version>9.6.0-2</version>
 		</dependency>
+
+
 	</dependencies>
+
+
+
 
 	<build>
 		<plugins>

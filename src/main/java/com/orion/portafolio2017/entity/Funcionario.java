@@ -49,7 +49,7 @@ public class Funcionario implements java.io.Serializable {
 	@Column(name = "sexo_funionario", nullable = false, length = 9)
 	private String sexoFunionario;
 
-	@Column(name = "correo_funcionario", nullable = false, length = 20)
+	@Column(name = "correo_funcionario", nullable = false, length = 100)
 	private String correoFuncionario;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionario")

@@ -28,10 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itextpdf.text.DocumentException;
+import com.orion.portafolio2017.component.EnviarEmail;
 import com.orion.portafolio2017.component.Fechas;
 import com.orion.portafolio2017.component.GenerarPDF;
 import com.orion.portafolio2017.component.HttpJsonRequestLibreria;
 import com.orion.portafolio2017.constant.ViewConstant;
+import com.orion.portafolio2017.entity.Motivo;
+import com.orion.portafolio2017.entity.Tipo;
 import com.orion.portafolio2017.model.FuncionarioInfoModel;
 import com.orion.portafolio2017.model.PermisoModel;
 import com.orion.portafolio2017.service.DepartamentoService;
@@ -219,19 +222,25 @@ public class PermisoController {
 	public String redirectDetallePermiso(@RequestParam(name="idPermiso", required=false) int idPermiso,
 			Model model) {
 		PermisoModel permiso = new PermisoModel();
+		Motivo motivo = new Motivo();
+		Tipo tipo = new Tipo();
 		FuncionarioInfoModel funcionario = new FuncionarioInfoModel();
 		LOG.info("METHOD: redirectDetallePermiso() -- PARAMS IN: " + permiso.toString());
 		
 		if(idPermiso != 0) {
-			permiso = permisoService.findPermisoModelById(idPermiso);
+			permiso= permisoService.findPermisoModelById(idPermiso);
+			motivo= motivoService.findMotivoById(permiso.getMotivo());
+			tipo= tipoService.findTipoById(permiso.getTipo());
 		}
-		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + permiso.toString());
+		LOG.info("METHOD: redirectPermisoForm() -- PARAMS OUT: " + motivo.getDescripcionMotivo());
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		funcionario = funcionarioService.findFuncionarioModelByRut(permiso.getRutFuncionario());
 		String nomfuncionario = funcionario.getPrimerNombre().trim()+" "+funcionario.getSegundoNombre().trim()+" "+funcionario.getPrimerApellido().trim()+" "+funcionario.getSegundoApellido().trim();
 		
 		model.addAttribute("permiso", permiso);
+		model.addAttribute("motivo", motivo);
+		model.addAttribute("tipo", tipo);
 		model.addAttribute("funcionario", funcionario);
 		model.addAttribute("nomfuncionario", nomfuncionario.trim());
 		return ViewConstant.PERMISO_DETALLE;
@@ -242,12 +251,14 @@ public class PermisoController {
 	@PreAuthorize("hasAnyAuthority('JEFE INTERNO', 'JEFE SUPERIOR')")
 	@PostMapping("/authpermiso")
 	public String authPermiso(@ModelAttribute(name="permiso") PermisoModel permiso,
-							  Model model) throws FileNotFoundException, DocumentException {
+							  Model model) throws FileNotFoundException, DocumentException, Throwable {
 		LOG.info("METHOD: authPermiso() -- PARAMS: " + permiso.toString());
 		LOG.info("METHOD: authPermiso() -- VALOR ESTADO: " + permiso.getEstado());
 	
 		LocalDate localDate = LocalDate.now();
 		Date hora_actual=(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		
 		
 		
 		PermisoModel permi = permisoService.findPermisoModelById(permiso.getIdPermiso());
@@ -261,11 +272,16 @@ public class PermisoController {
 											 motivoService.findMotivoById(permi.getMotivo()),
 											 tipoService.findTipoById(permi.getTipo())))
 		{
+			LOG.info("METHOD: authPermiso() -- FECHA INICIO 1: " + permiso.getFechaInicio());
+			LOG.info("METHOD: authPermiso() -- FECHA TERMINO 1: " + permiso.getFechaTermino());
+
+			
 			String P_nombre = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getPrimerNombre();
 			String S_nombre = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getSegundoNombre();
 			String P_apellido = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getPrimerApellido();
 			String S_apellido = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getSegundoApellido();
 			String nombre= P_nombre +" "+ S_nombre +" "+ P_apellido +" "+ S_apellido;
+			String emailFuncionario = funcionarioService.findFuncionarioByRut(permiso.getRutFuncionario()).getCorreoFuncionario();
 			
 			String rut = permiso.getRutFuncionario();
 			String estado = estadoService.findEstadoById(permi.getEstado()).getNombreEstado();
@@ -277,8 +293,12 @@ public class PermisoController {
 			String nombre_departamento = permiso.getNombreDepartamento();
 			String nombre_funcionario = nombre;
 			
+			
 			GenerarPDF resolucion= new GenerarPDF();
 			resolucion.generarPDFresolucion(rut, estado, fecha, id_numero_resolucion, motivo, fInicio, fTermino, nombre_departamento, nombre_funcionario);
+			
+			EnviarEmail emailEnv= new EnviarEmail();
+			emailEnv.enviarEmail(emailFuncionario.toLowerCase().trim(),id_numero_resolucion,nombre_funcionario);
 			
 			model.addAttribute("result", 1);
 		}else {

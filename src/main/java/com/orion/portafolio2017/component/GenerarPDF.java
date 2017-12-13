@@ -33,7 +33,8 @@ public class GenerarPDF {
 		Font fontTitulos = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, Font.NORMAL, BaseColor.BLACK);
 
 		// Ruta y nombre del documento
-		FileOutputStream archivo = new FileOutputStream(new File(".").getAbsolutePath()+"\\resoluciones\\" + n_doc + ".pdf");
+		//FileOutputStream archivo = new FileOutputStream(new File(".").getAbsolutePath()+"\\resoluciones\\" + n_doc + ".pdf");
+		FileOutputStream archivo = new FileOutputStream(new File(".").getAbsolutePath()+"\\resoluciones\\" + id_numero_resolucion + ".pdf");
 		// Creo el documento con el tipo de hoja y sus màrgenes
 		Document documento = new Document(PageSize.A4, 35, 30, 50, 50);
 		// Obtener la instancia del PdfWrite
