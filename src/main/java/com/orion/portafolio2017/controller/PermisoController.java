@@ -154,7 +154,7 @@ public class PermisoController {
 	//VISUALIZAR PERMISOS DEL USUARIO
 	@PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ALCALDE', 'JEFE INTERNO', 'JEFE SUPERIOR', 'FUNCIONARIO')")
 	@GetMapping("/mispermisos")
-	public ModelAndView misPermisos() {
+	public ModelAndView misPermisos(@RequestParam(name="idPermi", required=false) String idPermi) throws InterruptedException {
 		ModelAndView mav;
 		String constante=null;
 		
@@ -179,6 +179,16 @@ public class PermisoController {
 		
 		//retorna la vista
 		mav = new ModelAndView(constante);
+		
+		/*
+		if(idPermi != null) {
+		GenerarPDF resolucion= new GenerarPDF();
+		resolucion.abrirPDF(178);
+		LOG.info("METHOD: misPermisos() -- Logre entrar al metodo Abrir PDF "+idPermi);
+		mav.addObject("resolucion", resolucion.getCurrentProjectDirectory2());
+		//Thread.sleep(5000);
+		}
+		*/
 		
 		mav.addObject("username", user.getUsername());
 		mav.addObject("mispermisos", permisoService.findAllPermisoByRut(rutFuncionario));
@@ -378,7 +388,7 @@ public class PermisoController {
 			
 			//String mensajeError1="No puedes solicitar mas de "+dias+" Días de permiso.";
 			//model.addAttribute("mensajeError1", mensajeError1);
-			return "redirect:/permisos/permisoform?idPermiso=0&error=1&diass="+dias;
+			return "redirect:/permisos/permisoform?idPermiso=0&error=1&diass="+diasDisponibles;
 
 		}
 		

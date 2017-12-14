@@ -63,7 +63,11 @@ public class PermisoServiceImpl implements PermisoService {
 
 		for (Permiso permiso : permisos) {
 			if (permiso.getFuncionario().getDepartamento().getIdDepto() == idDepartamento) {
-				permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+				if((permiso.getEstado().getNombreEstado().equals("ACEPTADO") || permiso.getEstado().getNombreEstado().equals("RECHAZADO"))) {
+					
+				}else {
+					permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+				}
 			}
 		}
 		return permisoModel;
@@ -75,7 +79,12 @@ public class PermisoServiceImpl implements PermisoService {
 		List<PermisoModel> permisoModel = new ArrayList<PermisoModel>();
 
 		for (Permiso permiso : permisos) {
-			permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+			if((permiso.getEstado().getNombreEstado().equals("ACEPTADO") || permiso.getEstado().getNombreEstado().equals("RECHAZADO"))) {
+				
+			}else {
+				permisoModel.add(permisoConverter.convertPermiso2PermisoModel(permiso));
+			}
+			
 		}
 		return permisoModel;
 	}
