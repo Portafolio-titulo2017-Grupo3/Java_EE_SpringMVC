@@ -34,8 +34,8 @@
 	- Encargados del proyecto
 	```
 	   - Matías Sotomayor.
-	   - Rebeca Navia.
 	   - Daniela Flores.
+	   - Rebeca Navia.
 	```
 - Uso
 - Documentación
