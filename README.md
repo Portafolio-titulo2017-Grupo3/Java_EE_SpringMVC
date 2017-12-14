@@ -27,8 +27,9 @@
 	- Requisitos
 	```
 	   - Java 8
+	   - Maven 3.5
 	   - Apache Tomcat 8 o motor de servidores web similares que manejen poryectos JavaEE (proyecto.war)
-	   - Empaquetar en proyecto en un archivo WAR, luego insertar el proyecto en la carpeta correspondiente de tu servidor JavaEE.
+	   - Comprimir el proyecto en un WAR con el comando 'mvn clean install/mvn package', luego insertar el proyecto en la carpeta 	 correspondiente de tu servidor Web JavaEE.
 	```
 	- Versión
 	- Encargados del proyecto
